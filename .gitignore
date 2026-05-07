@@ -1,0 +1,10 @@
+.DS_Store
+.vscode/
+*.swp
+
+# Never commit private keys or secrets
+configs/ssh/id_*
+configs/**/*.private*
+configs/**/*.secret*
+*.local.json
+.env

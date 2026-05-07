@@ -1,0 +1,64 @@
+# Brewfile — packages and casks installed via Homebrew on a fresh Mac.
+#
+# Install everything in this file with:
+#   brew bundle --file=configs/Brewfile
+#
+# IMPORTANT: this file is a CURATED list of what should be installed on a
+# fresh setup, not a snapshot of what's currently on the machine. Do NOT
+# regenerate it with `brew bundle dump --force` without cleaning up the
+# current Mac first — that command re-adds every package it sees installed
+# and would put back the per-project Python packages we removed
+# (numpy, matplotlib, pillow, jupyterlab, etc.). Those belong inside venvs;
+# see section 10 of the README.
+
+# ─── Core dev tools ─────────────────────────────────────────────────────
+brew "git"           # newer than the Xcode CLI tools version
+brew "gh"            # GitHub CLI — `gh auth login`, `gh repo create`, etc.
+brew "gcc"           # C/C++ compiler
+
+# ─── Shell / terminal utilities ─────────────────────────────────────────
+brew "neofetch"      # system-info banner, runs on terminal start
+brew "progress"      # show progress for long-running commands like cp/dd
+
+# ─── Python ─────────────────────────────────────────────────────────────
+# Just the interpreter — every project gets its own venv. See README §10.
+brew "python"
+
+# ─── GUI apps ───────────────────────────────────────────────────────────
+cask "iterm2"
+
+# ─── VS Code extensions ────────────────────────────────────────────────
+# These are managed by VS Code Settings Sync (signed in to GitHub/Microsoft),
+# so they're commented out by default. Uncomment if you ever want a
+# Settings-Sync-free reinstall.
+#
+# vscode "adpyke.codesnap"
+# vscode "akamud.vscode-theme-onelight"
+# vscode "danielgjackson.auto-dark-mode-windows"
+# vscode "dbanksdesign.nu-disco"
+# vscode "fehey.brackets-light-pro"
+# vscode "formulahendry.code-runner"
+# vscode "james-yu.latex-workshop"
+# vscode "jdinhlife.gruvbox"
+# vscode "miguelsolorio.fluent-icons"
+# vscode "monokai.theme-monokai-pro-vscode"
+# vscode "ms-python.autopep8"
+# vscode "ms-python.debugpy"
+# vscode "ms-python.isort"
+# vscode "ms-python.python"
+# vscode "ms-python.vscode-pylance"
+# vscode "ms-python.vscode-python-envs"
+# vscode "ms-toolsai.jupyter"
+# vscode "ms-toolsai.jupyter-keymap"
+# vscode "ms-toolsai.jupyter-renderers"
+# vscode "ms-toolsai.vscode-jupyter-cell-tags"
+# vscode "ms-toolsai.vscode-jupyter-slideshow"
+# vscode "pkief.material-icon-theme"
+# vscode "sahilchandravanshi.saklash-theme"
+# vscode "streetsidesoftware.code-spell-checker"
+# vscode "streetsidesoftware.code-spell-checker-norwegian-bokmal"
+# vscode "teabyii.ayu"
+# vscode "thenikso.github-plus-theme"
+# vscode "usernamehw.errorlens"
+# vscode "vscode-icons-team.vscode-icons"
+# vscode "zoxon.monokai-light"

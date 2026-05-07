@@ -1,0 +1,55 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+cmd+z",
+        "command": "workbench.action.toggleZenMode"
+    },
+    {
+        "key": "cmd+k z",
+        "command": "-workbench.action.toggleZenMode"
+    },
+    {
+        "key": "ctrl+cmd+s",
+        "command": "cSpell.toggleEnableSpellChecker"
+    },
+    {
+        "key": "cmd+b",
+        "command": "workbench.action.toggleAuxiliaryBar"
+    },
+    {
+        "key": "alt+b",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "cmd+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "alt+r",
+        "command": "code-runner.run"
+    },
+    {
+        "key": "ctrl+alt+n",
+        "command": "-code-runner.run"
+    },
+    {
+        "key": "alt+e",
+        "command": "latex-workshop.synctex",
+        "when": "config.latex-workshop.bind.altKeymap.enabled && editorTextFocus && !virtualWorkspace && editorLangId == 'latex'"
+    },
+    {
+        "key": "cmd+l alt+j",
+        "command": "-latex-workshop.synctex",
+        "when": "config.latex-workshop.bind.altKeymap.enabled && editorTextFocus && !virtualWorkspace && editorLangId == 'latex'"
+    },
+    {
+        "key": "alt+e",
+        "command": "latex-workshop.synctex",
+        "when": "editorTextFocus && !config.latex-workshop.bind.altKeymap.enabled && !virtualWorkspace && editorLangId == 'latex'"
+    },
+    {
+        "key": "alt+cmd+j",
+        "command": "-latex-workshop.synctex",
+        "when": "editorTextFocus && !config.latex-workshop.bind.altKeymap.enabled && !virtualWorkspace && editorLangId == 'latex'"
+    }
+]
