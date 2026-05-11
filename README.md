@@ -71,7 +71,7 @@ brew doctor
 brew --version
 ```
 
-> 💡 **Tip:** Once you've finished setting up, run `brew bundle dump --file=~/Brewfile` to snapshot every package you've installed. Drop that `Brewfile` into [`configs/`](./configs/) and you can recreate your whole setup with `brew bundle --file=Brewfile`.
+> 💡 **Tip:** [`configs/Brewfile`](./configs/Brewfile) in this repo lists every package you'll need on a fresh setup. Run `brew bundle --file=configs/Brewfile` once Homebrew is installed to (re)install them all in one shot. The file is curated by hand — see the warning at the top of `Brewfile` before running `brew bundle dump`, which would overwrite it.
 
 ---
 
@@ -147,7 +147,7 @@ plugins=(git
 
 The `vscode` plugin (built into Oh My Zsh) adds aliases like `vsc .` to open the current folder. The `git` plugin adds dozens of git aliases like `gst` for `git status`.
 
-My `~/.zshrc` also runs `neofetch` automatically when a new terminal opens — that's the line at the very bottom of the file.
+My `~/.zshrc` also runs `fastfetch` automatically when a new terminal opens — that's the line at the very bottom of the file.
 
 > 📁 *Config in this repo:* [`configs/zsh/.zshrc`](./configs/zsh/.zshrc)
 
@@ -186,7 +186,7 @@ This writes `~/.p10k.zsh`, which is the file you save to share your prompt acros
 
 ## 6. Nerd Fonts
 
-Powerlevel10k and many neofetch styles need a font with extra glyphs (folder icons, git branch, OS logos).
+Powerlevel10k needs a font with extra glyphs — folder icons, git-branch arrows, OS logos — to render its prompt segments. iTerm2 (and VS Code's integrated terminal) use the same font.
 
 ```bash
 brew install --cask font-meslo-lg-nerd-font
@@ -229,6 +229,16 @@ fastfetch --gen-config
 > 📁 *Config in this repo:* [`configs/fastfetch/config.jsonc`](./configs/fastfetch/config.jsonc)
 
 > 💡 `fastfetch` is already set to run on terminal start in my `.zshrc` (last line of the file).
+
+### Hide the "Last login" banner
+
+By default, every new terminal prints a `Last login: ... on ttys000` line at the top, which pushes fastfetch's output down by one line. Suppress it by creating an empty file in your home directory:
+
+```bash
+touch ~/.hushlogin
+```
+
+Open a new terminal — fastfetch becomes the very first thing on screen. The file is empty by design; its mere presence is the signal to the login shell.
 
 ### Migrating from neofetch
 
@@ -500,9 +510,9 @@ brew bundle --file=configs/Brewfile
 cp configs/zsh/.zshrc      ~/.zshrc
 cp configs/zsh/.p10k.zsh   ~/.p10k.zsh
 
-# 3. neofetch
-mkdir -p ~/.config/neofetch
-cp configs/neofetch/config.conf ~/.config/neofetch/config.conf
+# 3. fastfetch
+mkdir -p ~/.config/fastfetch
+cp configs/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
 
 # 4. VS Code — easiest path: open it and sign in to Settings Sync.
 #    (Manual fallback if you'd rather not sign in:)
@@ -513,7 +523,10 @@ cp configs/neofetch/config.conf ~/.config/neofetch/config.conf
 # 5. Git
 cp configs/.gitconfig ~/.gitconfig
 
-# 6. reload the shell
+# 6. Hide the "Last login" banner so fastfetch is the first thing on screen
+touch ~/.hushlogin
+
+# 7. reload the shell
 source ~/.zshrc
 ```
 
@@ -521,7 +534,7 @@ For **iTerm2**: open it once, then **Settings → General → Settings → Impor
 
 For **MacTeX**: download `MacTeX.pkg` from https://www.tug.org/mactex/ and run it manually (see [section 11](#11-latex)). Not in the Brewfile by design — the .pkg installer is the more reliable route for the 6 GB download.
 
-> 💡 The `Brewfile` already includes every VS Code extension with `vscode "..."` lines, so step 4's `xargs` line is redundant if you've run step 1 — pick whichever you prefer.
+> 💡 The `Brewfile` keeps the VS Code extension list under `vscode "..."` lines but commented out by default — Settings Sync is the primary path for those. If you'd rather install them via Homebrew, uncomment those lines before running `brew bundle`.
 
 ---
 
@@ -532,7 +545,6 @@ For **MacTeX**: download `MacTeX.pkg` from https://www.tug.org/mactex/ and run i
 - Oh My Zsh wiki — https://github.com/ohmyzsh/ohmyzsh/wiki
 - Powerlevel10k — https://github.com/romkatv/powerlevel10k
 - Nerd Fonts — https://www.nerdfonts.com
-- Neofetch wiki — https://github.com/dylanaraps/neofetch/wiki
 - fastfetch — https://github.com/fastfetch-cli/fastfetch
 - VS Code docs — https://code.visualstudio.com/docs
 - pyenv — https://github.com/pyenv/pyenv
@@ -542,4 +554,4 @@ For **MacTeX**: download `MacTeX.pkg` from https://www.tug.org/mactex/ and run i
 
 ---
 
-*Last updated: 2026-05-07*
+*Last updated: 2026-05-11*
