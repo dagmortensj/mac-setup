@@ -6,7 +6,7 @@ A personal, reproducible setup for a fresh Mac — terminal, editor, languages, 
 
 ![Terminal preview](./screenshots/terminal.png)
 
-*iTerm2 + Powerlevel10k + Neofetch on macOS 26.4 (Apple M5).*
+*iTerm2 + Powerlevel10k + Fastfetch on macOS 26.4 (Apple M5).*
 
 ---
 
@@ -18,7 +18,7 @@ A personal, reproducible setup for a fresh Mac — terminal, editor, languages, 
 4. [Oh My Zsh](#4-oh-my-zsh)
 5. [Powerlevel10k](#5-powerlevel10k)
 6. [Nerd Fonts (for icons in the prompt)](#6-nerd-fonts)
-7. [Neofetch](#7-neofetch)
+7. [Fastfetch](#7-fastfetch)
 8. [VS Code](#8-vs-code)
 9. [Git](#9-git)
 10. [Python](#10-python)
@@ -198,39 +198,48 @@ Other good options: `font-fira-code-nerd-font`, `font-jetbrains-mono-nerd-font`,
 
 ---
 
-## 7. Neofetch
+## 7. Fastfetch
 
-[Neofetch](https://github.com/dylanaraps/neofetch) is the little system-info banner that prints an ASCII Apple logo and your specs. (Note: upstream is archived — still works fine, alternatives are `fastfetch` and `macchina`.)
+[Fastfetch](https://github.com/fastfetch-cli/fastfetch) prints a colored Apple logo and your system specs every time you open a terminal. It's the actively-maintained successor to [Neofetch](https://github.com/dylanaraps/neofetch), which was archived in 2024. Fastfetch starts noticeably faster (written in C, not bash) and tracks new macOS versions and Apple Silicon chips properly.
 
 ### Install
-
-```bash
-brew install neofetch
-```
-
-### Where the config lives
-
-Neofetch reads `~/.config/neofetch/config.conf`. The file is created the first time you run `neofetch`.
-
-To open it:
-
-```bash
-open ~/.config/neofetch/config.conf
-# or
-code ~/.config/neofetch/config.conf
-```
-
-> 📁 *Config in this repo:* [`configs/neofetch/config.conf`](./configs/neofetch/config.conf) — slimmed down to show OS, Kernel, Uptime, Shell, Terminal, Terminal Font, CPU, GPU. Uses the small macOS logo (`ascii_distro="macos_small"`).
-
-> 💡 `neofetch` is already set to run on terminal start in my `.zshrc` (last line of the file).
-
-### Modern alternatives (optional)
 
 ```bash
 brew install fastfetch
 ```
 
-`fastfetch` is a maintained drop-in replacement that's noticeably quicker. Config lives at `~/.config/fastfetch/config.jsonc`.
+### Where the config lives
+
+Fastfetch reads `~/.config/fastfetch/config.jsonc`. The config in this repo is a slimmed-down version showing OS, Kernel, Uptime, Shell, Terminal, Terminal Font, CPU, and GPU, with the small macOS logo and color blocks underneath — matching the look from my previous neofetch setup.
+
+To install it:
+
+```bash
+mkdir -p ~/.config/fastfetch
+cp configs/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
+fastfetch     # test it
+```
+
+Generate a fresh starter config (with every option commented) if you want to customize further:
+
+```bash
+fastfetch --gen-config
+```
+
+> 📁 *Config in this repo:* [`configs/fastfetch/config.jsonc`](./configs/fastfetch/config.jsonc)
+
+> 💡 `fastfetch` is already set to run on terminal start in my `.zshrc` (last line of the file).
+
+### Migrating from neofetch
+
+If you previously had neofetch installed:
+
+```bash
+brew uninstall neofetch
+rm -rf ~/.config/neofetch
+```
+
+Then update the last line of `~/.zshrc` from `neofetch` to `fastfetch` and open a new terminal.
 
 ---
 

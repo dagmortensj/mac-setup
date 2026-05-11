@@ -17,7 +17,7 @@ brew "gh"            # GitHub CLI — `gh auth login`, `gh repo create`, etc.
 brew "gcc"           # C/C++ compiler
 
 # ─── Shell / terminal utilities ─────────────────────────────────────────
-brew "neofetch"      # system-info banner, runs on terminal start
+brew "fastfetch"   # actively-maintained replacement for the archived neofetch
 brew "progress"      # show progress for long-running commands like cp/dd
 
 # ─── Python ─────────────────────────────────────────────────────────────

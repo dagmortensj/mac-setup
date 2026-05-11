@@ -6,8 +6,7 @@ Quick reference for grabbing each config off your current Mac and dropping it in
 |---|---|---|
 | **zsh / Oh My Zsh** | `~/.zshrc` | `configs/zsh/.zshrc` |
 | **Powerlevel10k** | `~/.p10k.zsh` | `configs/zsh/.p10k.zsh` |
-| **Neofetch** | `~/.config/neofetch/config.conf` | `configs/neofetch/config.conf` |
-| **fastfetch** *(if used)* | `~/.config/fastfetch/config.jsonc` | `configs/fastfetch/config.jsonc` |
+| **fastfetch** | `~/.config/fastfetch/config.jsonc` | `configs/fastfetch/config.jsonc` |
 | **VS Code settings** | `~/Library/Application Support/Code/User/settings.json` | `configs/vscode/settings.json` |
 | **VS Code keybindings** | `~/Library/Application Support/Code/User/keybindings.json` | `configs/vscode/keybindings.json` |
 | **VS Code snippets** | `~/Library/Application Support/Code/User/snippets/` | `configs/vscode/snippets/` |
@@ -31,10 +30,9 @@ cd path/to/mac-setup
 cp ~/.zshrc                                                  configs/zsh/.zshrc
 cp ~/.p10k.zsh                                               configs/zsh/.p10k.zsh
 
-# Neofetch / fastfetch
-mkdir -p configs/neofetch configs/fastfetch
-[ -f ~/.config/neofetch/config.conf ]      && cp ~/.config/neofetch/config.conf      configs/neofetch/config.conf
-[ -f ~/.config/fastfetch/config.jsonc ]    && cp ~/.config/fastfetch/config.jsonc    configs/fastfetch/config.jsonc
+# fastfetch
+mkdir -p configs/fastfetch
+[ -f ~/.config/fastfetch/config.jsonc ] && cp ~/.config/fastfetch/config.jsonc configs/fastfetch/config.jsonc
 
 # VS Code
 cp "$HOME/Library/Application Support/Code/User/settings.json"    configs/vscode/settings.json
@@ -45,7 +43,8 @@ code --list-extensions > configs/vscode/extensions.txt
 # Git
 cp ~/.gitconfig configs/.gitconfig
 
-# Homebrew snapshot
+# Homebrew snapshot (NOTE: this overwrites the curated Brewfile —
+# only run after you've cleaned the current Mac to match the desired state).
 brew bundle dump --file=configs/Brewfile --force
 ```
 
