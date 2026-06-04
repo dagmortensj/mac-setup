@@ -19,6 +19,9 @@
     { "type": "cpu",          "key": "CPU" },
     { "type": "gpu",          "key": "GPU" },
     "break",
-    "colors"
+    "colors",
+    "break",
+    "break",
+    "break"
   ]
 }
