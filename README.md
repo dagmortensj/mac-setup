@@ -23,8 +23,9 @@ A personal, reproducible setup for a fresh Mac — terminal, editor, languages, 
 9. [Git](#9-git)
 10. [Python](#10-python)
 11. [LaTeX](#11-latex)
-12. [Restoring configs from this repo](#12-restoring-configs-from-this-repo)
-13. [Useful links](#useful-links)
+12. [macOS tweaks (Studio Display fan fix, etc.)](#12-macos-tweaks)
+13. [Restoring configs from this repo](#13-restoring-configs-from-this-repo)
+14. [Useful links](#useful-links)
 
 ---
 
@@ -498,7 +499,53 @@ Already in [`extensions.txt`](./configs/vscode/extensions.txt) and [`settings.js
 
 ---
 
-## 12. Restoring configs from this repo
+## 12. macOS tweaks
+
+Some macOS settings have no checkbox anywhere in System Settings — they only exist as `pmset`, `defaults`, or similar shell commands. They're trivial to apply once you know about them, easy to forget, and may quietly get reset by a major macOS upgrade. Worth re-checking after any large OS update.
+
+### Studio Display fan during sleep
+
+**Problem:** Studio Display fans spin up periodically when the MacBook is asleep — quiet for a while, then back on in a 15–20 minute cycle.
+
+**Cause:** Not the display itself. The MacBook does *maintenance wakes* (Power Nap + TCP keepalive) every few minutes while asleep. Each wake re-engages the display and spins its fan. Confirmed via `rtc/SleepService`, `rtc/Maintenance`, and `wifibt ... E_TKO_TCP` entries in `pmset -g log`.
+
+**Fix:**
+
+```bash
+sudo pmset -a powernap 0
+sudo pmset -c tcpkeepalive 0
+```
+
+- `powernap 0` — stops scheduled Mail / Calendar / iCloud / Time Machine syncing during sleep. (The main culprit.)
+- `tcpkeepalive 0` — stops the Mac waking to maintain network connections. Find My location won't update *while asleep* (still works when awake). Acceptable trade-off for a docked desktop setup.
+
+Both are reversible — re-run with `1` instead of `0` to undo.
+
+**Check current state:**
+
+```bash
+pmset -g | grep -E "powernap|tcpkeepalive|womp"
+# want: powernap 0, tcpkeepalive 0, womp 0
+```
+
+**Verify it worked.** After sleeping the Mac 20+ minutes:
+
+```bash
+pmset -g log | grep -i "wake from"
+```
+
+`rtc/SleepService` and `rtc/Maintenance` lines shouldn't appear after the time you ran the commands. Occasional `USB-C_plug` wakes are normal.
+
+**Notes:**
+
+- These commands don't affect waking the Mac with keyboard/mouse — that's HID activity, a separate system.
+- Settings persist across reboots.
+- A major macOS update or SMC/NVRAM reset may revert them — re-run if the fan cycle ever returns.
+- `-a` = all power sources, `-c` = charger only, `-b` = battery only.
+
+---
+
+## 13. Restoring configs from this repo
 
 The fast path on a fresh Mac, after Homebrew, Oh My Zsh and Powerlevel10k are installed (sections 2, 4, 5):
 
@@ -554,4 +601,4 @@ For **MacTeX**: download `MacTeX.pkg` from https://www.tug.org/mactex/ and run i
 
 ---
 
-*Last updated: 2026-05-11*
+*Last updated: 2026-06-04*
