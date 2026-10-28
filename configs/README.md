@@ -12,6 +12,7 @@ Quick reference for grabbing each config off your current Mac and dropping it in
 | **VS Code snippets** | `~/Library/Application Support/Code/User/snippets/` | `configs/vscode/snippets/` |
 | **VS Code extensions list** | (run `code --list-extensions`) | `configs/vscode/extensions.txt` |
 | **latexmk** | `~/.config/latexmk/latexmkrc` | `configs/latexmk/latexmkrc` |
+| **Stavekontroll, egne ord** | (leses direkte fra repoet av Code Spell Checker) | `configs/cspell/ordliste.txt` |
 | **iTerm2 (archive)** ✅ | iTerm2 → Settings → General → Settings → *Export All Settings and Data* | `configs/iterm2/iterm2-settings.itermexport` |
 | **iTerm2 (folder)** *(alt)* | iTerm2 → Settings → General → Settings → *Save current settings to folder* | `configs/iterm2/com.googlecode.iterm2.plist` |
 | **Git** | `~/.gitconfig` | `configs/.gitconfig` |

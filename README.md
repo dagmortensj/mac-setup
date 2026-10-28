@@ -297,7 +297,7 @@ bash configs/vscode/setup.sh
 | `tavle/settings.json` | Tavle profile, for live coding in front of the class |
 | `keybindings.json` | Shared by both profiles |
 | `extensions.txt` | Marketplace extensions in the Default profile |
-| `handout-light/` | Colour theme built on the palette of the lualatex templates (source and `.vsix`) |
+| `host/` | The Høst themes: Høstlys (light) and Høstkveld (dark), built on the palette of the lualatex templates and tuned for Python and LaTeX (source, `.vsix` and `eksempel.tex`) |
 | `tex-oppstart/` | Opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened (source and `.vsix`) |
 | `setup.sh` | Restores all of the above, plus `configs/latexmk/latexmkrc` |
 
@@ -307,7 +307,7 @@ To rebuild a `.vsix` after editing a theme or extension source, zip `package.jso
 
 **Default** is the everyday profile. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline. The right-hand chat panel stays closed when a window opens. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one.
 
-**Tavle** is for coding on the board: the Handout Light theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed.
+**Tavle** is for coding on the board: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed.
 
 ### Keybindings
 

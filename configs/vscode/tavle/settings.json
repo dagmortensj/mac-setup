@@ -3,11 +3,11 @@
     // ingen popups, ingen røde streker og ingen automatisk innsetting.
 
     // ===== Utseende =====
-    // Eget tema med fargene fra lualatex-malene (handout-light/):
+    // Eget tema, Høstlys, med fargene fra lualatex-malene (host/):
     // rød nøkkelord, oransje tall, blå strenger, grønne funksjoner,
     // plum klasser/dekoratorer/self, grå kommentarer.
-    "workbench.colorTheme": "Handout Light",
-    "editor.bracketPairColorization.enabled": false,
+    "workbench.colorTheme": "Høstlys",
+    "editor.bracketPairColorization.enabled": true,             // Høstlys gir alle klammer samme grå farge
     "window.autoDetectColorScheme": false,
     "workbench.activityBar.location": "top",
     "workbench.startupEditor": "none",

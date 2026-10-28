@@ -3,10 +3,12 @@
     "workbench.colorTheme": "Monokai Classic",                 // fra Monokai Pro
     "workbench.productIconTheme": "fluent-icons",
     "workbench.colorCustomizations": {
-        "editor.selectionBackground": "#187ee465",
-        "editor.selectionHighlightBackground": "#187ee465",
-        "editor.findMatchBackground": "#187ee465",            // gjeldende søketreff
-        "editor.findMatchHighlightBackground": "#187ee465"    // øvrige søketreff
+        "[Monokai Classic]": {                                // gjelder bare Monokai, ikke Høstlys
+            "editor.selectionBackground": "#187ee465",
+            "editor.selectionHighlightBackground": "#187ee465",
+            "editor.findMatchBackground": "#187ee465",        // gjeldende søketreff
+            "editor.findMatchHighlightBackground": "#187ee465" // øvrige søketreff
+        }
     },
     "workbench.activityBar.location": "top",
     "workbench.startupEditor": "none",
@@ -22,6 +24,7 @@
     "editor.lineHeight": 1.5,
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,                     // ingen fastlåste linjer øverst ved rulling
     "editor.renderWhitespace": "none",
     "editor.renderLineHighlight": "none",
     "editor.bracketPairColorization.enabled": true,
@@ -99,6 +102,21 @@
     "cSpell.textDecorationStyle": "dotted",
     "cSpell.textDecorationColor": "#e08a2c",
     "cSpell.textDecorationThickness": "1.5px",
+    "cSpell.showInRuler": false,                             // ingen merker i rullefeltet
+    // Sammensatte ord godtas når delene finnes i ordboka (banefart, sirklingsfarten),
+    // og ord med stor forbokstav (navn som Kepler, Rutherford) sjekkes ikke.
+    "cSpell.allowCompoundWords": true,
+    "cSpell.ignoreRegExpList": ["/(?<!\\p{L})\\p{Lu}\\p{L}+/gu"],
+    // Egne ord ligger i mac-setup, så de følger med i git og overskrives ikke
+    // når settings.json kopieres inn. Cmd+. på et ord → «Add to ordliste».
+    "cSpell.customDictionaries": {
+        "ordliste": {
+            "name": "ordliste",
+            "path": "${userHome}/Developer/mac-setup/configs/cspell/ordliste.txt",
+            "addWords": true,
+            "scope": "user"
+        }
+    },
     // Hopp over kommandoer, argumenter som er nøkler/filnavn, og all matematikk
     "cSpell.languageSettings": [
         {
@@ -113,14 +131,6 @@
                 "/\\\\begin\\{(equation|align|alignat|gather|multline|flalign|eqnarray|tikzpicture|lstlisting|verbatim|minted)\\*?\\}[\\s\\S]*?\\\\end\\{\\1\\*?\\}/g"
             ]
         }
-    ],
-    "cSpell.userWords": [
-        "banefart", "banefarten", "coulombspredning", "energibevaring", "Ernest",
-        "fundamentalkraft", "gravitasjonslov", "indentering",
-        "nedskalerte", "partikkelakseleratorer", "Rutherford",
-        "Rutherfordspredning", "sentrallegemet", "Sierpinski", "sirkelbane",
-        "Sirkelbaner", "Sirklingsfart", "sirklingsfarten", "startbetingelse",
-        "startfarten", "Unnslippingsfart", "unnslippingsfarten", "vektorstørrelse"
     ],
 
     // ===== Annet =====

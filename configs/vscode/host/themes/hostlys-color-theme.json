@@ -1,0 +1,571 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Høstlys",
+  "type": "light",
+  "semanticHighlighting": false,
+  "colors": {
+    "foreground": "#282828",
+    "focusBorder": "#1E608C",
+    "widget.border": "#00000000",
+    "descriptionForeground": "#7c6f64",
+    "editor.background": "#fdfcf2",
+    "editor.foreground": "#282828",
+    "editorCursor.foreground": "#282828",
+    "editor.selectionBackground": "#e2d8bf",
+    "editor.inactiveSelectionBackground": "#efe8d6",
+    "editor.selectionHighlightBackground": "#efe8d6",
+    "editor.wordHighlightBackground": "#efe8d6",
+    "editor.findMatchBackground": "#e8cca9",
+    "editor.findMatchHighlightBackground": "#f1dfc6",
+    "editor.lineHighlightBackground": "#f6f2e2",
+    "editor.lineHighlightBorder": "#00000000",
+    "editorLineNumber.foreground": "#c9a77a",
+    "editorLineNumber.activeForeground": "#B85C00",
+    "editorIndentGuide.background1": "#ebe5d3",
+    "editorIndentGuide.activeBackground1": "#d5cdb6",
+    "editorWhitespace.foreground": "#ddd5bf",
+    "editorRuler.foreground": "#ebe5d3",
+    "editorBracketMatch.background": "#ebdbb2",
+    "editorBracketMatch.border": "#00000000",
+    "editorBracketHighlight.foreground1": "#7c6f64",
+    "editorBracketHighlight.foreground2": "#7c6f64",
+    "editorBracketHighlight.foreground3": "#7c6f64",
+    "editorBracketHighlight.foreground4": "#7c6f64",
+    "editorBracketHighlight.foreground5": "#7c6f64",
+    "editorBracketHighlight.foreground6": "#7c6f64",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#781414",
+    "editorGutter.background": "#fdfcf2",
+    "editorGroupHeader.tabsBackground": "#f4f1e4",
+    "editorGroup.border": "#00000000",
+    "editorWidget.background": "#f4f1e4",
+    "editorWidget.border": "#e2dcc8",
+    "editorHoverWidget.background": "#f4f1e4",
+    "editorHoverWidget.border": "#e2dcc8",
+    "editorSuggestWidget.background": "#f4f1e4",
+    "editorSuggestWidget.border": "#e2dcc8",
+    "editorSuggestWidget.selectedBackground": "#e2d8bf",
+    "editorError.foreground": "#781414",
+    "editorWarning.foreground": "#B85C00",
+    "editorInfo.foreground": "#1E608C",
+    "editorOverviewRuler.border": "#00000000",
+    "tab.activeBackground": "#fdfcf2",
+    "tab.activeForeground": "#282828",
+    "tab.inactiveBackground": "#f4f1e4",
+    "tab.inactiveForeground": "#7c6f64",
+    "tab.border": "#00000000",
+    "tab.activeBorderTop": "#00000000",
+    "sideBar.background": "#f4f1e4",
+    "sideBar.foreground": "#282828",
+    "sideBar.border": "#00000000",
+    "sideBarSectionHeader.background": "#f4f1e4",
+    "sideBarTitle.foreground": "#282828",
+    "activityBar.background": "#f4f1e4",
+    "activityBar.foreground": "#282828",
+    "activityBar.inactiveForeground": "#a89984",
+    "activityBar.border": "#00000000",
+    "activityBarBadge.background": "#781414",
+    "activityBarBadge.foreground": "#fdfcf2",
+    "badge.background": "#781414",
+    "badge.foreground": "#fdfcf2",
+    "titleBar.activeBackground": "#f4f1e4",
+    "titleBar.activeForeground": "#282828",
+    "titleBar.inactiveBackground": "#f4f1e4",
+    "titleBar.inactiveForeground": "#a89984",
+    "titleBar.border": "#00000000",
+    "statusBar.background": "#f4f1e4",
+    "statusBar.foreground": "#282828",
+    "statusBar.border": "#00000000",
+    "statusBar.noFolderBackground": "#f4f1e4",
+    "statusBar.debuggingBackground": "#B85C00",
+    "statusBar.debuggingForeground": "#fdfcf2",
+    "panel.background": "#fdfcf2",
+    "panel.border": "#00000000",
+    "panelTitle.activeForeground": "#282828",
+    "panelTitle.activeBorder": "#B85C00",
+    "panelTitle.inactiveForeground": "#7c6f64",
+    "list.activeSelectionBackground": "#e2d8bf",
+    "list.activeSelectionForeground": "#282828",
+    "list.inactiveSelectionBackground": "#efe8d6",
+    "list.hoverBackground": "#efe9d6",
+    "list.focusOutline": "#d5cdb6",
+    "list.highlightForeground": "#B85C00",
+    "input.background": "#fdfcf2",
+    "input.border": "#e2dcc8",
+    "input.foreground": "#282828",
+    "input.placeholderForeground": "#a89984",
+    "dropdown.background": "#fdfcf2",
+    "dropdown.border": "#e2dcc8",
+    "button.background": "#1E608C",
+    "button.foreground": "#fdfcf2",
+    "button.hoverBackground": "#174d70",
+    "scrollbarSlider.background": "#3c383622",
+    "scrollbarSlider.hoverBackground": "#3c383633",
+    "scrollbarSlider.activeBackground": "#3c383644",
+    "textLink.foreground": "#781414",
+    "textLink.activeForeground": "#781414",
+    "gitDecoration.modifiedResourceForeground": "#B85C00",
+    "gitDecoration.untrackedResourceForeground": "#4A6B12",
+    "gitDecoration.addedResourceForeground": "#4A6B12",
+    "gitDecoration.deletedResourceForeground": "#781414",
+    "gitDecoration.ignoredResourceForeground": "#a89984",
+    "terminal.background": "#fdfcf2",
+    "terminal.foreground": "#282828",
+    "terminalCursor.foreground": "#282828",
+    "terminal.ansiBlack": "#282828",
+    "terminal.ansiRed": "#781414",
+    "terminal.ansiGreen": "#4A6B12",
+    "terminal.ansiYellow": "#B85C00",
+    "terminal.ansiBlue": "#1E608C",
+    "terminal.ansiMagenta": "#6E3278",
+    "terminal.ansiCyan": "#1E608C",
+    "terminal.ansiWhite": "#e2dcc8",
+    "terminal.ansiBrightBlack": "#7c6f64",
+    "terminal.ansiBrightRed": "#9a2a2a",
+    "terminal.ansiBrightGreen": "#5f8320",
+    "terminal.ansiBrightYellow": "#c96f12",
+    "terminal.ansiBrightBlue": "#2e78a8",
+    "terminal.ansiBrightMagenta": "#864094",
+    "terminal.ansiBrightCyan": "#2e78a8",
+    "terminal.ansiBrightWhite": "#fdfcf2",
+    "editor.wordHighlightStrongBackground": "#efe8d6",
+    "editor.findMatchBorder": "#B85C00",
+    "editor.findRangeHighlightBackground": "#f6f2e2",
+    "terminal.selectionBackground": "#e2d8bf",
+    "editorGroupHeader.tabsBorder": "#00000000",
+    "editorGroupHeader.border": "#00000000",
+    "sideBarSectionHeader.border": "#00000000",
+    "tab.activeBorder": "#00000000",
+    "commandCenter.border": "#00000000",
+    "commandCenter.inactiveBorder": "#00000000",
+    "commandCenter.background": "#ebe6d4",
+    "commandCenter.activeBackground": "#e2dcc8"
+  },
+  "tokenColors": [
+    {
+      "name": "Standardtekst",
+      "scope": [
+        "source",
+        "variable",
+        "variable.parameter",
+        "meta.function-call.arguments",
+        "keyword.operator"
+      ],
+      "settings": {
+        "foreground": "#282828"
+      }
+    },
+    {
+      "name": "Kommentarer",
+      "scope": [
+        "comment",
+        "punctuation.definition.comment",
+        "string.quoted.docstring.multi.python",
+        "string.quoted.docstring"
+      ],
+      "settings": {
+        "foreground": "#928374",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "1 Rød: nøkkelord",
+      "scope": [
+        "keyword",
+        "keyword.control",
+        "keyword.control.import",
+        "keyword.control.flow",
+        "storage.type",
+        "storage.modifier",
+        "keyword.operator.logical.python",
+        "keyword.operator.word",
+        "keyword.operator.new",
+        "storage.type.function.python",
+        "storage.type.class.python",
+        "keyword.operator.logical"
+      ],
+      "settings": {
+        "foreground": "#781414",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "2 Oransje: tall og konstanter",
+      "scope": [
+        "constant.numeric",
+        "constant.language",
+        "constant.other",
+        "support.constant"
+      ],
+      "settings": {
+        "foreground": "#B85C00"
+      }
+    },
+    {
+      "name": "3 Blå: strenger",
+      "scope": [
+        "string",
+        "punctuation.definition.string",
+        "string.quoted",
+        "string.interpolated"
+      ],
+      "settings": {
+        "foreground": "#1E608C"
+      }
+    },
+    {
+      "name": "4 Grønn: funksjoner",
+      "scope": [
+        "entity.name.function",
+        "support.function",
+        "support.function.builtin",
+        "meta.function-call.generic",
+        "support.function.magic",
+        "variable.function"
+      ],
+      "settings": {
+        "foreground": "#4A6B12"
+      }
+    },
+    {
+      "name": "5 Plum: klasser, typer, dekoratorer, self",
+      "scope": [
+        "entity.name.type",
+        "entity.name.type.class",
+        "entity.name.class",
+        "entity.other.inherited-class",
+        "support.type",
+        "support.class",
+        "entity.name.function.decorator",
+        "meta.function.decorator",
+        "punctuation.definition.decorator",
+        "variable.language.special.self",
+        "variable.parameter.function.language.special.self",
+        "variable.language.special.cls",
+        "support.variable.magic",
+        "constant.character.escape",
+        "constant.character.format.placeholder",
+        "meta.fstring.python constant.character.format.placeholder"
+      ],
+      "settings": {
+        "foreground": "#6E3278"
+      }
+    },
+    {
+      "name": "Markdown overskrifter",
+      "scope": [
+        "markup.heading",
+        "entity.name.section"
+      ],
+      "settings": {
+        "foreground": "#781414",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Markdown utheving",
+      "scope": [
+        "markup.bold"
+      ],
+      "settings": {
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "",
+      "scope": [
+        "markup.italic"
+      ],
+      "settings": {
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Ugyldig",
+      "scope": [
+        "invalid"
+      ],
+      "settings": {
+        "foreground": "#781414"
+      }
+    },
+    {
+      "name": "LaTeX: struktur (rød)",
+      "scope": [
+        "keyword.control.preamble.latex",
+        "keyword.control.include.latex",
+        "storage.type.function.latex",
+        "keyword.other.item.latex"
+      ],
+      "settings": {
+        "foreground": "#781414",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: \\begin og \\end (rød, fet)",
+      "scope": [
+        "support.function.be.latex"
+      ],
+      "settings": {
+        "foreground": "#781414",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "LaTeX: seksjonskommandoer (rød, fet)",
+      "scope": [
+        "support.function.section.latex"
+      ],
+      "settings": {
+        "foreground": "#781414",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "LaTeX: linjeskift og tabellceller (nøytral)",
+      "scope": [
+        "keyword.control.newline.tex",
+        "keyword.control.equation.newline.latex",
+        "keyword.control.table.cell.latex",
+        "keyword.control.table.newline.latex",
+        "keyword.control.equation.align.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: seksjonstitler",
+      "scope": [
+        "entity.name.section.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "LaTeX: matematikk, variabler (blå)",
+      "scope": [
+        "support.class.math.block.tex",
+        "support.class.math.block.environment.latex",
+        "meta.math.block.tex",
+        "meta.math.block.latex"
+      ],
+      "settings": {
+        "foreground": "#1E608C"
+      }
+    },
+    {
+      "name": "LaTeX: greske bokstaver og symboler (plum)",
+      "scope": [
+        "constant.character.math.tex"
+      ],
+      "settings": {
+        "foreground": "#6E3278"
+      }
+    },
+    {
+      "name": "LaTeX: tall (oransje)",
+      "scope": [
+        "constant.numeric.math.tex"
+      ],
+      "settings": {
+        "foreground": "#B85C00"
+      }
+    },
+    {
+      "name": "LaTeX: vanlig tekst inne i matte (\\text{})",
+      "scope": [
+        "meta.text.normal.tex"
+      ],
+      "settings": {
+        "foreground": "#282828"
+      }
+    },
+    {
+      "name": "LaTeX: miljønavn (grønn, fet)",
+      "scope": [
+        "variable.parameter.function.latex"
+      ],
+      "settings": {
+        "foreground": "#4A6B12",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "LaTeX: øvrige kommandoer (nøytral)",
+      "scope": [
+        "support.function.general.latex",
+        "support.function.general.tex",
+        "support.function.emph.latex",
+        "support.function.textbf.latex",
+        "support.function.textit.latex",
+        "support.function.texttt.latex",
+        "support.function.url.latex",
+        "support.function.footnote.latex",
+        "support.function.marginpar.latex",
+        "support.function.verb.latex",
+        "keyword.control.ref.latex",
+        "keyword.control.label.latex",
+        "keyword.control.cite.latex",
+        "keyword.control.layout.latex",
+        "keyword.control.tex",
+        "constant.other.general.math.tex",
+        "constant.other.math.tex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: navn og nøkler (nøytral)",
+      "scope": [
+        "variable.parameter.definition.label.latex",
+        "constant.other.reference.label.latex",
+        "constant.other.reference.citation.latex",
+        "support.class.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: operatorer (nøytral)",
+      "scope": [
+        "punctuation.math.operator.tex"
+      ],
+      "settings": {
+        "foreground": "#282828"
+      }
+    },
+    {
+      "name": "LaTeX: klammer, parenteser og $ (grå)",
+      "scope": [
+        "punctuation.definition.arguments.begin.latex",
+        "punctuation.definition.arguments.end.latex",
+        "punctuation.definition.arguments.begin.tex",
+        "punctuation.definition.arguments.end.tex",
+        "punctuation.definition.arguments.optional.begin.latex",
+        "punctuation.definition.arguments.optional.end.latex",
+        "punctuation.group.begin.latex",
+        "punctuation.group.end.latex",
+        "punctuation.group.begin.tex",
+        "punctuation.group.end.tex",
+        "punctuation.definition.brackets.tex",
+        "punctuation.math.begin.bracket.curly.tex",
+        "punctuation.math.end.bracket.curly.tex",
+        "punctuation.math.begin.bracket.round.tex",
+        "punctuation.math.end.bracket.round.tex",
+        "punctuation.math.bracket.pair.tex",
+        "punctuation.math.bracket.pair.big.tex",
+        "punctuation.definition.emph.begin.latex",
+        "punctuation.definition.emph.end.latex",
+        "punctuation.definition.textbf.begin.latex",
+        "punctuation.definition.textbf.end.latex",
+        "punctuation.definition.textit.begin.latex",
+        "punctuation.definition.textit.end.latex",
+        "punctuation.definition.texttt.begin.latex",
+        "punctuation.definition.texttt.end.latex",
+        "punctuation.definition.footnote.begin.latex",
+        "punctuation.definition.footnote.end.latex",
+        "punctuation.definition.string.begin.tex",
+        "punctuation.definition.string.end.tex",
+        "punctuation.definition.string.begin.latex",
+        "punctuation.definition.string.end.latex",
+        "punctuation.section.embedded.begin.math.tex",
+        "punctuation.section.embedded.end.math.tex"
+      ],
+      "settings": {
+        "foreground": "#7c6f64",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: kommentarer",
+      "scope": [
+        "comment.line.percentage.tex",
+        "comment.line.percentage.latex",
+        "punctuation.definition.comment.tex",
+        "punctuation.definition.comment.latex"
+      ],
+      "settings": {
+        "foreground": "#928374",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "LaTeX: tegnekommandoer i tikzpicture (grønn)",
+      "scope": [
+        "meta.function.environment.latex.tikz support.function.general.latex",
+        "meta.function.environment.latex.tikz support.function.general.tex"
+      ],
+      "settings": {
+        "foreground": "#4A6B12",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Generelt: tagger, nøkler og attributter (plum)",
+      "scope": [
+        "entity.name.tag",
+        "support.type.property-name",
+        "meta.object-literal.key",
+        "entity.other.attribute-name",
+        "meta.mapping.key string",
+        "support.type.property-name.toml"
+      ],
+      "settings": {
+        "foreground": "#6E3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown: kode i teksten (blå)",
+      "scope": [
+        "markup.inline.raw",
+        "markup.inline.raw.string.markdown",
+        "markup.raw",
+        "markup.fenced_code.block.markdown"
+      ],
+      "settings": {
+        "foreground": "#1E608C"
+      }
+    },
+    {
+      "name": "Markdown: lenker (grønn)",
+      "scope": [
+        "markup.underline.link",
+        "string.other.link",
+        "meta.link.inline.markdown",
+        "meta.image.inline.markdown"
+      ],
+      "settings": {
+        "foreground": "#4A6B12"
+      }
+    },
+    {
+      "name": "Markdown: listetegn (rød)",
+      "scope": [
+        "punctuation.definition.list.begin.markdown",
+        "beginning.punctuation.definition.list.markdown"
+      ],
+      "settings": {
+        "foreground": "#781414"
+      }
+    },
+    {
+      "name": "Markdown: sitat (grå, kursiv)",
+      "scope": [
+        "markup.quote"
+      ],
+      "settings": {
+        "foreground": "#7c6f64",
+        "fontStyle": "italic"
+      }
+    }
+  ]
+}
