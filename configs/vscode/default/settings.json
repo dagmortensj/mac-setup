@@ -1,11 +1,7 @@
 {
     // ===== Utseende =====
     "workbench.colorTheme": "Monokai Classic",                 // fra Monokai Pro
-    "workbench.preferredDarkColorTheme": "Monokai Classic",
-    "workbench.preferredLightColorTheme": "Atom One Light",
     "workbench.productIconTheme": "fluent-icons",
-    // Filikoner: "Atom One Light Icons" finnes ikke blant utvidelsene dine,
-    // så VS Code har brukt standardikonene. Linjen er fjernet.
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#187ee465",
         "editor.selectionHighlightBackground": "#187ee465",
@@ -14,7 +10,7 @@
     },
     "workbench.activityBar.location": "top",
     "workbench.startupEditor": "none",
-    // Høyrepanelet (chat/agent) er skjult når et vindu åpnes. Cmd+B åpner det.
+    // Høyrepanelet (chat/agent) er skjult når et vindu åpnes. Alt+Cmd+B åpner det.
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "extensions.ignoreRecommendations": true,
     "update.showReleaseNotes": false,
@@ -31,11 +27,9 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.occurrencesHighlight": "off",
     "editor.selectionHighlight": false,
-    "editor.hover.enabled": "off",
+    "editor.hover.enabled": "onKeyboardModifier",              // hold Option for å se feilmelding/dokumentasjon
     "editor.detectIndentation": false,
-    "editor.formatOnSave": true,
-    // Forslag også i kommentarer og strenger (den gamle kommentaren
-    // «Disable popups» stemte ikke: dette slår forslag PÅ)
+    // Forslag også i kommentarer og strenger
     "editor.quickSuggestions": {
         "comments": "on",
         "strings": "on"
@@ -83,6 +77,7 @@
 
     // ===== Python =====
     "[python]": {
+        "editor.formatOnSave": true,                           // bare Python, ikke .tex
         "editor.formatOnType": true,
         "editor.defaultFormatter": "ms-python.autopep8"
     },
@@ -121,15 +116,15 @@
     ],
     "cSpell.userWords": [
         "banefart", "banefarten", "coulombspredning", "energibevaring", "Ernest",
-        "fundamentalkraft", "gravitasjonslov", "indentering", "Kommandoer",
-        "nedskalerte", "noen", "partikkelakseleratorer", "Rutherford",
+        "fundamentalkraft", "gravitasjonslov", "indentering",
+        "nedskalerte", "partikkelakseleratorer", "Rutherford",
         "Rutherfordspredning", "sentrallegemet", "Sierpinski", "sirkelbane",
         "Sirkelbaner", "Sirklingsfart", "sirklingsfarten", "startbetingelse",
         "startfarten", "Unnslippingsfart", "unnslippingsfarten", "vektorstørrelse"
     ],
 
     // ===== Annet =====
-    "codesnap.target": "window",
+    "easy-codesnap.target": "window",
     "extensions.supportAgentsWindow": {
         "monokai.theme-monokai-pro-vscode": true
     }
