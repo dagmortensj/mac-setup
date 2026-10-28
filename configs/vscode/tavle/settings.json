@@ -1,0 +1,72 @@
+{
+    // Profil for koding på tavla: lyst tema, stor tekst, ingen forslag,
+    // ingen popups, ingen røde streker og ingen automatisk innsetting.
+
+    // ===== Utseende =====
+    // Eget tema med fargene fra lualatex-malene (handout-light/):
+    // rød nøkkelord, oransje tall, blå strenger, grønne funksjoner,
+    // plum klasser/dekoratorer/self, grå kommentarer.
+    "workbench.colorTheme": "Handout Light",
+    "editor.bracketPairColorization.enabled": false,
+    "window.autoDetectColorScheme": false,
+    "workbench.activityBar.location": "top",
+    "workbench.startupEditor": "none",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "workbench.tips.enabled": false,
+    "breadcrumbs.enabled": false,
+
+    // ===== Tekst =====
+    "editor.fontFamily": "MesloLGS NF",
+    "editor.fontSize": 20,
+    "editor.lineHeight": 1.5,
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.renderLineHighlight": "none",
+    "editor.renderWhitespace": "none",
+    "editor.detectIndentation": false,
+
+    // ===== Ingen forslag eller autofullføring =====
+    "editor.quickSuggestions": {
+        "other": "off",
+        "comments": "off",
+        "strings": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.wordBasedSuggestions": "off",
+    "editor.parameterHints.enabled": false,
+    "editor.inlineSuggest.enabled": false,
+    "editor.snippetSuggestions": "none",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.tabCompletion": "off",
+
+    // ===== Ingen popups =====
+    "editor.hover.enabled": "off",
+    "editor.lightbulb.enabled": "off",
+    "editor.codeLens": false,
+    "editor.inlayHints.enabled": "off",
+    "editor.occurrencesHighlight": "off",
+    "editor.selectionHighlight": false,
+    "chat.disableAIFeatures": true,
+
+    // ===== Ingen røde streker =====
+    "editor.renderValidationDecorations": "off",
+    "problems.decorations.enabled": false,
+    "python.languageServer": "None",
+
+    // ===== Det du skriver, blir stående som du skrev det =====
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.autoSurround": "never",
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false,
+
+    // ===== Terminal =====
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.fontSize": 18,
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.tabs.enabled": false,
+    "terminal.integrated.persistentSessionReviveProcess": "never"
+}

@@ -7,10 +7,11 @@ Quick reference for grabbing each config off your current Mac and dropping it in
 | **zsh / Oh My Zsh** | `~/.zshrc` | `configs/zsh/.zshrc` |
 | **Powerlevel10k** | `~/.p10k.zsh` | `configs/zsh/.p10k.zsh` |
 | **fastfetch** | `~/.config/fastfetch/config.jsonc` | `configs/fastfetch/config.jsonc` |
-| **VS Code settings** | `~/Library/Application Support/Code/User/settings.json` | `configs/vscode/settings.json` |
+| **VS Code settings** | `~/Library/Application Support/Code/User/settings.json` | `configs/vscode/default/settings.json` (Tavle profile: `configs/vscode/tavle/settings.json`) |
 | **VS Code keybindings** | `~/Library/Application Support/Code/User/keybindings.json` | `configs/vscode/keybindings.json` |
 | **VS Code snippets** | `~/Library/Application Support/Code/User/snippets/` | `configs/vscode/snippets/` |
 | **VS Code extensions list** | (run `code --list-extensions`) | `configs/vscode/extensions.txt` |
+| **latexmk** | `~/.config/latexmk/latexmkrc` | `configs/latexmk/latexmkrc` |
 | **iTerm2 (archive)** ✅ | iTerm2 → Settings → General → Settings → *Export All Settings and Data* | `configs/iterm2/iterm2-settings.itermexport` |
 | **iTerm2 (folder)** *(alt)* | iTerm2 → Settings → General → Settings → *Save current settings to folder* | `configs/iterm2/com.googlecode.iterm2.plist` |
 | **Git** | `~/.gitconfig` | `configs/.gitconfig` |
@@ -35,7 +36,7 @@ mkdir -p configs/fastfetch
 [ -f ~/.config/fastfetch/config.jsonc ] && cp ~/.config/fastfetch/config.jsonc configs/fastfetch/config.jsonc
 
 # VS Code
-cp "$HOME/Library/Application Support/Code/User/settings.json"    configs/vscode/settings.json
+cp "$HOME/Library/Application Support/Code/User/settings.json"    configs/vscode/default/settings.json
 cp "$HOME/Library/Application Support/Code/User/keybindings.json" configs/vscode/keybindings.json
 cp -R "$HOME/Library/Application Support/Code/User/snippets"      configs/vscode/snippets 2>/dev/null
 code --list-extensions > configs/vscode/extensions.txt

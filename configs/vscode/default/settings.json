@@ -1,0 +1,136 @@
+{
+    // ===== Utseende =====
+    "workbench.colorTheme": "Monokai Classic",                 // fra Monokai Pro
+    "workbench.preferredDarkColorTheme": "Monokai Classic",
+    "workbench.preferredLightColorTheme": "Atom One Light",
+    "workbench.productIconTheme": "fluent-icons",
+    // Filikoner: "Atom One Light Icons" finnes ikke blant utvidelsene dine,
+    // så VS Code har brukt standardikonene. Linjen er fjernet.
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#187ee465",
+        "editor.selectionHighlightBackground": "#187ee465",
+        "editor.findMatchBackground": "#187ee465",            // gjeldende søketreff
+        "editor.findMatchHighlightBackground": "#187ee465"    // øvrige søketreff
+    },
+    "workbench.activityBar.location": "top",
+    "workbench.startupEditor": "none",
+    // Høyrepanelet (chat/agent) er skjult når et vindu åpnes. Cmd+B åpner det.
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "extensions.ignoreRecommendations": true,
+    "update.showReleaseNotes": false,
+    "breadcrumbs.enabled": false,
+
+    // ===== Editor =====
+    "editor.fontFamily": "MesloLGS NF",
+    "editor.fontSize": 13,
+    "editor.lineHeight": 1.5,
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.renderLineHighlight": "none",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.occurrencesHighlight": "off",
+    "editor.selectionHighlight": false,
+    "editor.hover.enabled": "off",
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    // Forslag også i kommentarer og strenger (den gamle kommentaren
+    // «Disable popups» stemte ikke: dette slår forslag PÅ)
+    "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on"
+    },
+
+    // ===== Terminal =====
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.tabs.enabled": false,
+    "terminal.integrated.persistentSessionReviveProcess": "never",
+    "terminal.external.osxExec": "iTerm2.app",
+
+    // ===== Sikkerhet (workspace trust av) =====
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.startupPrompt": "never",
+    "security.workspace.trust.untrustedFiles": "open",
+
+    // ===== LaTeX Workshop =====
+    "latex-workshop.latex.autoBuild.run": "never",                // Cmd+R bygger
+    // Én oppskrift uten motorvalg: .latexmkrc i prosjektmappa bestemmer
+    // (lualatex/pdflatex). Uten slik fil avgjør ~/.config/latexmk/latexmkrc.
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "-outdir=%OUTDIR%", "%DOC%"],
+            "env": {}
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        { "name": "latexmk", "tools": ["latexmk"] }
+    ],
+    "latex-workshop.latex.recipe.default": "first",
+    "latex-workshop.view.pdf.viewer": "tab",                       // PDF i egen fane ...
+    "latex-workshop.view.pdf.tab.editorGroup": "right",            // ... til høyre for koden
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.view.outline.sync.viewer": true,
+    "latex-workshop.message.error.show": false,
+    "latex-workshop.message.warning.show": false,
+    "latex-workshop.message.log.show": false,
+    "workbench.editorAssociations": {
+        "*.pdf": "latex-workshop-pdf-hook"
+    },
+
+    // ===== Python =====
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+
+    // ===== Stavekontroll: bare LaTeX og Markdown, norsk og engelsk =====
+    // Et ord godtas hvis det finnes i en av ordbøkene. Ctrl+Cmd+S slår av/på.
+    "cSpell.enabled": true,
+    "cSpell.language": "nb,en",
+    "cSpell.enabledFileTypes": {
+        "*": false,
+        "latex": true,
+        "markdown": true
+    },
+    "cSpell.checkOnlyEnabledFileTypes": true,
+    // Diskré prikket understreking i stedet for bølgestrek, og ikke i Problems-panelet
+    "cSpell.diagnosticLevel": "Hint",
+    "cSpell.useCustomDecorations": true,
+    "cSpell.textDecorationLine": "underline",
+    "cSpell.textDecorationStyle": "dotted",
+    "cSpell.textDecorationColor": "#e08a2c",
+    "cSpell.textDecorationThickness": "1.5px",
+    // Hopp over kommandoer, argumenter som er nøkler/filnavn, og all matematikk
+    "cSpell.languageSettings": [
+        {
+            "languageId": "latex",
+            "ignoreRegExpList": [
+                "/\\\\(?:label|ref|eqref|autoref|cref|Cref|cite[pt]?|input|include|includegraphics|usepackage|RequirePackage|documentclass|begin|end|url|href|bibliography|bibliographystyle|addbibresource|graphicspath|newcommand|renewcommand|DeclareMathOperator|hypersetup|setmainfont|setmathfont|SI|si|qty|unit|usetikzlibrary|usephysicsmodule|tikzset|pgfplotsset|sisetup|captionsetup|newtheorem|theoremstyle|setlength|addtolength|hspace|vspace|geometry|color|textcolor|definecolor|pagestyle|thispagestyle)\\*?(?:\\[[^\\]]*\\])*\\{[^}]*\\}/g",
+                "/\\\\[a-zA-Z@]+/g",
+                "/\\\\[a-zA-Z@]+\\*?\\[[^\\]]*\\]/g",
+                "/\\$[^$]*\\$/g",
+                "/\\\\\\([\\s\\S]*?\\\\\\)/g",
+                "/\\\\\\[[\\s\\S]*?\\\\\\]/g",
+                "/\\\\begin\\{(equation|align|alignat|gather|multline|flalign|eqnarray|tikzpicture|lstlisting|verbatim|minted)\\*?\\}[\\s\\S]*?\\\\end\\{\\1\\*?\\}/g"
+            ]
+        }
+    ],
+    "cSpell.userWords": [
+        "banefart", "banefarten", "coulombspredning", "energibevaring", "Ernest",
+        "fundamentalkraft", "gravitasjonslov", "indentering", "Kommandoer",
+        "nedskalerte", "noen", "partikkelakseleratorer", "Rutherford",
+        "Rutherfordspredning", "sentrallegemet", "Sierpinski", "sirkelbane",
+        "Sirkelbaner", "Sirklingsfart", "sirklingsfarten", "startbetingelse",
+        "startfarten", "Unnslippingsfart", "unnslippingsfarten", "vektorstørrelse"
+    ],
+
+    // ===== Annet =====
+    "codesnap.target": "window",
+    "extensions.supportAgentsWindow": {
+        "monokai.theme-monokai-pro-vscode": true
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "handout-light",
+  "displayName": "Handout Light",
+  "description": "Lyst tema med fargepaletten fra lualatex-malene: rød, oransje, oliven, blå og plum.",
+  "version": "1.0.1",
+  "publisher": "dagmorten",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Handout Light",
+        "uiTheme": "vs",
+        "path": "./themes/handout-light-color-theme.json"
+      }
+    ]
+  }
+}

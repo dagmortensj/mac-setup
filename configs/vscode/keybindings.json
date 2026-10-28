@@ -1,5 +1,51 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Snarveier, felles for Default og Tavle.
+// Paneler bruker VS Codes standard: Cmd+B venstre, Alt+Cmd+B høyre, Cmd+J bunn.
 [
+    // ===== Cmd+R: lag resultatet =====
+    // Python: lagre og kjør fila i terminalen nederst. Fokus blir i editoren.
+    {
+        "key": "cmd+r",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.files.save",
+                "workbench.action.terminal.focus",
+                {
+                    "command": "workbench.action.terminal.sendSequence",
+                    "args": { "text": "cd \"${fileDirname}\" && clear && python3 \"${fileBasename}\"\u000D" }
+                },
+                "workbench.action.focusActiveEditorGroup"
+            ]
+        },
+        "when": "editorTextFocus && editorLangId == 'python'"
+    },
+    // LaTeX: lagre og bygg (Cmd+S lagrer bare)
+    {
+        "key": "cmd+r",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.files.save",
+                "latex-workshop.build"
+            ]
+        },
+        "when": "editorTextFocus && editorLangId == 'latex'"
+    },
+
+    // LaTeX Workshop bygger på Alt+Cmd+B, som skal åpne høyrefanen. Fjernet.
+    {
+        "key": "cmd+alt+b",
+        "command": "-latex-workshop.build"
+    },
+
+    // ===== LaTeX: hopp fra kilde til PDF =====
+    {
+        "key": "alt+e",
+        "command": "latex-workshop.synctex",
+        "when": "editorTextFocus && editorLangId == 'latex'"
+    },
+
+    // ===== Visning =====
     {
         "key": "ctrl+cmd+z",
         "command": "workbench.action.toggleZenMode"
@@ -8,48 +54,10 @@
         "key": "cmd+k z",
         "command": "-workbench.action.toggleZenMode"
     },
+
+    // ===== Stavekontroll av/på =====
     {
         "key": "ctrl+cmd+s",
         "command": "cSpell.toggleEnableSpellChecker"
-    },
-    {
-        "key": "cmd+b",
-        "command": "workbench.action.toggleAuxiliaryBar"
-    },
-    {
-        "key": "alt+b",
-        "command": "workbench.action.toggleSidebarVisibility"
-    },
-    {
-        "key": "cmd+b",
-        "command": "-workbench.action.toggleSidebarVisibility"
-    },
-    {
-        "key": "alt+r",
-        "command": "code-runner.run"
-    },
-    {
-        "key": "ctrl+alt+n",
-        "command": "-code-runner.run"
-    },
-    {
-        "key": "alt+e",
-        "command": "latex-workshop.synctex",
-        "when": "config.latex-workshop.bind.altKeymap.enabled && editorTextFocus && !virtualWorkspace && editorLangId == 'latex'"
-    },
-    {
-        "key": "cmd+l alt+j",
-        "command": "-latex-workshop.synctex",
-        "when": "config.latex-workshop.bind.altKeymap.enabled && editorTextFocus && !virtualWorkspace && editorLangId == 'latex'"
-    },
-    {
-        "key": "alt+e",
-        "command": "latex-workshop.synctex",
-        "when": "editorTextFocus && !config.latex-workshop.bind.altKeymap.enabled && !virtualWorkspace && editorLangId == 'latex'"
-    },
-    {
-        "key": "alt+cmd+j",
-        "command": "-latex-workshop.synctex",
-        "when": "editorTextFocus && !config.latex-workshop.bind.altKeymap.enabled && !virtualWorkspace && editorLangId == 'latex'"
     }
 ]

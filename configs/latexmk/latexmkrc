@@ -1,0 +1,39 @@
+# Global latexmk configuration (fallback).
+#
+# A project's own .latexmkrc (next to main.tex) is read after this file
+# and overrides it. This file only decides for projects that have none:
+#
+#   % !TEX program = lualatex / xelatex  in the main file  -> that engine
+#   fontspec, unicode-math, luacode or \directlua in the
+#   main file or a local .sty/.cls                         -> LuaLaTeX
+#   otherwise                                              -> pdfLaTeX
+
+use File::Basename qw(dirname);
+
+$pdf_mode = 1;
+
+{
+    my ($main) = grep { !/^-/ && (/\.tex$/ || -e "$_.tex") } reverse @ARGV;
+    $main = 'main' unless defined $main;
+    $main .= '.tex' unless $main =~ /\.tex$/;
+    my $dir = dirname($main);
+    my @files = ($main, glob("\Q$dir\E/*.sty"), glob("\Q$dir\E/*.cls"));
+
+    FILE: for my $f (@files) {
+        open(my $fh, '<', $f) or next;
+        while (my $line = <$fh>) {
+            if ($f eq $main && $line =~ /^\s*%\s*!\s*TeX\s+(?:TS-)?program\s*=\s*(\w+)/i) {
+                my $prog = lc $1;
+                if    ($prog eq 'lualatex') { $pdf_mode = 4; last FILE }
+                elsif ($prog eq 'xelatex')  { $pdf_mode = 5; last FILE }
+                elsif ($prog eq 'pdflatex') { $pdf_mode = 1; last FILE }
+            }
+            $line =~ s/(?<!\\)%.*//;
+            if ($line =~ /\\(?:usepackage|RequirePackage)\s*(?:\[[^\]]*\])?\s*\{[^}]*\b(?:fontspec|unicode-math|luacode)\b/
+                || $line =~ /\\directlua/) {
+                $pdf_mode = 4;
+            }
+        }
+        close $fh;
+    }
+}

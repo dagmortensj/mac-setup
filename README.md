@@ -281,36 +281,49 @@ VS Code's built-in **Settings Sync** handles the full restore automatically — 
 
 That's the entire VS Code section of a fresh-Mac install when Settings Sync is enabled.
 
-### The files in `configs/vscode/` are a backup snapshot
+### What Settings Sync does not cover
 
-Even with Settings Sync, the committed files matter — they're the version-controlled record of every choice, readable on GitHub without launching VS Code:
-
-- [`configs/vscode/settings.json`](./configs/vscode/settings.json)
-- [`configs/vscode/keybindings.json`](./configs/vscode/keybindings.json)
-- [`configs/vscode/extensions.txt`](./configs/vscode/extensions.txt) — output of `code --list-extensions`
-
-If Settings Sync is ever unavailable or you'd rather not sign in, apply them manually:
+Settings Sync restores settings, keybindings and both profiles, but not the two home-made extensions, which are not on the Marketplace, and not the global latexmk config. `configs/vscode/setup.sh` restores everything in one go and is safe to re-run (it backs up the current settings and keybindings first):
 
 ```bash
-cp configs/vscode/settings.json    "$HOME/Library/Application Support/Code/User/settings.json"
-cp configs/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
-xargs -n1 code --install-extension < configs/vscode/extensions.txt
+bash configs/vscode/setup.sh
 ```
 
-### What's in my settings (the highlights)
+### Layout of `configs/vscode/`
 
-- **Themes:** *Monokai Classic* (dark) / *Atom One Light* (light) — auto-switches with system appearance via `auto-dark-mode-windows`.
-- **Font:** `MesloLGS NF` at 13pt, line-height 1.5 — same Nerd Font as the terminal so glyphs render in both.
-- **Format on save** with `autopep8` for Python.
-- **Word wrap** on, **minimap / breadcrumbs / hover popups** off — minimalist editing surface.
-- **Spell-check** for Norwegian Bokmål + English (`cSpell.language: "nb,nb-NO,en"`) with a custom dictionary of physics terms.
-- **Code Runner** rebound from `Ctrl+Alt+N` to **`Alt+R`**, with `python` set to `python3`.
-- **`Cmd+B`** toggles the **Auxiliary Bar** (right-side panel), **`Alt+B`** toggles the **Sidebar**.
-- **LaTeX Workshop** auto-builds on save; PDF opens via `latex-workshop-pdf-hook`.
+| Path | What it is |
+|---|---|
+| `default/settings.json` | Default profile, used for LaTeX and Python |
+| `tavle/settings.json` | Tavle profile, for live coding in front of the class |
+| `keybindings.json` | Shared by both profiles |
+| `extensions.txt` | Marketplace extensions in the Default profile |
+| `handout-light/` | Colour theme built on the palette of the lualatex templates (source and `.vsix`) |
+| `tex-oppstart/` | Opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened (source and `.vsix`) |
+| `setup.sh` | Restores all of the above, plus `configs/latexmk/latexmkrc` |
+
+To rebuild a `.vsix` after editing a theme or extension source, zip `package.json` and the source files under `extension/` together with an `extension.vsixmanifest` and `[Content_Types].xml`, or install `vsce` and run `vsce package` in the folder.
+
+### Profiles
+
+**Default** is the everyday profile. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline. The right-hand chat panel stays closed when a window opens. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one.
+
+**Tavle** is for coding on the board: the Handout Light theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed.
+
+### Keybindings
+
+| Keys | Action |
+|---|---|
+| `Cmd+B` / `Alt+Cmd+B` / `Cmd+J` | Left sidebar / right panel / bottom panel (VS Code defaults) |
+| `Cmd+S` | Save only |
+| `Cmd+R` in Python | Save and run the file with `python3` in the integrated terminal, from the file's folder |
+| `Cmd+R` in LaTeX | Save and build |
+| `Alt+E` | SyncTeX: jump from source to PDF |
+| `Ctrl+Cmd+Z` | Zen mode |
+| `Ctrl+Cmd+S` | Spell-check on/off |
 
 ### Terminal integration with iTerm2 / Powerlevel10k
 
-Already configured in [`settings.json`](./configs/vscode/settings.json):
+Already configured in [`settings.json`](./configs/vscode/default/settings.json):
 
 ```jsonc
 "terminal.integrated.fontFamily": "MesloLGS NF",
@@ -325,7 +338,7 @@ That last line means *Open in External Terminal* (⇧⌘C) launches iTerm2 inste
 Settings Sync handles the live state, but if you want the committed files to stay in sync (so the GitHub view of the repo reflects your current setup), refresh them once in a while:
 
 ```bash
-cp "$HOME/Library/Application Support/Code/User/settings.json"    configs/vscode/settings.json
+cp "$HOME/Library/Application Support/Code/User/settings.json"    configs/vscode/default/settings.json
 cp "$HOME/Library/Application Support/Code/User/keybindings.json" configs/vscode/keybindings.json
 code --list-extensions > configs/vscode/extensions.txt
 ```
@@ -492,7 +505,7 @@ sudo tlmgr install latexmk collection-fontsrecommended
 
 ### VS Code integration
 
-Already in [`extensions.txt`](./configs/vscode/extensions.txt) and [`settings.json`](./configs/vscode/settings.json):
+Already in [`extensions.txt`](./configs/vscode/extensions.txt) and [`settings.json`](./configs/vscode/default/settings.json):
 
 - **`james-yu.latex-workshop`** — auto-builds on save (`latex-workshop.latex.autoBuild.run: "onSave"`), opens the PDF inside VS Code, supports SyncTeX (Alt+E to jump to source from the PDF — that's a custom keybinding in [`keybindings.json`](./configs/vscode/keybindings.json)).
 - Error/warning popups are turned off (`latex-workshop.message.error.show: false`) so build failures don't spam notifications — check the Problems panel instead.
@@ -561,11 +574,8 @@ cp configs/zsh/.p10k.zsh   ~/.p10k.zsh
 mkdir -p ~/.config/fastfetch
 cp configs/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
 
-# 4. VS Code — easiest path: open it and sign in to Settings Sync.
-#    (Manual fallback if you'd rather not sign in:)
-# cp configs/vscode/settings.json    "$HOME/Library/Application Support/Code/User/settings.json"
-# cp configs/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
-# xargs -n1 code --install-extension < configs/vscode/extensions.txt
+# 4. VS Code — profiles, keybindings, extensions and latexmkrc
+bash configs/vscode/setup.sh
 
 # 5. Git
 cp configs/.gitconfig ~/.gitconfig

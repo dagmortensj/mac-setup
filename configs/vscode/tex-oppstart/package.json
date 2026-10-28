@@ -1,0 +1,11 @@
+{
+  "name": "tex-oppstart",
+  "displayName": "TeX-oppstart",
+  "description": "Åpner main.tex og PDF-visningen til høyre når en mappe med main.tex åpnes.",
+  "version": "1.0.0",
+  "publisher": "dagmorten",
+  "engines": { "vscode": "^1.70.0" },
+  "categories": ["Other"],
+  "activationEvents": ["workspaceContains:main.tex"],
+  "main": "./extension.js"
+}
