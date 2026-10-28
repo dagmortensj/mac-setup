@@ -15,6 +15,7 @@ Quick reference for grabbing each config off your current Mac and dropping it in
 | **Stavekontroll, egne ord** | (leses direkte fra repoet av Code Spell Checker) | `configs/cspell/ordliste.txt` |
 | **iTerm2 (archive)** ✅ | iTerm2 → Settings → General → Settings → *Export All Settings and Data* | `configs/iterm2/iterm2-settings.itermexport` |
 | **iTerm2 (folder)** *(alt)* | iTerm2 → Settings → General → Settings → *Save current settings to folder* | `configs/iterm2/com.googlecode.iterm2.plist` |
+| **iTerm2 fargetema** | Dobbeltklikk fila for å importere, velg under Profiles → Colors → Color Presets | `configs/iterm2/farger/Høstlys.itermcolors`, `Høstkveld.itermcolors` |
 | **Git** | `~/.gitconfig` | `configs/.gitconfig` |
 | **Homebrew package list** | (run `brew bundle dump --file=Brewfile`) | `configs/Brewfile` |
 | **SSH config** *(optional)* | `~/.ssh/config` | `configs/ssh/config` *(never commit private keys)* |

@@ -77,6 +77,14 @@ plugins=(git
 
 source $ZSH/oh-my-zsh.sh
 
+# Høst-farger i ls: mapper i fet oransje, lenker i plum, kjørbare filer i rødt
+export LSCOLORS="Dxfxcxdxbxegedabagacad"
+
+# Høst-farger i kommandolinja: tekst i anførselstegn blå, som strenger i koden
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=blue'
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

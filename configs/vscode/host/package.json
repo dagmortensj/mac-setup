@@ -1,8 +1,8 @@
 {
   "name": "host-theme",
   "displayName": "Høst",
-  "description": "Høstlys og Høstkveld: lyst og mørkt tema i jordfarger, med fargepaletten fra lualatex-malene (rød, oransje, grønn, blå og plum). Tilpasset Python og LaTeX.",
-  "version": "1.8.3",
+  "description": "Høstlys og Høstkveld: lyst og mørkt tema i jordfarger, med fargepaletten fra lualatex-malene (rød, oransje, grønn, blå og plum). Tilpasset Python og LaTeX. Med knapp i statuslinjen for å bytte mellom lyst og mørkt.",
+  "version": "1.9.0",
   "publisher": "dagmorten",
   "engines": {
     "vscode": "^1.70.0"
@@ -23,5 +23,9 @@
         "path": "./themes/hostkveld-color-theme.json"
       }
     ]
-  }
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ]
 }

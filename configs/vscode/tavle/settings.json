@@ -7,6 +7,8 @@
     // rød nøkkelord, oransje tall, blå strenger, grønne funksjoner,
     // plum klasser/dekoratorer/self, grå kommentarer.
     "workbench.colorTheme": "Høstlys",
+    "workbench.preferredLightColorTheme": "Høstlys",          // knappen nede til høyre bytter mellom disse
+    "workbench.preferredDarkColorTheme": "Høstkveld",
     "editor.bracketPairColorization.enabled": true,             // Høstlys gir alle klammer samme grå farge
     "window.autoDetectColorScheme": false,
     "workbench.activityBar.location": "top",
@@ -67,6 +69,7 @@
     "terminal.integrated.fontSize": 18,
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.drawBoldTextInBrightColors": false,  // fet tekst beholder fargen, blir ikke lysere
     "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.persistentSessionReviveProcess": "never"
 }

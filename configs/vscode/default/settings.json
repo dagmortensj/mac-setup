@@ -1,6 +1,8 @@
 {
     // ===== Utseende =====
-    "workbench.colorTheme": "Monokai Classic",                 // fra Monokai Pro
+    "workbench.colorTheme": "Høstkveld",                       // Høst-temaet; Høstlys er det lyse
+    "workbench.preferredLightColorTheme": "Høstlys",          // knappen nede til høyre bytter mellom disse
+    "workbench.preferredDarkColorTheme": "Høstkveld",
     "workbench.productIconTheme": "fluent-icons",
     "workbench.colorCustomizations": {
         "[Monokai Classic]": {                                // gjelder bare Monokai, ikke Høstlys
@@ -42,6 +44,7 @@
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.drawBoldTextInBrightColors": false,  // fet tekst beholder fargen, blir ikke lysere
     "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.external.osxExec": "iTerm2.app",

@@ -6,7 +6,7 @@ A personal, reproducible setup for a fresh Mac — terminal, editor, languages, 
 
 ![Terminal preview](./screenshots/terminal.png)
 
-*iTerm2 + Powerlevel10k + Fastfetch on macOS 26.4 (Apple M5).*
+*iTerm2 + Powerlevel10k + Fastfetch on macOS 27 (Apple M5), in the Høstkveld colours.*
 
 ---
 
@@ -111,6 +111,12 @@ On the **new** Mac, after installing iTerm2:
 
 > 📁 *Config in this repo:* [`configs/iterm2/iterm2-settings.itermexport`](./configs/iterm2/iterm2-settings.itermexport)
 
+### Colours
+
+The terminal uses the Høst palette from the VS Code themes (red, orange, green, blue, plum), as iTerm colour presets in [`configs/iterm2/farger/`](./configs/iterm2/farger/): `Høstkveld.itermcolors` (dark, slightly brighter than the VS Code theme because the window is semi-transparent) and `Høstlys.itermcolors` (light). Double-click a file to import it, then pick it under **Settings → Profiles → Colors → Color Presets**. The cyan slot reuses blue, so turquoise never appears.
+
+If the `.itermexport` archive above is older than the colour presets, import the archive first and then the preset.
+
 ---
 
 ## 4. Oh My Zsh
@@ -211,13 +217,13 @@ brew install fastfetch
 
 ### Where the config lives
 
-Fastfetch reads `~/.config/fastfetch/config.jsonc`. The config in this repo is a slimmed-down version showing OS, Kernel, Uptime, Shell, Terminal, Terminal Font, CPU, and GPU, with the small macOS logo and color blocks underneath — matching the look from my previous neofetch setup.
+Fastfetch reads `~/.config/fastfetch/config.jsonc`. The config in this repo is a slimmed-down version showing OS, Kernel, Uptime, Shell, Terminal, Terminal Font, CPU, and GPU, with labels in red. The logo is fastfetch's small macOS logo, kept as a local copy in `eple.txt` so each stripe can get its own colour (red, orange, orange, green, blue, plum from the top). Below it, two rows of colour blocks show the palette in the same order, without the duplicate blue.
 
 To install it:
 
 ```bash
 mkdir -p ~/.config/fastfetch
-cp configs/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
+cp configs/fastfetch/config.jsonc configs/fastfetch/eple.txt ~/.config/fastfetch/
 fastfetch     # test it
 ```
 
@@ -297,7 +303,7 @@ bash configs/vscode/setup.sh
 | `tavle/settings.json` | Tavle profile, for live coding in front of the class |
 | `keybindings.json` | Shared by both profiles |
 | `extensions.txt` | Marketplace extensions in the Default profile |
-| `host/` | The Høst themes: Høstlys (light) and Høstkveld (dark), built on the palette of the lualatex templates and tuned for Python and LaTeX (source, `.vsix` and `eksempel.tex`) |
+| `host/` | The Høst themes: Høstlys (light) and Høstkveld (dark), built on the palette of the lualatex templates and tuned for Python and LaTeX (source, `.vsix` and `eksempel.tex`). Also adds a button at the right of the status bar that switches between the two |
 | `tex-oppstart/` | Opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened (source and `.vsix`) |
 | `setup.sh` | Restores all of the above, plus `configs/latexmk/latexmkrc` |
 
