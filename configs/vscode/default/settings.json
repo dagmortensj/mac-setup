@@ -45,6 +45,7 @@
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.drawBoldTextInBrightColors": false,  // fet tekst beholder fargen, blir ikke lysere
+    "terminal.integrated.minimumContrastRatio": 1,           // VS Code skal ikke lysne temafargene i terminalen
     "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.external.osxExec": "iTerm2.app",
