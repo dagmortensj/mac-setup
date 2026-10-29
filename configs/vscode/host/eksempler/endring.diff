@@ -1,0 +1,9 @@
+diff --git a/main.tex b/main.tex
+index 3b18e51..a9c2f01 100644
+--- a/main.tex
++++ b/main.tex
+@@ -12,7 +12,7 @@ \begin{document}
+ \section{Banen til en planet}
+-Keplers 2. lov sier at arealet er konstant.
++Keplers 2.\ lov sier at arealet planeten sveiper over er det samme.
+ \begin{equation}

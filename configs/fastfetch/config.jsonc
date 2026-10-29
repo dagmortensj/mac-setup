@@ -5,7 +5,7 @@
     "source": "~/.config/fastfetch/eple.txt",
     "color": {
       "1": "red",
-      "2": "yellow",
+      "2": "cyan",
       "3": "yellow",
       "4": "green",
       "5": "blue",
@@ -18,7 +18,7 @@
   "display": {
     "separator": ": ",
     "color": {
-      "keys": "red"
+      "keys": "cyan"
     }
   },
   "modules": [
@@ -31,8 +31,8 @@
     { "type": "cpu",          "key": "CPU" },
     { "type": "gpu",          "key": "GPU" },
     "break",
-    { "type": "custom", "format": "{#40}   {#41}   {#43}   {#42}   {#44}   {#45}   {#47}   {#}" },
-    { "type": "custom", "format": "{#100}   {#101}   {#103}   {#102}   {#104}   {#105}   {#107}   {#}" },
+    { "type": "custom", "format": "{#40}   {#41}   {#46}   {#43}   {#42}   {#44}   {#45}   {#47}   {#}" },
+    { "type": "custom", "format": "{#100}   {#101}   {#106}   {#103}   {#102}   {#104}   {#105}   {#107}   {#}" },
     "break",
     "break",
     "break"

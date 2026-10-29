@@ -2,10 +2,10 @@
   "$schema": "vscode://schemas/color-theme",
   "name": "Høstlys",
   "type": "light",
-  "semanticHighlighting": false,
+  "semanticHighlighting": true,
   "colors": {
     "foreground": "#282828",
-    "focusBorder": "#1E608C",
+    "focusBorder": "#1e608c",
     "widget.border": "#00000000",
     "descriptionForeground": "#7c6f64",
     "editor.background": "#fdfcf2",
@@ -15,12 +15,15 @@
     "editor.inactiveSelectionBackground": "#efe8d6",
     "editor.selectionHighlightBackground": "#efe8d6",
     "editor.wordHighlightBackground": "#efe8d6",
+    "editor.wordHighlightStrongBackground": "#efe8d6",
     "editor.findMatchBackground": "#e8cca9",
+    "editor.findMatchBorder": "#b85c00",
     "editor.findMatchHighlightBackground": "#f1dfc6",
+    "editor.findRangeHighlightBackground": "#f6f2e2",
     "editor.lineHighlightBackground": "#f6f2e2",
     "editor.lineHighlightBorder": "#00000000",
     "editorLineNumber.foreground": "#c9a77a",
-    "editorLineNumber.activeForeground": "#B85C00",
+    "editorLineNumber.activeForeground": "#b85c00",
     "editorIndentGuide.background1": "#ebe5d3",
     "editorIndentGuide.activeBackground1": "#d5cdb6",
     "editorWhitespace.foreground": "#ddd5bf",
@@ -33,7 +36,7 @@
     "editorBracketHighlight.foreground4": "#7c6f64",
     "editorBracketHighlight.foreground5": "#7c6f64",
     "editorBracketHighlight.foreground6": "#7c6f64",
-    "editorBracketHighlight.unexpectedBracket.foreground": "#8c1c1c",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#781414",
     "editorGutter.background": "#fdfcf2",
     "editorGroupHeader.tabsBackground": "#f4f1e4",
     "editorGroup.border": "#00000000",
@@ -44,9 +47,9 @@
     "editorSuggestWidget.background": "#f4f1e4",
     "editorSuggestWidget.border": "#e2dcc8",
     "editorSuggestWidget.selectedBackground": "#e2d8bf",
-    "editorError.foreground": "#8c1c1c",
-    "editorWarning.foreground": "#B85C00",
-    "editorInfo.foreground": "#1E608C",
+    "editorError.foreground": "#781414",
+    "editorWarning.foreground": "#b85c00",
+    "editorInfo.foreground": "#1e608c",
     "editorOverviewRuler.border": "#00000000",
     "tab.activeBackground": "#fdfcf2",
     "tab.activeForeground": "#282828",
@@ -63,9 +66,9 @@
     "activityBar.foreground": "#282828",
     "activityBar.inactiveForeground": "#a89984",
     "activityBar.border": "#00000000",
-    "activityBarBadge.background": "#8c1c1c",
+    "activityBarBadge.background": "#99380e",
     "activityBarBadge.foreground": "#fdfcf2",
-    "badge.background": "#8c1c1c",
+    "badge.background": "#99380e",
     "badge.foreground": "#fdfcf2",
     "titleBar.activeBackground": "#f4f1e4",
     "titleBar.activeForeground": "#282828",
@@ -76,61 +79,58 @@
     "statusBar.foreground": "#282828",
     "statusBar.border": "#00000000",
     "statusBar.noFolderBackground": "#f4f1e4",
-    "statusBar.debuggingBackground": "#B85C00",
+    "statusBar.debuggingBackground": "#b85c00",
     "statusBar.debuggingForeground": "#fdfcf2",
     "panel.background": "#fdfcf2",
     "panel.border": "#00000000",
     "panelTitle.activeForeground": "#282828",
-    "panelTitle.activeBorder": "#B85C00",
+    "panelTitle.activeBorder": "#b85c00",
     "panelTitle.inactiveForeground": "#7c6f64",
     "list.activeSelectionBackground": "#e2d8bf",
     "list.activeSelectionForeground": "#282828",
     "list.inactiveSelectionBackground": "#efe8d6",
     "list.hoverBackground": "#efe9d6",
     "list.focusOutline": "#d5cdb6",
-    "list.highlightForeground": "#B85C00",
+    "list.highlightForeground": "#b85c00",
     "input.background": "#fdfcf2",
     "input.border": "#e2dcc8",
     "input.foreground": "#282828",
     "input.placeholderForeground": "#a89984",
     "dropdown.background": "#fdfcf2",
     "dropdown.border": "#e2dcc8",
-    "button.background": "#1E608C",
+    "button.background": "#1e608c",
     "button.foreground": "#fdfcf2",
-    "button.hoverBackground": "#174d70",
+    "button.hoverBackground": "#044f7a",
     "scrollbarSlider.background": "#3c383622",
     "scrollbarSlider.hoverBackground": "#3c383633",
     "scrollbarSlider.activeBackground": "#3c383644",
-    "textLink.foreground": "#8c1c1c",
-    "textLink.activeForeground": "#8c1c1c",
-    "gitDecoration.modifiedResourceForeground": "#B85C00",
-    "gitDecoration.untrackedResourceForeground": "#4A6B12",
-    "gitDecoration.addedResourceForeground": "#4A6B12",
-    "gitDecoration.deletedResourceForeground": "#8c1c1c",
+    "textLink.foreground": "#781414",
+    "textLink.activeForeground": "#781414",
+    "gitDecoration.modifiedResourceForeground": "#b85c00",
+    "gitDecoration.untrackedResourceForeground": "#4a6b12",
+    "gitDecoration.addedResourceForeground": "#4a6b12",
+    "gitDecoration.deletedResourceForeground": "#781414",
     "gitDecoration.ignoredResourceForeground": "#a89984",
     "terminal.background": "#fdfcf2",
     "terminal.foreground": "#282828",
     "terminalCursor.foreground": "#282828",
+    "terminal.selectionBackground": "#e2d8bf",
     "terminal.ansiBlack": "#282828",
-    "terminal.ansiRed": "#8c1c1c",
-    "terminal.ansiGreen": "#4A6B12",
-    "terminal.ansiYellow": "#B85C00",
-    "terminal.ansiBlue": "#1E608C",
-    "terminal.ansiMagenta": "#6E3278",
-    "terminal.ansiCyan": "#1E608C",
+    "terminal.ansiRed": "#781414",
+    "terminal.ansiGreen": "#4a6b12",
+    "terminal.ansiYellow": "#b85c00",
+    "terminal.ansiBlue": "#1e608c",
+    "terminal.ansiMagenta": "#6e3278",
+    "terminal.ansiCyan": "#99380e",
     "terminal.ansiWhite": "#e2dcc8",
     "terminal.ansiBrightBlack": "#7c6f64",
-    "terminal.ansiBrightRed": "#9a2a2a",
-    "terminal.ansiBrightGreen": "#5f8320",
-    "terminal.ansiBrightYellow": "#c96f12",
-    "terminal.ansiBrightBlue": "#2e78a8",
-    "terminal.ansiBrightMagenta": "#864094",
-    "terminal.ansiBrightCyan": "#2e78a8",
+    "terminal.ansiBrightRed": "#8f2c28",
+    "terminal.ansiBrightGreen": "#5d802c",
+    "terminal.ansiBrightYellow": "#d07128",
+    "terminal.ansiBrightBlue": "#3575a2",
+    "terminal.ansiBrightMagenta": "#83468d",
+    "terminal.ansiBrightCyan": "#b04d28",
     "terminal.ansiBrightWhite": "#fdfcf2",
-    "editor.wordHighlightStrongBackground": "#efe8d6",
-    "editor.findMatchBorder": "#B85C00",
-    "editor.findRangeHighlightBackground": "#f6f2e2",
-    "terminal.selectionBackground": "#e2d8bf",
     "editorGroupHeader.tabsBorder": "#00000000",
     "editorGroupHeader.border": "#00000000",
     "sideBarSectionHeader.border": "#00000000",
@@ -138,7 +138,460 @@
     "commandCenter.border": "#00000000",
     "commandCenter.inactiveBorder": "#00000000",
     "commandCenter.background": "#ebe6d4",
-    "commandCenter.activeBackground": "#e2dcc8"
+    "commandCenter.activeBackground": "#e2dcc8",
+    "icon.foreground": "#282828d9",
+    "disabledForeground": "#a89984",
+    "errorForeground": "#781414",
+    "strongForeground": "#282828",
+    "selection.background": "#e2d8bf",
+    "textBlockQuote.background": "#f4f1e4",
+    "textBlockQuote.border": "#7c6f64",
+    "textCodeBlock.background": "#f4f1e4",
+    "textPreformat.foreground": "#1e608c",
+    "textPreformat.background": "#efe8d6",
+    "textSeparator.foreground": "#e2dcc8",
+    "sash.hoverBorder": "#b85c00",
+    "toolbar.hoverBackground": "#28282812",
+    "toolbar.activeBackground": "#2828281c",
+    "widget.shadow": "#3c383629",
+    "scrollbar.shadow": "#3c383629",
+    "editorStickyScroll.shadow": "#3c383629",
+    "sideBarStickyScroll.shadow": "#3c383629",
+    "panelStickyScroll.shadow": "#3c383629",
+    "listFilterWidget.shadow": "#3c383629",
+    "inlineChat.shadow": "#3c383629",
+    "diffEditor.unchangedRegionShadow": "#3c383629",
+    "activityBar.activeBorder": "#b85c00",
+    "activityBar.dropBorder": "#b85c00",
+    "activityBarTop.foreground": "#282828",
+    "activityBarTop.inactiveForeground": "#a89984",
+    "activityBarTop.activeBorder": "#b85c00",
+    "activityBarTop.dropBorder": "#b85c00",
+    "activityErrorBadge.background": "#781414",
+    "activityErrorBadge.foreground": "#fdfcf2",
+    "activityWarningBadge.background": "#b85c00",
+    "activityWarningBadge.foreground": "#fdfcf2",
+    "profileBadge.background": "#7c6f64",
+    "profileBadge.foreground": "#fdfcf2",
+    "statusBarItem.hoverBackground": "#28282812",
+    "statusBarItem.compactHoverBackground": "#28282812",
+    "statusBarItem.activeBackground": "#2828281c",
+    "statusBarItem.prominentBackground": "#2828281c",
+    "statusBarItem.prominentHoverBackground": "#28282812",
+    "statusBarItem.errorBackground": "#781414",
+    "statusBarItem.errorForeground": "#fdfcf2",
+    "statusBarItem.errorHoverBackground": "#28282812",
+    "statusBarItem.warningBackground": "#b85c00",
+    "statusBarItem.warningForeground": "#fdfcf2",
+    "statusBarItem.warningHoverBackground": "#28282812",
+    "statusBarItem.offlineBackground": "#781414",
+    "statusBarItem.offlineForeground": "#fdfcf2",
+    "statusBarItem.offlineHoverBackground": "#28282812",
+    "statusBarItem.remoteBackground": "#f4f1e4",
+    "statusBarItem.remoteForeground": "#b85c00",
+    "statusBarItem.remoteHoverBackground": "#28282812",
+    "statusBar.debuggingBorder": "#00000000",
+    "statusBar.focusBorder": "#b85c00",
+    "statusBarItem.focusBorder": "#b85c00",
+    "tab.hoverBackground": "#efe9d6",
+    "tab.unfocusedHoverBackground": "#efe9d6",
+    "tab.activeModifiedBorder": "#b85c00",
+    "tab.inactiveModifiedBorder": "#b85c0080",
+    "tab.unfocusedActiveModifiedBorder": "#b85c0080",
+    "tab.unfocusedInactiveModifiedBorder": "#b85c0040",
+    "tab.lastPinnedBorder": "#e2dcc8",
+    "tab.dragAndDropBorder": "#b85c00",
+    "editorActiveLineNumber.foreground": "#b85c00",
+    "editor.hoverHighlightBackground": "#efe8d6",
+    "editor.rangeHighlightBackground": "#b85c001a",
+    "editor.foldPlaceholderForeground": "#7c6f64",
+    "editor.linkedEditingBackground": "#78141426",
+    "editor.snippetTabstopHighlightBackground": "#efe8d6",
+    "editor.snippetFinalTabstopHighlightBorder": "#7c6f64",
+    "editor.inlineValuesBackground": "#b85c0026",
+    "editor.inlineValuesForeground": "#7c6f64",
+    "editor.stackFrameHighlightBackground": "#b85c0026",
+    "editor.focusedStackFrameHighlightBackground": "#4a6b1226",
+    "editor.compositionBorder": "#282828",
+    "editor.placeholder.foreground": "#a89984",
+    "editorCodeLens.foreground": "#7c6f64",
+    "editorGhostText.foreground": "#928374",
+    "editorHint.foreground": "#7c6f64",
+    "editorInlayHint.foreground": "#7c6f64",
+    "editorInlayHint.background": "#7c6f641f",
+    "editorInlayHint.typeForeground": "#7c6f64",
+    "editorInlayHint.parameterForeground": "#7c6f64",
+    "editorLightBulb.foreground": "#b85c00",
+    "editorLightBulbAi.foreground": "#b85c00",
+    "editorLightBulbAutoFix.foreground": "#4a6b12",
+    "editorLink.activeForeground": "#781414",
+    "editorStickyScrollHover.background": "#efe9d6",
+    "editorGutter.foldingControlForeground": "#7c6f64",
+    "editorGutter.addedBackground": "#4a6b12",
+    "editorGutter.addedSecondaryBackground": "#4a6b1280",
+    "editorGutter.modifiedBackground": "#b85c00",
+    "editorGutter.modifiedSecondaryBackground": "#b85c0080",
+    "editorGutter.deletedBackground": "#781414",
+    "editorGutter.deletedSecondaryBackground": "#78141480",
+    "editorCommentsWidget.replyInputBackground": "#fdfcf2",
+    "editorCommentsWidget.resolvedBorder": "#7c6f64",
+    "editorCommentsWidget.unresolvedBorder": "#b85c00",
+    "editorCommentsWidget.rangeActiveBackground": "#b85c001f",
+    "editorCommentsWidget.rangeBackground": "#b85c000f",
+    "commentsView.resolvedIcon": "#7c6f64",
+    "commentsView.unresolvedIcon": "#b85c00",
+    "editorUnicodeHighlight.border": "#b85c00",
+    "editorMarkerNavigation.background": "#f4f1e4",
+    "editorMarkerNavigationError.background": "#781414",
+    "editorMarkerNavigationWarning.background": "#b85c00",
+    "editorMarkerNavigationInfo.background": "#1e608c",
+    "editorOverviewRuler.addedForeground": "#4a6b1299",
+    "editorOverviewRuler.modifiedForeground": "#b85c0099",
+    "editorOverviewRuler.deletedForeground": "#78141499",
+    "editorOverviewRuler.errorForeground": "#781414cc",
+    "editorOverviewRuler.warningForeground": "#b85c00cc",
+    "editorOverviewRuler.infoForeground": "#1e608ccc",
+    "editorOverviewRuler.findMatchForeground": "#b85c0080",
+    "editorOverviewRuler.rangeHighlightForeground": "#b85c0066",
+    "editorOverviewRuler.selectionHighlightForeground": "#7c6f6499",
+    "editorOverviewRuler.wordHighlightForeground": "#7c6f6499",
+    "editorOverviewRuler.wordHighlightStrongForeground": "#7c6f64cc",
+    "editorOverviewRuler.wordHighlightTextForeground": "#7c6f6499",
+    "editorOverviewRuler.bracketMatchForeground": "#7c6f64",
+    "editorOverviewRuler.currentContentForeground": "#4a6b1280",
+    "editorOverviewRuler.incomingContentForeground": "#6e327880",
+    "editorOverviewRuler.commonContentForeground": "#7c6f6466",
+    "editorOverviewRuler.inlineChatInserted": "#4a6b121f",
+    "editorOverviewRuler.inlineChatRemoved": "#7814141f",
+    "editorMinimap.inlineChatInserted": "#4a6b121f",
+    "minimap.errorHighlight": "#781414b2",
+    "minimap.warningHighlight": "#b85c00b2",
+    "minimap.findMatchHighlight": "#b85c0099",
+    "minimap.selectionHighlight": "#e2d8bf",
+    "minimapGutter.addedBackground": "#4a6b12",
+    "minimapGutter.modifiedBackground": "#b85c00",
+    "minimapGutter.deletedBackground": "#781414",
+    "diffEditor.insertedTextBackground": "#4a6b1238",
+    "diffEditor.insertedLineBackground": "#4a6b121f",
+    "diffEditor.removedTextBackground": "#99380e38",
+    "diffEditor.removedLineBackground": "#99380e1f",
+    "diffEditorGutter.insertedLineBackground": "#4a6b1240",
+    "diffEditorGutter.removedLineBackground": "#99380e4c",
+    "diffEditorOverview.insertedForeground": "#4a6b1299",
+    "diffEditorOverview.removedForeground": "#78141499",
+    "diffEditor.diagonalFill": "#7c6f6433",
+    "diffEditor.unchangedCodeBackground": "#7c6f6414",
+    "diffEditor.unchangedRegionBackground": "#f4f1e4",
+    "diffEditor.unchangedRegionForeground": "#7c6f64",
+    "diffEditor.move.border": "#7c6f6499",
+    "diffEditor.moveActive.border": "#b85c00",
+    "diffEditor.border": "#00000000",
+    "multiDiffEditor.headerBackground": "#f4f1e4",
+    "multiDiffEditor.background": "#fdfcf2",
+    "multiDiffEditor.border": "#00000000",
+    "inlineChatDiff.inserted": "#4a6b121f",
+    "inlineChatDiff.removed": "#99380e1f",
+    "inlineEdit.modifiedBackground": "#4a6b120f",
+    "inlineEdit.modifiedBorder": "#4a6b1240",
+    "inlineEdit.modifiedChangedLineBackground": "#4a6b1224",
+    "inlineEdit.modifiedChangedTextBackground": "#4a6b1238",
+    "inlineEdit.originalBackground": "#99380e0f",
+    "inlineEdit.originalBorder": "#99380e40",
+    "inlineEdit.originalChangedLineBackground": "#99380e24",
+    "inlineEdit.originalChangedTextBackground": "#99380e38",
+    "inlineEdit.tabWillAcceptModifiedBorder": "#4a6b1240",
+    "inlineEdit.tabWillAcceptOriginalBorder": "#99380e40",
+    "inlineEdit.gutterIndicator.background": "#7c6f641f",
+    "merge.currentHeaderBackground": "#4a6b1273",
+    "merge.currentContentBackground": "#4a6b122e",
+    "merge.incomingHeaderBackground": "#6e327873",
+    "merge.incomingContentBackground": "#6e32782e",
+    "merge.commonHeaderBackground": "#7c6f6466",
+    "merge.commonContentBackground": "#7c6f6429",
+    "merge.border": "#00000000",
+    "mergeEditor.change.background": "#4a6b122e",
+    "mergeEditor.change.word.background": "#4a6b1252",
+    "mergeEditor.changeBase.background": "#99380e2e",
+    "mergeEditor.changeBase.word.background": "#99380e52",
+    "mergeEditor.conflict.input1.background": "#4a6b122e",
+    "mergeEditor.conflict.input2.background": "#6e32782e",
+    "mergeEditor.conflict.unhandledFocused.border": "#b85c00",
+    "mergeEditor.conflict.unhandledUnfocused.border": "#b85c0080",
+    "mergeEditor.conflict.handledFocused.border": "#4a6b12cc",
+    "mergeEditor.conflict.handledUnfocused.border": "#4a6b1266",
+    "mergeEditor.conflict.unhandled.minimapOverViewRuler": "#b85c00",
+    "mergeEditor.conflict.handled.minimapOverViewRuler": "#4a6b12",
+    "mergeEditor.conflictingLines.background": "#b85c0040",
+    "peekView.border": "#b85c00",
+    "peekViewEditor.background": "#f4f1e4",
+    "peekViewEditorGutter.background": "#f4f1e4",
+    "peekViewEditorStickyScroll.background": "#f4f1e4",
+    "peekViewEditorStickyScrollGutter.background": "#f4f1e4",
+    "peekViewEditor.matchHighlightBackground": "#b85c0059",
+    "peekViewResult.background": "#f4f1e4",
+    "peekViewResult.fileForeground": "#282828",
+    "peekViewResult.lineForeground": "#7c6f64",
+    "peekViewResult.selectionBackground": "#e2d8bf",
+    "peekViewResult.selectionForeground": "#282828",
+    "peekViewResult.matchHighlightBackground": "#b85c004c",
+    "peekViewTitle.background": "#f4f1e4",
+    "peekViewTitleLabel.foreground": "#282828",
+    "peekViewTitleDescription.foreground": "#7c6f64",
+    "pickerGroup.foreground": "#b85c00",
+    "pickerGroup.border": "#e2dcc8",
+    "quickInputTitle.background": "#2828280f",
+    "menu.foreground": "#282828",
+    "menu.background": "#f4f1e4",
+    "menu.selectionBackground": "#e2d8bf",
+    "menu.selectionForeground": "#282828",
+    "menu.separatorBackground": "#e2dcc8",
+    "menu.border": "#e2dcc8",
+    "menubar.selectionBackground": "#28282812",
+    "keybindingLabel.foreground": "#282828",
+    "keybindingLabel.background": "#7c6f642e",
+    "keybindingLabel.border": "#7c6f644c",
+    "keybindingLabel.bottomBorder": "#7c6f6473",
+    "dropdown.foreground": "#282828",
+    "dropdown.listBackground": "#fdfcf2",
+    "checkbox.foreground": "#282828",
+    "checkbox.background": "#fdfcf2",
+    "checkbox.border": "#e2dcc8",
+    "checkbox.selectBorder": "#7c6f64",
+    "inputOption.activeBorder": "#b85c00",
+    "inputOption.activeBackground": "#b85c0033",
+    "inputOption.activeForeground": "#282828",
+    "inputOption.hoverBackground": "#28282812",
+    "radio.activeBorder": "#b85c00",
+    "radio.activeBackground": "#b85c0033",
+    "radio.activeForeground": "#282828",
+    "radio.inactiveBorder": "#e2dcc8",
+    "radio.inactiveHoverBackground": "#28282812",
+    "inputValidation.errorBackground": "#f4f1e4",
+    "inputValidation.errorBorder": "#781414",
+    "inputValidation.warningBackground": "#f4f1e4",
+    "inputValidation.warningBorder": "#b85c00",
+    "inputValidation.infoBackground": "#f4f1e4",
+    "inputValidation.infoBorder": "#1e608c",
+    "button.secondaryBackground": "#e2d8bf",
+    "button.secondaryForeground": "#282828",
+    "button.secondaryHoverBackground": "#e2d8bf",
+    "button.border": "#00000000",
+    "button.separator": "#fdfcf266",
+    "progressBar.background": "#b85c00",
+    "list.errorForeground": "#781414",
+    "list.warningForeground": "#b85c00",
+    "list.invalidItemForeground": "#b85c00",
+    "list.deemphasizedForeground": "#a89984",
+    "list.dropBackground": "#b85c0029",
+    "list.dropBetweenBackground": "#b85c00",
+    "listFilterWidget.noMatchesOutline": "#781414",
+    "listFilterWidget.outline": "#00000000",
+    "tree.indentGuidesStroke": "#d5cdb6",
+    "tree.inactiveIndentGuidesStroke": "#ebe5d3",
+    "tree.tableColumnsBorder": "#e2dcc8",
+    "tree.tableOddRowsBackground": "#28282808",
+    "sideBar.dropBackground": "#b85c0029",
+    "editorGroup.dropBackground": "#b85c0029",
+    "panelSection.dropBackground": "#b85c0029",
+    "terminal.dropBackground": "#b85c0029",
+    "panelSectionHeader.background": "#f4f1e4",
+    "panelSection.border": "#00000000",
+    "panelInput.border": "#e2dcc8",
+    "simpleFindWidget.sashBorder": "#e2dcc8",
+    "settings.headerForeground": "#282828",
+    "settings.settingsHeaderHoverForeground": "#282828b2",
+    "settings.modifiedItemIndicator": "#b85c00",
+    "settings.checkboxForeground": "#282828",
+    "settings.dropdownForeground": "#282828",
+    "settings.headerBorder": "#e2dcc8",
+    "settings.sashBorder": "#e2dcc8",
+    "welcomePage.tileBackground": "#f4f1e4",
+    "welcomePage.tileHoverBackground": "#efe9d6",
+    "welcomePage.tileBorder": "#2828281a",
+    "welcomePage.progress.foreground": "#b85c00",
+    "walkthrough.stepTitle.foreground": "#282828",
+    "walkThrough.embeddedEditorBackground": "#f4f1e4",
+    "extensionIcon.starForeground": "#b85c00",
+    "extensionIcon.preReleaseForeground": "#4a6b12",
+    "extensionIcon.sponsorForeground": "#6e3278",
+    "extensionIcon.verifiedForeground": "#4a6b12",
+    "extensionIcon.privateForeground": "#28282866",
+    "mcpIcon.starForeground": "#b85c00",
+    "debugToolBar.background": "#f4f1e4",
+    "debugToolBar.border": "#e2dcc8",
+    "debugIcon.breakpointForeground": "#781414",
+    "debugIcon.breakpointDisabledForeground": "#a89984",
+    "debugIcon.breakpointUnverifiedForeground": "#7c6f64",
+    "debugIcon.breakpointCurrentStackframeForeground": "#b85c00",
+    "debugIcon.breakpointStackframeForeground": "#4a6b12",
+    "debugIcon.startForeground": "#4a6b12",
+    "debugIcon.continueForeground": "#4a6b12",
+    "debugIcon.restartForeground": "#4a6b12",
+    "debugIcon.pauseForeground": "#b85c00",
+    "debugIcon.stopForeground": "#781414",
+    "debugIcon.disconnectForeground": "#781414",
+    "debugIcon.stepOverForeground": "#6e3278",
+    "debugIcon.stepIntoForeground": "#6e3278",
+    "debugIcon.stepOutForeground": "#6e3278",
+    "debugIcon.stepBackForeground": "#6e3278",
+    "debugConsole.errorForeground": "#781414",
+    "debugConsole.warningForeground": "#b85c00",
+    "debugConsole.infoForeground": "#1e608c",
+    "debugConsole.sourceForeground": "#7c6f64",
+    "debugConsoleInputIcon.foreground": "#b85c00",
+    "debugTokenExpression.name": "#6e3278",
+    "debugTokenExpression.type": "#6e3278",
+    "debugTokenExpression.value": "#7c6f64",
+    "debugTokenExpression.string": "#1e608c",
+    "debugTokenExpression.number": "#b85c00",
+    "debugTokenExpression.boolean": "#b85c00",
+    "debugTokenExpression.error": "#781414",
+    "debugView.stateLabelBackground": "#7c6f644c",
+    "debugView.stateLabelForeground": "#282828",
+    "debugView.exceptionLabelBackground": "#781414",
+    "debugView.exceptionLabelForeground": "#fdfcf2",
+    "debugView.valueChangedHighlight": "#b85c00",
+    "debugExceptionWidget.background": "#f4f1e4",
+    "debugExceptionWidget.border": "#781414",
+    "testing.iconPassed": "#4a6b12",
+    "testing.iconFailed": "#781414",
+    "testing.iconErrored": "#781414",
+    "testing.iconQueued": "#b85c00",
+    "testing.iconUnset": "#7c6f64",
+    "testing.iconSkipped": "#a89984",
+    "testing.runAction": "#4a6b12",
+    "testing.peekBorder": "#781414",
+    "testing.peekHeaderBackground": "#7814141a",
+    "testing.message.error.lineBackground": "#7814141a",
+    "testing.message.error.badgeBackground": "#781414",
+    "testing.message.error.badgeForeground": "#fdfcf2",
+    "testing.message.error.badgeBorder": "#781414",
+    "testing.message.info.decorationForeground": "#7c6f64",
+    "testing.coveredBackground": "#4a6b121f",
+    "testing.coveredGutterBackground": "#4a6b1280",
+    "testing.uncoveredBackground": "#7814141f",
+    "testing.uncoveredGutterBackground": "#78141480",
+    "testing.coverCountBadgeBackground": "#7c6f64",
+    "testing.coverCountBadgeForeground": "#fdfcf2",
+    "notebook.cellBorderColor": "#e2dcc8",
+    "notebook.focusedCellBorder": "#b85c00",
+    "notebook.inactiveFocusedCellBorder": "#b85c0066",
+    "notebook.focusedEditorBorder": "#b85c0080",
+    "notebook.selectedCellBorder": "#e2dcc8",
+    "notebook.cellToolbarSeparator": "#e2dcc8",
+    "notebook.cellStatusBarItemHoverBackground": "#28282812",
+    "notebook.symbolHighlightBackground": "#b85c0014",
+    "notebook.cellInsertionIndicator": "#b85c00",
+    "notebookStatusSuccessIcon.foreground": "#4a6b12",
+    "notebookStatusErrorIcon.foreground": "#781414",
+    "notebookStatusRunningIcon.foreground": "#b85c00",
+    "notebookEditorOverviewRuler.runningCellForeground": "#4a6b12",
+    "notebookScrollbarSlider.background": "#3c383622",
+    "notebookScrollbarSlider.hoverBackground": "#3c383633",
+    "notebookScrollbarSlider.activeBackground": "#3c383644",
+    "interactive.activeCodeBorder": "#b85c00",
+    "interactive.inactiveCodeBorder": "#e2dcc8",
+    "terminalCursor.background": "#fdfcf2",
+    "terminal.hoverHighlightBackground": "#b85c001f",
+    "terminal.initialHintForeground": "#928374",
+    "terminalCommandDecoration.defaultBackground": "#7c6f6480",
+    "terminalCommandDecoration.successBackground": "#4a6b12",
+    "terminalCommandDecoration.errorBackground": "#781414",
+    "terminalOverviewRuler.cursorForeground": "#7c6f64",
+    "terminalOverviewRuler.findMatchForeground": "#b85c0080",
+    "terminalStickyScrollHover.background": "#efe9d6",
+    "terminalSymbolIcon.aliasForeground": "#6e3278",
+    "terminalSymbolIcon.argumentForeground": "#282828",
+    "terminalSymbolIcon.flagForeground": "#b85c00",
+    "terminalSymbolIcon.methodForeground": "#4a6b12",
+    "terminalSymbolIcon.optionForeground": "#b85c00",
+    "terminalSymbolIcon.optionValueForeground": "#1e608c",
+    "symbolIcon.classForeground": "#6e3278",
+    "symbolIcon.interfaceForeground": "#6e3278",
+    "symbolIcon.structForeground": "#6e3278",
+    "symbolIcon.enumeratorForeground": "#6e3278",
+    "symbolIcon.typeParameterForeground": "#6e3278",
+    "symbolIcon.constructorForeground": "#4a6b12",
+    "symbolIcon.functionForeground": "#4a6b12",
+    "symbolIcon.methodForeground": "#4a6b12",
+    "symbolIcon.constantForeground": "#b85c00",
+    "symbolIcon.booleanForeground": "#b85c00",
+    "symbolIcon.numberForeground": "#b85c00",
+    "symbolIcon.nullForeground": "#b85c00",
+    "symbolIcon.enumeratorMemberForeground": "#b85c00",
+    "symbolIcon.eventForeground": "#b85c00",
+    "symbolIcon.unitForeground": "#b85c00",
+    "symbolIcon.colorForeground": "#b85c00",
+    "symbolIcon.stringForeground": "#1e608c",
+    "symbolIcon.keyForeground": "#6e3278",
+    "symbolIcon.keywordForeground": "#99380e",
+    "symbolIcon.operatorForeground": "#282828",
+    "symbolIcon.variableForeground": "#282828",
+    "symbolIcon.fieldForeground": "#282828",
+    "symbolIcon.propertyForeground": "#282828",
+    "symbolIcon.objectForeground": "#282828",
+    "symbolIcon.arrayForeground": "#282828",
+    "symbolIcon.moduleForeground": "#282828",
+    "symbolIcon.namespaceForeground": "#282828",
+    "symbolIcon.packageForeground": "#282828",
+    "symbolIcon.fileForeground": "#282828",
+    "symbolIcon.folderForeground": "#282828",
+    "symbolIcon.referenceForeground": "#282828",
+    "symbolIcon.snippetForeground": "#7c6f64",
+    "symbolIcon.textForeground": "#7c6f64",
+    "gitDecoration.renamedResourceForeground": "#4a6b12",
+    "gitDecoration.stageModifiedResourceForeground": "#b85c00",
+    "gitDecoration.stageDeletedResourceForeground": "#781414",
+    "gitDecoration.conflictingResourceForeground": "#6e3278",
+    "gitDecoration.submoduleResourceForeground": "#6e3278",
+    "scmGraph.foreground1": "#b85c00",
+    "scmGraph.foreground2": "#781414",
+    "scmGraph.foreground3": "#4a6b12",
+    "scmGraph.foreground4": "#6e3278",
+    "scmGraph.foreground5": "#1e608c",
+    "scmGraph.historyItemRefColor": "#b85c00",
+    "scmGraph.historyItemRemoteRefColor": "#6e3278",
+    "scmGraph.historyItemBaseRefColor": "#4a6b12",
+    "scmGraph.historyItemHoverAdditionsForeground": "#4a6b12",
+    "scmGraph.historyItemHoverDeletionsForeground": "#781414",
+    "charts.foreground": "#282828",
+    "charts.lines": "#7c6f64",
+    "charts.red": "#781414",
+    "charts.orange": "#b85c00",
+    "charts.yellow": "#b85c00",
+    "charts.green": "#4a6b12",
+    "charts.blue": "#1e608c",
+    "charts.purple": "#6e3278",
+    "chart.line": "#b85c00",
+    "chart.axis": "#7c6f6466",
+    "chart.guide": "#7c6f6433",
+    "agentsWindowGraphic.orange": "#b85c00",
+    "markdownAlert.note.foreground": "#1e608c",
+    "markdownAlert.tip.foreground": "#4a6b12",
+    "markdownAlert.important.foreground": "#6e3278",
+    "markdownAlert.warning.foreground": "#b85c00",
+    "markdownAlert.caution.foreground": "#781414",
+    "chat.requestBorder": "#2828281a",
+    "chat.requestCodeBorder": "#b85c0080",
+    "chat.slashCommandBackground": "#6e327833",
+    "chat.slashCommandForeground": "#6e3278",
+    "chat.avatarBackground": "#f4f1e4",
+    "chat.avatarForeground": "#282828",
+    "chat.editedFileForeground": "#b85c00",
+    "chat.linesAddedForeground": "#4a6b12",
+    "chat.linesRemovedForeground": "#781414",
+    "chat.checkpointSeparator": "#e2dcc8",
+    "chat.mcpCompatibilityWarningForeground": "#b85c00",
+    "chat.thinkingShimmer": "#282828",
+    "chat.workingProgressStableIconForeground": "#b85c00",
+    "chat.workingProgressInsidersIconForeground": "#b85c00",
+    "chat.sessionStateIndicator.needsInputBorder": "#b85c00",
+    "chat.sessionStateIndicator.unvisitedBorder": "#4a6b12",
+    "chat.fusionBadgeGradientStart": "#b85c00",
+    "chat.fusionBadgeGradientEnd": "#781414",
+    "chat.inputWorkingBorderColor1": "#b85c00",
+    "chat.inputWorkingBorderColor2": "#781414",
+    "chat.inputWorkingBorderColor3": "#4a6b12"
   },
   "tokenColors": [
     {
@@ -148,10 +601,33 @@
         "variable",
         "variable.parameter",
         "meta.function-call.arguments",
-        "keyword.operator"
+        "keyword.operator",
+        "entity.name.namespace",
+        "entity.name.module",
+        "entity.name.label",
+        "variable.other.readwrite",
+        "variable.other.property",
+        "variable.other.object"
       ],
       "settings": {
         "foreground": "#282828"
+      }
+    },
+    {
+      "name": "Operatorer (ikke fet)",
+      "scope": [
+        "keyword.operator",
+        "keyword.operator.assignment",
+        "keyword.operator.arithmetic",
+        "keyword.operator.comparison",
+        "keyword.operator.bitwise",
+        "keyword.operator.pipe",
+        "keyword.operator.redirect",
+        "keyword.operator.expansion"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
       }
     },
     {
@@ -160,7 +636,8 @@
         "comment",
         "punctuation.definition.comment",
         "string.quoted.docstring.multi.python",
-        "string.quoted.docstring"
+        "string.quoted.docstring",
+        "string.quoted.docstring punctuation.definition.string"
       ],
       "settings": {
         "foreground": "#928374",
@@ -168,23 +645,45 @@
       }
     },
     {
-      "name": "1 Rød: nøkkelord",
+      "name": "1 Rust: nøkkelord",
       "scope": [
         "keyword",
-        "keyword.control",
-        "keyword.control.import",
-        "keyword.control.flow",
         "storage.type",
         "storage.modifier",
-        "keyword.operator.logical.python",
-        "keyword.operator.word",
+        "keyword.other",
         "keyword.operator.new",
-        "storage.type.function.python",
-        "storage.type.class.python",
-        "keyword.operator.logical"
+        "keyword.control.import",
+        "keyword.control.import.python",
+        "storage.type.function.lambda.python",
+        "storage.type.function.async.python"
       ],
       "settings": {
-        "foreground": "#8c1c1c",
+        "foreground": "#99380e",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "1 Rust, fet: kontrollord og logiske ord",
+      "scope": [
+        "keyword.control",
+        "keyword.control.flow",
+        "keyword.control.flow.python",
+        "keyword.control.conditional",
+        "keyword.control.loop",
+        "keyword.control.return",
+        "keyword.control.trycatch",
+        "keyword.control.exception",
+        "keyword.operator.logical",
+        "keyword.operator.logical.python",
+        "keyword.operator.word",
+        "keyword.operator.expression",
+        "keyword.operator.instanceof",
+        "keyword.operator.typeof",
+        "storage.type.function.python",
+        "storage.type.class.python"
+      ],
+      "settings": {
+        "foreground": "#99380e",
         "fontStyle": "bold"
       }
     },
@@ -194,10 +693,39 @@
         "constant.numeric",
         "constant.language",
         "constant.other",
-        "support.constant"
+        "support.constant",
+        "variable.other.constant",
+        "variable.other.enummember",
+        "constant.other.color",
+        "keyword.other.unit"
       ],
       "settings": {
-        "foreground": "#B85C00"
+        "foreground": "#b85c00"
+      }
+    },
+    {
+      "name": "Python: navn med store bokstaver er vanlige variabler (M, G, GRENSE)",
+      "scope": [
+        "constant.other.caps",
+        "constant.other.caps.python",
+        "variable.other.constant"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "2 Oransje: prefiks og suffiks på tall (0x, 1j)",
+      "scope": [
+        "storage.type.number",
+        "storage.type.imaginary.number",
+        "storage.type.number.python",
+        "storage.type.imaginary.number.python"
+      ],
+      "settings": {
+        "foreground": "#b85c00",
+        "fontStyle": ""
       }
     },
     {
@@ -206,10 +734,24 @@
         "string",
         "punctuation.definition.string",
         "string.quoted",
-        "string.interpolated"
+        "string.interpolated",
+        "string.template",
+        "string.regexp",
+        "string.other"
       ],
       "settings": {
-        "foreground": "#1E608C"
+        "foreground": "#1e608c"
+      }
+    },
+    {
+      "name": "3 Blå: strengprefiks (f, r, b)",
+      "scope": [
+        "storage.type.string",
+        "storage.type.string.python"
+      ],
+      "settings": {
+        "foreground": "#1e608c",
+        "fontStyle": ""
       }
     },
     {
@@ -220,10 +762,12 @@
         "support.function.builtin",
         "meta.function-call.generic",
         "support.function.magic",
-        "variable.function"
+        "variable.function",
+        "entity.name.function.member",
+        "entity.name.command"
       ],
       "settings": {
-        "foreground": "#4A6B12"
+        "foreground": "#4a6b12"
       }
     },
     {
@@ -241,23 +785,94 @@
         "variable.language.special.self",
         "variable.parameter.function.language.special.self",
         "variable.language.special.cls",
+        "variable.parameter.function.language.special.cls",
+        "variable.language.this",
+        "variable.language.self",
         "support.variable.magic",
         "constant.character.escape",
         "constant.character.format.placeholder",
-        "meta.fstring.python constant.character.format.placeholder"
+        "meta.fstring.python constant.character.format.placeholder",
+        "entity.name.type.parameter",
+        "storage.type.annotation",
+        "support.type.primitive"
       ],
       "settings": {
-        "foreground": "#6E3278"
+        "foreground": "#6e3278"
       }
     },
     {
-      "name": "Markdown overskrifter",
+      "name": "5 Plum: formatspesifikasjon i f-strenger (:.2f, !r)",
       "scope": [
-        "markup.heading",
-        "entity.name.section"
+        "storage.type.format",
+        "storage.type.format.python"
       ],
       "settings": {
-        "foreground": "#8c1c1c",
+        "foreground": "#6e3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "5 Plum: spesialtegn i regulære uttrykk",
+      "scope": [
+        "string.regexp keyword.operator",
+        "string.regexp keyword.control",
+        "string.regexp support.other",
+        "string.regexp constant.other.set",
+        "string.regexp constant.other.character-class",
+        "string.regexp constant.character.character-class",
+        "string.regexp punctuation.character.set",
+        "string.regexp punctuation.parenthesis",
+        "string.regexp punctuation.definition.group",
+        "string.regexp punctuation.definition.character-class",
+        "string.regexp keyword.operator.quantifier",
+        "string.regexp keyword.operator.disjunction",
+        "string.regexp support.other.escape.special",
+        "string.regexp support.other.match"
+      ],
+      "settings": {
+        "foreground": "#6e3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Ugyldig",
+      "scope": [
+        "invalid",
+        "invalid.illegal"
+      ],
+      "settings": {
+        "foreground": "#781414"
+      }
+    },
+    {
+      "name": "Utdatert",
+      "scope": [
+        "invalid.deprecated"
+      ],
+      "settings": {
+        "foreground": "#781414",
+        "fontStyle": "strikethrough"
+      }
+    },
+    {
+      "name": "Markdown: overskrifter (fet tekst)",
+      "scope": [
+        "markup.heading",
+        "entity.name.section",
+        "markup.heading.setext"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Markdown: # foran overskrifter (rød)",
+      "scope": [
+        "punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "foreground": "#781414",
         "fontStyle": "bold"
       }
     },
@@ -271,7 +886,7 @@
       }
     },
     {
-      "name": "",
+      "name": "Markdown kursiv",
       "scope": [
         "markup.italic"
       ],
@@ -280,34 +895,196 @@
       }
     },
     {
-      "name": "Ugyldig",
+      "name": "Markdown overstreking",
       "scope": [
-        "invalid"
+        "markup.strikethrough"
       ],
       "settings": {
-        "foreground": "#8c1c1c"
+        "fontStyle": "strikethrough"
       }
     },
     {
-      "name": "LaTeX: struktur (rød)",
+      "name": "Markdown understreking",
       "scope": [
-        "keyword.control.preamble.latex",
-        "keyword.control.include.latex",
-        "storage.type.function.latex",
-        "keyword.other.item.latex"
+        "markup.underline"
       ],
       "settings": {
-        "foreground": "#8c1c1c",
+        "fontStyle": "underline"
+      }
+    },
+    {
+      "name": "Markdown: kode i teksten (blå)",
+      "scope": [
+        "markup.inline.raw",
+        "markup.inline.raw.string.markdown",
+        "markup.raw",
+        "markup.raw.block.markdown"
+      ],
+      "settings": {
+        "foreground": "#1e608c"
+      }
+    },
+    {
+      "name": "Markdown: kodeblokker følger språket inni",
+      "scope": [
+        "markup.fenced_code.block.markdown",
+        "meta.embedded.block"
+      ],
+      "settings": {
+        "foreground": "#282828"
+      }
+    },
+    {
+      "name": "Markdown: ``` og språknavn (grå)",
+      "scope": [
+        "punctuation.definition.markdown",
+        "fenced_code.block.language",
+        "fenced_code.block.language.markdown",
+        "fenced_code.block.language.attributes.markdown",
+        "punctuation.definition.raw.markdown"
+      ],
+      "settings": {
+        "foreground": "#7c6f64",
         "fontStyle": ""
       }
     },
     {
-      "name": "LaTeX: \\begin og \\end (rød, fet)",
+      "name": "Markdown: lenker (rød, som i PDF-en)",
+      "scope": [
+        "markup.underline.link",
+        "string.other.link",
+        "meta.link.inline.markdown",
+        "meta.image.inline.markdown",
+        "meta.link.reference.markdown",
+        "constant.other.reference.link.markdown"
+      ],
+      "settings": {
+        "foreground": "#781414",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown: klammer rundt lenker (grå)",
+      "scope": [
+        "punctuation.definition.link.title.begin.markdown",
+        "punctuation.definition.link.title.end.markdown",
+        "punctuation.definition.link.description.begin.markdown",
+        "punctuation.definition.link.description.end.markdown",
+        "punctuation.definition.metadata.markdown"
+      ],
+      "settings": {
+        "foreground": "#7c6f64",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown: listetegn (rust)",
+      "scope": [
+        "punctuation.definition.list.begin.markdown",
+        "beginning.punctuation.definition.list.markdown"
+      ],
+      "settings": {
+        "foreground": "#99380e"
+      }
+    },
+    {
+      "name": "Markdown: sitat (grå, kursiv)",
+      "scope": [
+        "markup.quote"
+      ],
+      "settings": {
+        "foreground": "#7c6f64",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Markdown: skillelinjer og tabellstreker (grå)",
+      "scope": [
+        "meta.separator.markdown",
+        "punctuation.definition.table.markdown",
+        "punctuation.separator.table.markdown",
+        "punctuation.definition.strikethrough.markdown",
+        "punctuation.definition.bold.markdown",
+        "punctuation.definition.italic.markdown"
+      ],
+      "settings": {
+        "foreground": "#7c6f64"
+      }
+    },
+    {
+      "name": "Markdown: matematikk (blå, kommandoer nøytrale)",
+      "scope": [
+        "meta.embedded.math.markdown",
+        "markup.math.inline.markdown",
+        "markup.math.block.markdown",
+        "meta.function.math.tex"
+      ],
+      "settings": {
+        "foreground": "#1e608c"
+      }
+    },
+    {
+      "name": "Markdown: matematikk, kommandoer som \\frac (nøytral)",
+      "scope": [
+        "entity.name.function.math.tex",
+        "punctuation.definition.function.math.tex",
+        "storage.type.function.math.tex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown: matematikk, operatorer (nøytral)",
+      "scope": [
+        "punctuation.math.operator.latex",
+        "punctuation.line.separator.math.tex",
+        "line.separator.math.tex"
+      ],
+      "settings": {
+        "foreground": "#282828"
+      }
+    },
+    {
+      "name": "Markdown: matematikk, $ og klammer (grå)",
+      "scope": [
+        "punctuation.definition.math.begin.markdown",
+        "punctuation.definition.math.end.markdown",
+        "punctuation.math.begin.bracket.curly",
+        "punctuation.math.end.bracket.curly",
+        "punctuation.math.begin.bracket.round",
+        "punctuation.math.end.bracket.round",
+        "punctuation.definition.arguments.begin.math.tex",
+        "punctuation.definition.arguments.end.math.tex"
+      ],
+      "settings": {
+        "foreground": "#7c6f64"
+      }
+    },
+    {
+      "name": "LaTeX: struktur (rust)",
+      "scope": [
+        "keyword.control.preamble.latex",
+        "keyword.control.include.latex",
+        "storage.type.function.latex",
+        "keyword.other.item.latex",
+        "storage.type.function.tex",
+        "keyword.control.tex",
+        "keyword.control.catcode.tex"
+      ],
+      "settings": {
+        "foreground": "#99380e",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: \\begin og \\end (rust, fet)",
       "scope": [
         "support.function.be.latex"
       ],
       "settings": {
-        "foreground": "#8c1c1c",
+        "foreground": "#99380e",
         "fontStyle": "bold"
       }
     },
@@ -317,7 +1094,7 @@
         "support.function.section.latex"
       ],
       "settings": {
-        "foreground": "#8c1c1c",
+        "foreground": "#781414",
         "fontStyle": "bold"
       }
     },
@@ -328,7 +1105,8 @@
         "keyword.control.equation.newline.latex",
         "keyword.control.table.cell.latex",
         "keyword.control.table.newline.latex",
-        "keyword.control.equation.align.latex"
+        "keyword.control.equation.align.latex",
+        "keyword.control.layout.latex"
       ],
       "settings": {
         "foreground": "#282828",
@@ -354,7 +1132,7 @@
         "meta.math.block.latex"
       ],
       "settings": {
-        "foreground": "#1E608C"
+        "foreground": "#1e608c"
       }
     },
     {
@@ -363,7 +1141,7 @@
         "constant.character.math.tex"
       ],
       "settings": {
-        "foreground": "#6E3278"
+        "foreground": "#6e3278"
       }
     },
     {
@@ -372,7 +1150,7 @@
         "constant.numeric.math.tex"
       ],
       "settings": {
-        "foreground": "#B85C00"
+        "foreground": "#b85c00"
       }
     },
     {
@@ -390,8 +1168,20 @@
         "variable.parameter.function.latex"
       ],
       "settings": {
-        "foreground": "#4A6B12",
+        "foreground": "#4a6b12",
         "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "LaTeX: navn på nye kommandoer (grønn)",
+      "scope": [
+        "meta.parameter.newcommand.latex support.function.general.latex",
+        "entity.name.function.latex",
+        "entity.name.function.tex"
+      ],
+      "settings": {
+        "foreground": "#4a6b12",
+        "fontStyle": ""
       }
     },
     {
@@ -410,14 +1200,74 @@
         "keyword.control.ref.latex",
         "keyword.control.label.latex",
         "keyword.control.cite.latex",
-        "keyword.control.layout.latex",
-        "keyword.control.tex",
         "constant.other.general.math.tex",
-        "constant.other.math.tex"
+        "constant.other.math.tex",
+        "support.function.textcolor.latex",
+        "support.function.textsubscript.latex",
+        "support.function.textsuperscript.latex",
+        "support.function.textsc.latex",
+        "support.function.textsf.latex",
+        "support.function.textrm.latex",
+        "support.function.underline.latex"
       ],
       "settings": {
         "foreground": "#282828",
         "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: kommandoer i klammer og \\newcommand som ikke er miljøer (nøytral)",
+      "scope": [
+        "meta.group.braces.latex support.function.be.latex",
+        "meta.parameter.newcommand.latex support.function.be.latex",
+        "meta.group.braces.latex variable.parameter.function.latex",
+        "meta.parameter.newcommand.latex variable.parameter.function.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: \\begin og \\end inne i klammer (rust, fet)",
+      "scope": [
+        "meta.group.braces.latex meta.function.environment.general.latex support.function.be.latex",
+        "meta.group.braces.latex meta.function.environment.math.latex support.function.be.latex",
+        "meta.group.braces.latex meta.function.environment.list.latex support.function.be.latex",
+        "meta.group.braces.latex meta.function.environment.tabular.latex support.function.be.latex",
+        "meta.group.braces.latex meta.function.environment.frame.latex support.function.be.latex",
+        "meta.group.braces.latex meta.function.environment.latex.tikz support.function.be.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.general.latex support.function.be.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.math.latex support.function.be.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.list.latex support.function.be.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.tabular.latex support.function.be.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.frame.latex support.function.be.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.latex.tikz support.function.be.latex"
+      ],
+      "settings": {
+        "foreground": "#99380e",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "LaTeX: miljønavn inne i klammer (grønn, fet)",
+      "scope": [
+        "meta.group.braces.latex meta.function.environment.general.latex variable.parameter.function.latex",
+        "meta.group.braces.latex meta.function.environment.math.latex variable.parameter.function.latex",
+        "meta.group.braces.latex meta.function.environment.list.latex variable.parameter.function.latex",
+        "meta.group.braces.latex meta.function.environment.tabular.latex variable.parameter.function.latex",
+        "meta.group.braces.latex meta.function.environment.frame.latex variable.parameter.function.latex",
+        "meta.group.braces.latex meta.function.environment.latex.tikz variable.parameter.function.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.general.latex variable.parameter.function.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.math.latex variable.parameter.function.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.list.latex variable.parameter.function.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.tabular.latex variable.parameter.function.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.frame.latex variable.parameter.function.latex",
+        "meta.parameter.newcommand.latex meta.function.environment.latex.tikz variable.parameter.function.latex"
+      ],
+      "settings": {
+        "foreground": "#4a6b12",
+        "fontStyle": "bold"
       }
     },
     {
@@ -426,7 +1276,8 @@
         "variable.parameter.definition.label.latex",
         "constant.other.reference.label.latex",
         "constant.other.reference.citation.latex",
-        "support.class.latex"
+        "support.class.latex",
+        "constant.other.citation.latex"
       ],
       "settings": {
         "foreground": "#282828",
@@ -443,6 +1294,27 @@
       }
     },
     {
+      "name": "LaTeX: fet og kursiv tekst",
+      "scope": [
+        "markup.bold.textbf.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "LaTeX: kursiv tekst",
+      "scope": [
+        "markup.italic.emph.latex",
+        "markup.italic.textit.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": "italic"
+      }
+    },
+    {
       "name": "LaTeX: klammer, parenteser og $ (grå)",
       "scope": [
         "punctuation.definition.arguments.begin.latex",
@@ -456,6 +1328,8 @@
         "punctuation.group.begin.tex",
         "punctuation.group.end.tex",
         "punctuation.definition.brackets.tex",
+        "punctuation.definition.begin.latex",
+        "punctuation.definition.end.latex",
         "punctuation.math.begin.bracket.curly.tex",
         "punctuation.math.end.bracket.curly.tex",
         "punctuation.math.begin.bracket.round.tex",
@@ -472,12 +1346,15 @@
         "punctuation.definition.texttt.end.latex",
         "punctuation.definition.footnote.begin.latex",
         "punctuation.definition.footnote.end.latex",
+        "punctuation.definition.marginpar.begin.latex",
+        "punctuation.definition.marginpar.end.latex",
         "punctuation.definition.string.begin.tex",
         "punctuation.definition.string.end.tex",
         "punctuation.definition.string.begin.latex",
         "punctuation.definition.string.end.latex",
         "punctuation.section.embedded.begin.math.tex",
-        "punctuation.section.embedded.end.math.tex"
+        "punctuation.section.embedded.end.math.tex",
+        "punctuation.definition.verb.latex"
       ],
       "settings": {
         "foreground": "#7c6f64",
@@ -490,11 +1367,83 @@
         "comment.line.percentage.tex",
         "comment.line.percentage.latex",
         "punctuation.definition.comment.tex",
-        "punctuation.definition.comment.latex"
+        "punctuation.definition.comment.latex",
+        "comment.block.preprocessor.tex",
+        "comment.line.percentage.directive.texshop.tex"
       ],
       "settings": {
         "foreground": "#928374",
         "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "LaTeX: henvisninger og lenker (rød, som i PDF-en)",
+      "scope": [
+        "keyword.control.ref.latex",
+        "keyword.control.cite.latex",
+        "constant.other.reference.label.latex",
+        "constant.other.reference.citation.latex",
+        "support.function.url.latex",
+        "markup.underline.link.latex",
+        "keyword.control.ref.latex punctuation.definition.keyword.latex",
+        "keyword.control.cite.latex punctuation.definition.keyword.latex",
+        "support.function.url.latex punctuation.definition.function.latex"
+      ],
+      "settings": {
+        "foreground": "#781414",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: siunitx og mhchem, kommandonavn (nøytral)",
+      "scope": [
+        "support.function.siunitx.latex",
+        "support.function.mhchem.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: enheter i siunitx (tekst, også i matte)",
+      "scope": [
+        "meta.unit.siunitx.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: kjemiske formler i \\ce (blå, som matte)",
+      "scope": [
+        "meta.chemistry.mhchem.latex"
+      ],
+      "settings": {
+        "foreground": "#1e608c",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: filstier (blå, som strenger)",
+      "scope": [
+        "string.unquoted.path.latex",
+        "meta.include.latex"
+      ],
+      "settings": {
+        "foreground": "#1e608c",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "LaTeX: pakkeopsjoner (tekst, ikke grønn og fet)",
+      "scope": [
+        "meta.parameter.optional.latex variable.parameter.function.latex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
       }
     },
     {
@@ -504,68 +1453,355 @@
         "meta.function.environment.latex.tikz support.function.general.tex"
       ],
       "settings": {
-        "foreground": "#4A6B12",
+        "foreground": "#4a6b12",
         "fontStyle": ""
       }
     },
     {
-      "name": "Generelt: tagger, nøkler og attributter (plum)",
+      "name": "BibTeX: posttype (@book)",
       "scope": [
-        "entity.name.tag",
+        "keyword.other.entry-type.bibtex",
+        "punctuation.definition.keyword.bibtex"
+      ],
+      "settings": {
+        "foreground": "#99380e",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "BibTeX: nøkkel som brukes i \\cite (nøytral, fet)",
+      "scope": [
+        "entity.name.type.entry-key.bibtex"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "BibTeX: feltnavn (plum)",
+      "scope": [
+        "support.function.key.bibtex",
+        "string.unquoted.key.bibtex"
+      ],
+      "settings": {
+        "foreground": "#6e3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "BibTeX: verdier (nøytral) og klammer (grå)",
+      "scope": [
+        "meta.key-assignment.bibtex"
+      ],
+      "settings": {
+        "foreground": "#282828"
+      }
+    },
+    {
+      "name": "BibTeX: klammer rundt verdier (grå)",
+      "scope": [
+        "meta.key-assignment.bibtex punctuation.definition.string.begin.bibtex",
+        "meta.key-assignment.bibtex punctuation.definition.string.end.bibtex",
+        "punctuation.section.entry.begin.bibtex",
+        "punctuation.section.entry.end.bibtex",
+        "punctuation.definition.group.begin.bibtex",
+        "punctuation.definition.group.end.bibtex"
+      ],
+      "settings": {
+        "foreground": "#7c6f64"
+      }
+    },
+    {
+      "name": "Generelt: nøkler og attributter (plum)",
+      "scope": [
         "support.type.property-name",
         "meta.object-literal.key",
         "entity.other.attribute-name",
         "meta.mapping.key string",
-        "support.type.property-name.toml"
+        "support.type.property-name.toml",
+        "keyword.other.definition.ini",
+        "entity.name.section.group-title.ini"
       ],
       "settings": {
-        "foreground": "#6E3278",
+        "foreground": "#6e3278",
         "fontStyle": ""
       }
     },
     {
-      "name": "Markdown: kode i teksten (blå)",
+      "name": "Generelt: tagger i HTML og XML, og typevelgere i CSS (rust, struktur)",
       "scope": [
-        "markup.inline.raw",
-        "markup.inline.raw.string.markdown",
-        "markup.raw",
-        "markup.fenced_code.block.markdown"
+        "entity.name.tag"
       ],
       "settings": {
-        "foreground": "#1E608C"
+        "foreground": "#99380e",
+        "fontStyle": ""
       }
     },
     {
-      "name": "Markdown: lenker (grønn)",
+      "name": "Generelt: < og > rundt tagger (grå, som klammer)",
       "scope": [
-        "markup.underline.link",
-        "string.other.link",
-        "meta.link.inline.markdown",
-        "meta.image.inline.markdown"
-      ],
-      "settings": {
-        "foreground": "#4A6B12"
-      }
-    },
-    {
-      "name": "Markdown: listetegn (rød)",
-      "scope": [
-        "punctuation.definition.list.begin.markdown",
-        "beginning.punctuation.definition.list.markdown"
-      ],
-      "settings": {
-        "foreground": "#8c1c1c"
-      }
-    },
-    {
-      "name": "Markdown: sitat (grå, kursiv)",
-      "scope": [
-        "markup.quote"
+        "punctuation.definition.tag"
       ],
       "settings": {
         "foreground": "#7c6f64",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "YAML: nøkler (plum, selv om grammatikken kaller dem tagger)",
+      "scope": [
+        "entity.name.tag.yaml"
+      ],
+      "settings": {
+        "foreground": "#6e3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Generelt: innebygde typer (int, double, char) er typer (plum)",
+      "scope": [
+        "storage.type.built-in",
+        "storage.type.built-in.primitive",
+        "storage.type.primitive",
+        "support.type.primitive",
+        "support.type.builtin"
+      ],
+      "settings": {
+        "foreground": "#6e3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Generelt: super og andre språkvariabler (plum)",
+      "scope": [
+        "variable.language.super",
+        "variable.language.makefile",
+        "constant.character.entity",
+        "punctuation.definition.entity.html"
+      ],
+      "settings": {
+        "foreground": "#6e3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown: skillelinjer rundt front matter (grå)",
+      "scope": [
+        "punctuation.definition.begin.frontmatter",
+        "punctuation.definition.end.frontmatter"
+      ],
+      "settings": {
+        "foreground": "#7c6f64",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "YAML: ankere og alias (plum)",
+      "scope": [
+        "variable.other.anchor",
+        "variable.other.alias",
+        "punctuation.definition.anchor",
+        "punctuation.definition.alias"
+      ],
+      "settings": {
+        "foreground": "#6e3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "JSON og YAML: strukturtegn (grå)",
+      "scope": [
+        "punctuation.support.type.property-name",
+        "punctuation.definition.dictionary",
+        "punctuation.definition.array",
+        "punctuation.definition.mapping",
+        "punctuation.definition.sequence"
+      ],
+      "settings": {
+        "foreground": "#7c6f64"
+      }
+    },
+    {
+      "name": "Diff: lagt til (grønn)",
+      "scope": [
+        "markup.inserted",
+        "punctuation.definition.inserted",
+        "meta.diff.header.to-file",
+        "punctuation.definition.to-file.diff"
+      ],
+      "settings": {
+        "foreground": "#4a6b12"
+      }
+    },
+    {
+      "name": "Diff: fjernet (rød)",
+      "scope": [
+        "markup.deleted",
+        "punctuation.definition.deleted",
+        "meta.diff.header.from-file",
+        "punctuation.definition.from-file.diff"
+      ],
+      "settings": {
+        "foreground": "#781414"
+      }
+    },
+    {
+      "name": "Diff: endret (oransje)",
+      "scope": [
+        "markup.changed",
+        "punctuation.definition.changed"
+      ],
+      "settings": {
+        "foreground": "#b85c00"
+      }
+    },
+    {
+      "name": "Diff: linjenummer og overskrifter (plum)",
+      "scope": [
+        "meta.diff.range",
+        "meta.toc-list.line-number.diff",
+        "punctuation.definition.range.diff"
+      ],
+      "settings": {
+        "foreground": "#6e3278"
+      }
+    },
+    {
+      "name": "Diff: git-overskrift (fet)",
+      "scope": [
+        "meta.diff.header.git",
+        "meta.diff.header.command",
+        "meta.diff.index.git",
+        "meta.diff.index"
+      ],
+      "settings": {
+        "foreground": "#7c6f64",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Git commit: emnelinje",
+      "scope": [
+        "meta.scope.subject.git-commit"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Git commit: filer i kommentaren",
+      "scope": [
+        "comment markup.inserted.git-commit",
+        "comment markup.deleted.git-commit",
+        "comment markup.changed.git-commit"
+      ],
+      "settings": {
         "fontStyle": "italic"
       }
+    },
+    {
+      "name": "Skall: variabler ($HOME)",
+      "scope": [
+        "variable.other.normal.shell",
+        "variable.other.positional.shell",
+        "variable.parameter.positional.shell",
+        "variable.other.special.shell",
+        "punctuation.definition.variable.shell"
+      ],
+      "settings": {
+        "foreground": "#6e3278",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Skall: shebang",
+      "scope": [
+        "meta.shebang",
+        "comment.line.shebang"
+      ],
+      "settings": {
+        "foreground": "#928374",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Logg: feil (rød)",
+      "scope": [
+        "token.error-token",
+        "log.error"
+      ],
+      "settings": {
+        "foreground": "#781414"
+      }
+    },
+    {
+      "name": "Logg: advarsel (oransje)",
+      "scope": [
+        "token.warn-token",
+        "log.warning"
+      ],
+      "settings": {
+        "foreground": "#b85c00"
+      }
+    },
+    {
+      "name": "Logg: info (grønn)",
+      "scope": [
+        "token.info-token",
+        "log.info"
+      ],
+      "settings": {
+        "foreground": "#4a6b12"
+      }
+    },
+    {
+      "name": "Logg: debug (grå)",
+      "scope": [
+        "token.debug-token",
+        "log.debug"
+      ],
+      "settings": {
+        "foreground": "#928374"
+      }
     }
-  ]
+  ],
+  "semanticTokenColors": {
+    "class": "#6e3278",
+    "class.builtin": "#6e3278",
+    "type": "#6e3278",
+    "typeParameter": "#6e3278",
+    "enum": "#6e3278",
+    "interface": "#6e3278",
+    "struct": "#6e3278",
+    "decorator": "#6e3278",
+    "selfParameter": "#6e3278",
+    "clsParameter": "#6e3278",
+    "function": "#4a6b12",
+    "function.builtin": "#4a6b12",
+    "method": "#4a6b12",
+    "macro": "#4a6b12",
+    "namespace": "#282828",
+    "module": "#282828",
+    "variable": "#282828",
+    "variable.readonly": "#282828",
+    "variable.readonly.builtin": "#282828",
+    "enumMember": "#b85c00",
+    "parameter": "#282828",
+    "property": "#282828",
+    "property.readonly": "#282828",
+    "keyword": "#99380e",
+    "number": "#b85c00",
+    "string": "#1e608c",
+    "regexp": "#1e608c",
+    "operator": "#282828",
+    "comment": {
+      "foreground": "#928374",
+      "italic": true
+    },
+    "*.deprecated": {
+      "strikethrough": true
+    }
+  }
 }

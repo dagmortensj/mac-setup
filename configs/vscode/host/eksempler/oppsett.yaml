@@ -1,0 +1,14 @@
+# Kurs og tema
+navn: Fysikk 2
+år: 2026
+aktiv: true
+tema:
+  - elektromagnetisme
+  - "kvantefysikk"
+  - relativitet: { del: 2, timer: 12.5 }
+merknad: |
+  Flere linjer
+  med tekst
+anker: &standard
+  språk: no
+bruk: *standard

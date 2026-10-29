@@ -1,0 +1,12 @@
+Høst: semantisk utheving for Python
+
+Legger inn semanticTokenColors slik at Pylance får
+samme farger som resten av temaet.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored.
+#
+# On branch main
+# Changes to be committed:
+#	modified:   themes/hostkveld-color-theme.json
+#	new file:   bygg.py
+#	deleted:    gammel.json

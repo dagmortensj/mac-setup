@@ -4,8 +4,8 @@
 
     // ===== Utseende =====
     // Eget tema, Høstlys, med fargene fra lualatex-malene (host/):
-    // rød nøkkelord, oransje tall, blå strenger, grønne funksjoner,
-    // plum klasser/dekoratorer/self, grå kommentarer.
+    // rust nøkkelord (fete kontrollord), oransje tall, blå strenger, grønne
+    // funksjoner, plum klasser/typer/dekoratorer/self, grå kommentarer. Se host/palett.md.
     "workbench.colorTheme": "Høstlys",
     "workbench.preferredLightColorTheme": "Høstlys",          // knappen nede til høyre bytter mellom disse
     "workbench.preferredDarkColorTheme": "Høstkveld",
@@ -68,6 +68,7 @@
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "terminal.integrated.fontSize": 18,
     "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.env.osx": { "HOST_TEMA": "lys" },     // prompten får lys tekst i feltene, som passer Høstlys
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.drawBoldTextInBrightColors": false,  // fet tekst beholder fargen, blir ikke lysere
     "terminal.integrated.minimumContrastRatio": 1,           // VS Code skal ikke lysne temafargene i terminalen

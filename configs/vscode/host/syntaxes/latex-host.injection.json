@@ -1,0 +1,246 @@
+{
+  "$comment": "Høst: gir definisjons- og preamblekommandoer egne scopes, slik at de kan farges som \\newcommand og \\usepackage. LaTeX Workshop-grammatikken gjør dem til vanlige kommandoer. Endrer bare fargene, ikke hvordan resten av fila tolkes.",
+  "scopeName": "latex.host.injection",
+  "injectionSelector": "L:text.tex.latex -comment -markup.raw -source -meta.embedded -string",
+  "patterns": [
+    {
+      "comment": "Filstier: \\includegraphics[...]{fil}. Opsjonene får farge fra opsjonsgrammatikken.",
+      "begin": "((\\\\)includegraphics\\*?)(?=\\s*[\\[{])",
+      "beginCaptures": {
+        "1": {
+          "name": "support.function.general.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        }
+      },
+      "end": "(?<=\\})",
+      "patterns": [
+        {
+          "match": "(\\{)([^}]*)(\\})",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.arguments.begin.latex"
+            },
+            "2": {
+              "name": "string.unquoted.path.latex"
+            },
+            "3": {
+              "name": "punctuation.definition.arguments.end.latex"
+            }
+          }
+        },
+        {
+          "include": "text.tex.latex"
+        }
+      ]
+    },
+    {
+      "comment": "Filstier: \\addbibresource{fil.bib}, \\bibliography{kilder}, \\graphicspath{{mappe/}}, \\includepdf, \\lstinputlisting, \\inputminted",
+      "match": "((\\\\)(?:addbibresource|bibliography|graphicspath|includepdf|lstinputlisting|inputminted|subfile|includeonly))(\\[[^\\]]*\\])?(\\{)((?:[^{}]|\\{[^{}]*\\})*)(\\})",
+      "captures": {
+        "1": {
+          "name": "keyword.control.preamble.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "4": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "5": {
+          "name": "string.unquoted.path.latex"
+        },
+        "6": {
+          "name": "punctuation.definition.arguments.end.latex"
+        }
+      }
+    },
+    {
+      "comment": "siunitx: \\qty{9,81}{m/s^2}, \\qtyrange{1}{2}{m}, \\SI. Tallet er oransje, enheten tekst (også i matte, der den ellers ville blitt blå som en variabel).",
+      "match": "((\\\\)(?:qty|SI|qtyrange|SIrange|qtylist|SIlist|qtyproduct|SIproduct))(?:\\[[^\\]]*\\])?(\\{)([^{}]*)(\\})(?:(\\{)([^{}]*)(\\}))?(\\{)((?:[^{}]|\\{[^{}]*\\})*)(\\})",
+      "captures": {
+        "1": {
+          "name": "support.function.siunitx.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "4": {
+          "name": "constant.numeric.siunitx.latex"
+        },
+        "5": {
+          "name": "punctuation.definition.arguments.end.latex"
+        },
+        "6": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "7": {
+          "name": "constant.numeric.siunitx.latex"
+        },
+        "8": {
+          "name": "punctuation.definition.arguments.end.latex"
+        },
+        "9": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "10": {
+          "name": "meta.unit.siunitx.latex"
+        },
+        "11": {
+          "name": "punctuation.definition.arguments.end.latex"
+        }
+      }
+    },
+    {
+      "comment": "siunitx: \\num{6,674e-11}, \\numrange, \\ang{30}",
+      "match": "((\\\\)(?:num|numlist|numrange|numproduct|ang|complexnum))(?:\\[[^\\]]*\\])?(\\{)([^{}]*)(\\})(?:(\\{)([^{}]*)(\\}))?",
+      "captures": {
+        "1": {
+          "name": "support.function.siunitx.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "4": {
+          "name": "constant.numeric.siunitx.latex"
+        },
+        "5": {
+          "name": "punctuation.definition.arguments.end.latex"
+        },
+        "6": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "7": {
+          "name": "constant.numeric.siunitx.latex"
+        },
+        "8": {
+          "name": "punctuation.definition.arguments.end.latex"
+        }
+      }
+    },
+    {
+      "comment": "siunitx: \\unit{\\joule}, \\si{m/s}",
+      "match": "((\\\\)(?:unit|si))(?:\\[[^\\]]*\\])?(\\{)((?:[^{}]|\\{[^{}]*\\})*)(\\})",
+      "captures": {
+        "1": {
+          "name": "support.function.siunitx.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "4": {
+          "name": "meta.unit.siunitx.latex"
+        },
+        "5": {
+          "name": "punctuation.definition.arguments.end.latex"
+        }
+      }
+    },
+    {
+      "comment": "mhchem: \\ce{H2O}, \\pu{...}. Formelen er blå, som matte.",
+      "match": "((\\\\)(?:ce|pu))(\\{)((?:[^{}]|\\{(?:[^{}]|\\{[^{}]*\\})*\\})*)(\\})",
+      "captures": {
+        "1": {
+          "name": "support.function.mhchem.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "4": {
+          "name": "meta.chemistry.mhchem.latex"
+        },
+        "5": {
+          "name": "punctuation.definition.arguments.end.latex"
+        }
+      }
+    },
+    {
+      "comment": "Nye kommandoer: \\NewDocumentCommand{\\navn}, \\DeclareMathOperator{\\navn}, ...",
+      "match": "((\\\\)(?:NewDocumentCommand|RenewDocumentCommand|ProvideDocumentCommand|DeclareDocumentCommand|NewExpandableDocumentCommand|RenewExpandableDocumentCommand|DeclareExpandableDocumentCommand|NewCommandCopy|RenewCommandCopy|DeclareMathOperator|DeclarePairedDelimiter|DeclarePairedDelimiterX|DeclarePairedDelimiterXPP|providecommand|newcommandx|renewcommandx|DeclareSIUnit)\\*?)\\s*(\\{)?((\\\\)[\\p{Alphabetic}@]+)(\\})?",
+      "captures": {
+        "1": {
+          "name": "storage.type.function.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "name": "punctuation.definition.begin.latex"
+        },
+        "4": {
+          "name": "entity.name.function.latex"
+        },
+        "5": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "6": {
+          "name": "punctuation.definition.end.latex"
+        }
+      }
+    },
+    {
+      "comment": "Nye miljøer: \\newenvironment{navn}, \\newtheorem{navn}, \\newtcolorbox{navn}, ...",
+      "match": "((\\\\)(?:NewDocumentEnvironment|RenewDocumentEnvironment|ProvideDocumentEnvironment|DeclareDocumentEnvironment|NewEnvironmentCopy|newenvironment|renewenvironment|newtheorem|newtcolorbox|renewtcolorbox|DeclareTColorBox|NewTColorBox|RenewTColorBox|ProvideTColorBox|newtcbtheorem|renewtcbtheorem|NewTcbTheorem|newmdenv|newfloat|newlist)\\*?)\\s*(\\{)([\\p{Alphabetic}\\p{Number}@*:._-]+)(\\})",
+      "captures": {
+        "1": {
+          "name": "storage.type.function.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "4": {
+          "name": "variable.parameter.function.latex"
+        },
+        "5": {
+          "name": "punctuation.definition.arguments.end.latex"
+        }
+      }
+    },
+    {
+      "comment": "TeX-definisjoner: \\def\\navn, \\let\\navn, \\newif\\ifnavn, ...",
+      "match": "((\\\\)(?:def|gdef|edef|xdef|let|futurelet|newif|newcount|newdimen|newskip|newtoks|newbox|newread|newwrite|chardef|mathchardef))\\s*((\\\\)[\\p{Alphabetic}@]+)",
+      "captures": {
+        "1": {
+          "name": "storage.type.function.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "name": "entity.name.function.latex"
+        },
+        "4": {
+          "name": "punctuation.definition.function.latex"
+        }
+      }
+    },
+    {
+      "comment": "Pakker, biblioteker, oppsett og annet som hører til preamblen",
+      "match": "((\\\\)(?:RequirePackage|RequirePackageWithOptions|LoadClass|LoadClassWithOptions|PassOptionsToPackage|PassOptionsToClass|NeedsTeXFormat|ProvidesPackage|ProvidesClass|ProvidesFile|ProvidesExplPackage|DeclareOption|ProcessOptions|ExecuteOptions|ProcessKeyvalOptions|DeclareKeys|SetKeys|AddToHook|RemoveFromHook|AtBeginDocument|AtEndDocument|AtEndOfPackage|AtEndOfClass|AtEndPreamble|usetikzlibrary|usepgfplotslibrary|usepgflibrary|tcbuselibrary|usephysicsmodule|addbibresource|bibliography|bibliographystyle|printbibliography|makeatletter|makeatother|ExplSyntaxOn|ExplSyntaxOff|definecolor|colorlet|providecolor|newcounter|newlength|newsavebox|newcolumntype|theoremstyle|newtheoremstyle|declaretheorem|declaretheoremstyle|tikzset|pgfplotsset|pgfkeys|tcbset|sisetup|hypersetup|captionsetup|setlist|setmainfont|setsansfont|setmonofont|setmathfont|newfontfamily|setfontfamily|defaultfontfeatures|geometry|graphicspath|pagestyle|numberwithin|counterwithin|counterwithout)\\*?)(?![\\p{Alphabetic}@])",
+      "captures": {
+        "1": {
+          "name": "keyword.control.preamble.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        }
+      }
+    }
+  ]
+}

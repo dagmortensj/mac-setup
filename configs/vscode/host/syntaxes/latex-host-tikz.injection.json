@@ -1,0 +1,36 @@
+{
+  "$comment": "Høst: fargelegger innholdet i tikzpicture, som LaTeX Workshop-grammatikken lar stå som vanlig tekst. Tall og enheter, nøkler i opsjoner og ordene i en tegnebane (node, at, cycle, circle ...) får egne scopes. Gjelder bare inne i tikzpicture, utenfor matte og kommentarer.",
+  "scopeName": "latex.host.tikz.injection",
+  "injectionSelector": "L:meta.function.environment.latex.tikz -meta.math -comment -string -support.class.math",
+  "patterns": [
+    {
+      "comment": "Nøkler i opsjoner: [line width=1pt, scale=1.2]",
+      "match": "(?:(?<=[\\[{])|(,))(\\s*)([A-Za-z][\\w \\-<>^_]*?)(\\s*)(=)",
+      "captures": {
+        "3": {
+          "name": "support.type.property-name.tikz"
+        },
+        "5": {
+          "name": "punctuation.separator.key-value.tikz"
+        }
+      }
+    },
+    {
+      "comment": "Ordene i en tegnebane, bare når de står der de hører hjemme",
+      "match": "\\b(?:(node|coordinate|pic)(?=\\s*[\\[({])|(at)(?=\\s*\\()|(cycle)\\b|(circle|ellipse|arc)(?=\\s*[\\[(])|(rectangle|grid|controls|and)(?=\\s*[\\[(+])|(to|edge)(?=\\s*[\\[(])|(plot)(?=\\s*[\\[({c])|(child)(?=\\s*[\\[{]))",
+      "name": "keyword.other.path.tikz"
+    },
+    {
+      "comment": "Tall, med eller uten enhet: 0.18  -4  1.6pt  2cm",
+      "match": "(?<![\\w.!])(-?(?:\\d+\\.?\\d*|\\.\\d+))(pt|cm|mm|em|ex|in|bp|sp|mu)?(?![\\w])",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.tikz"
+        },
+        "2": {
+          "name": "keyword.other.unit.tikz"
+        }
+      }
+    }
+  ]
+}
