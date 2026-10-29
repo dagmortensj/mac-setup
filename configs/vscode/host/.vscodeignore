@@ -1,9 +1,0 @@
-eksempler/**
-bygg.py
-palett.py
-palett.md
-palett.svg
-__pycache__/**
-*.vsix
-fargerom.py
-.gitignore

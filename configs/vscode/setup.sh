@@ -14,7 +14,7 @@ cp "$HER/default/settings.json" "$U/settings.json"
 cp "$HER/keybindings.json" "$U/keybindings.json"
 while read -r e; do [ -n "$e" ] && code --install-extension "$e" >/dev/null 2>&1; done < "$HER/extensions.txt"
 code --install-extension "$HER/tex-oppstart/tex-oppstart-1.0.0.vsix" --force >/dev/null 2>&1
-code --install-extension "$HER/host/host-theme.vsix" --force >/dev/null 2>&1
+code --install-extension "$HER/host-theme.vsix" --force >/dev/null 2>&1
 echo "OK: Default profile"
 
 # 2. Tavle profile (created if missing)
@@ -30,7 +30,7 @@ fi
 P="$U/profiles/$ID"; mkdir -p "$P"
 cp "$HER/tavle/settings.json" "$P/settings.json"
 cp "$HER/keybindings.json" "$P/keybindings.json"
-for e in ms-python.python ms-toolsai.jupyter "$HER/host/host-theme.vsix"; do
+for e in ms-python.python ms-toolsai.jupyter "$HER/host-theme.vsix"; do
   code --install-extension "$e" --profile "Tavle" --force >/dev/null 2>&1 || echo "ERROR: $e"
 done
 echo "OK: Tavle profile"

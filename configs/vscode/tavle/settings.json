@@ -3,9 +3,9 @@
     // ingen popups, ingen røde streker og ingen automatisk innsetting.
 
     // ===== Utseende =====
-    // Eget tema, Høstlys, med fargene fra lualatex-malene (host/):
+    // Eget tema, Høstlys, med fargene fra lualatex-malene:
     // rust nøkkelord (fete kontrollord), oransje tall, blå strenger, grønne
-    // funksjoner, plum klasser/typer/dekoratorer/self, grå kommentarer. Se host/palett.md.
+    // funksjoner, plum klasser/typer/dekoratorer/self, grå kommentarer. Se github.com/dagmortensj/hoest-theme.
     "workbench.colorTheme": "Høstlys",
     "workbench.preferredLightColorTheme": "Høstlys",          // knappen nede til høyre bytter mellom disse
     "workbench.preferredDarkColorTheme": "Høstkveld",

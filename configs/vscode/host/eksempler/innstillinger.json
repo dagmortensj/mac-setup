@@ -1,9 +1,0 @@
-{
-    // Kommentar i JSONC
-    "editor.fontSize": 13,
-    "editor.wordWrap": "on",
-    "editor.minimap.enabled": false,
-    "files.exclude": { "**/*.aux": true, "**/*.log": true },
-    "workbench.colorTheme": "Høstkveld",
-    "tall": [1, 2.5, -3e8, null]
-}
