@@ -147,10 +147,12 @@ Then the `plugins=(...)` line in `~/.zshrc` looks like this:
 
 ```zsh
 plugins=(git
+         vscode
          zsh-autosuggestions
-         zsh-syntax-highlighting
-         vscode)
+         zsh-syntax-highlighting)
 ```
+
+zsh-syntax-highlighting has to be the last plugin, since it colours what the others have already set up.
 
 The `vscode` plugin (built into Oh My Zsh) adds aliases like `vsc .` to open the current folder. The `git` plugin adds dozens of git aliases like `gst` for `git status`.
 
@@ -189,7 +191,7 @@ p10k configure
 
 This writes `~/.p10k.zsh`, which is the file you save to share your prompt across machines.
 
-The prompt in this repo uses the Høst colours: the path segment is orange, and the git segment is green when clean and rust when there are uncommitted changes. The segments have dark text, which suits Høstkveld. For Høstlys, `.p10k.zsh` switches to light text when `HOST_TEMA=lys` is set or the iTerm profile name contains "lys". The Tavle profile in VS Code sets `HOST_TEMA=lys` for its integrated terminal.
+The prompt in this repo uses the Høst colours: the path segment is orange, and the git segment is green when clean and rust when there are uncommitted changes. The segments have dark text, which suits Høstkveld. For Høstlys, `.p10k.zsh` switches to light text when `HOEST_TEMA=lys` is set or the iTerm profile name contains "lys". The Tavle profile in VS Code sets `HOEST_TEMA=lys` for its integrated terminal.
 
 > 📁 *Config in this repo:* [`configs/zsh/.p10k.zsh`](./configs/zsh/.p10k.zsh)
 
@@ -307,14 +309,14 @@ bash configs/vscode/setup.sh
 | `tavle/settings.json` | Tavle profile, for live coding in front of the class |
 | `keybindings.json` | Shared by both profiles |
 | `extensions.txt` | Marketplace extensions in the Default profile |
-| `host-theme.vsix` | The Høst themes, Høstlys (light) and Høstkveld (dark), built on the palette of the lualatex templates. They cover the whole workbench and LaTeX, BibTeX, Python (with Pylance semantic highlighting), Markdown, JSON, YAML, shell and diff, and add a button at the right of the status bar that switches between the two. Source, palette and documentation are in their own repository, [hoest-theme](https://github.com/dagmortensj/hoest-theme) |
+| `hoest-theme.vsix` | The Høst themes, Høstlys (light) and Høstkveld (dark), built on the palette of the lualatex templates. They cover the whole workbench and LaTeX, BibTeX, Python (with Pylance semantic highlighting), Markdown, JSON, YAML, shell and diff, and add a button at the right of the status bar that switches between the two. Source, palette and documentation are in their own repository, [hoest-theme](https://github.com/dagmortensj/hoest-theme) |
 | `tex-oppstart/` | Opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened (source and `.vsix`) |
 | `setup.sh` | Restores all of the above, plus `configs/latexmk/latexmkrc` |
 
 The Høst themes are developed in [hoest-theme](https://github.com/dagmortensj/hoest-theme). The `.vsix` here and the iTerm presets in `configs/iterm2/farger/` are copies, so that `setup.sh` works without it. After changing the theme there, refresh the copies and run `setup.sh` again:
 
 ```bash
-cp ../hoest-theme/vscode/host-theme.vsix configs/vscode/
+cp ../hoest-theme/vscode/hoest-theme.vsix configs/vscode/
 cp ../hoest-theme/iterm/*.itermcolors configs/iterm2/farger/
 bash configs/vscode/setup.sh
 ```
@@ -325,7 +327,7 @@ To rebuild `tex-oppstart/` after editing it, run `npx @vscode/vsce package` in t
 
 **Default** is the everyday profile. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline. The right-hand chat panel stays closed when a window opens. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one.
 
-**Tavle** is for coding on the board: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed. The integrated terminal gets `HOST_TEMA=lys`, so the prompt has light text that reads well on Høstlys.
+**Tavle** is for coding on the board: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed. The integrated terminal gets `HOEST_TEMA=lys`, so the prompt has light text that reads well on Høstlys.
 
 ### Keybindings
 
@@ -383,6 +385,8 @@ git config --global user.email "you@example.com"
 git config --global init.defaultBranch main
 git config --global pull.rebase false
 ```
+
+[`configs/.gitconfig`](./configs/.gitconfig) already holds all four, so on a restore it is enough to copy that file (section 13).
 
 ### SSH key for GitHub
 
@@ -581,8 +585,14 @@ pmset -g log | grep -i "wake from"
 The fast path on a fresh Mac, after Homebrew, Oh My Zsh and Powerlevel10k are installed (sections 2, 4, 5):
 
 ```bash
-# 1. reinstall every brew package + cask + vscode extension in one shot
+# 1. every brew package and cask, including iTerm2, VS Code and the Nerd Font
 brew bundle --file=configs/Brewfile
+
+# the two zsh plugins that .zshrc expects (section 4)
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # 2. shell + prompt
 cp configs/zsh/.zshrc      ~/.zshrc
@@ -593,6 +603,7 @@ mkdir -p ~/.config/fastfetch
 cp configs/fastfetch/config.jsonc configs/fastfetch/eple.txt ~/.config/fastfetch/
 
 # 4. VS Code — profiles, keybindings, extensions and latexmkrc
+#    (needs the code command: open VS Code once and run Shell Command: Install 'code' command in PATH)
 bash configs/vscode/setup.sh
 
 # 5. Git
@@ -601,15 +612,15 @@ cp configs/.gitconfig ~/.gitconfig
 # 6. Hide the "Last login" banner so fastfetch is the first thing on screen
 touch ~/.hushlogin
 
-# 7. reload the shell
-source ~/.zshrc
+# 7. start a fresh shell with the new config
+exec zsh
 ```
 
 For **iTerm2**: open it once, then **Settings → General → Settings → Import All Settings and Data** → pick `configs/iterm2/iterm2-settings.itermexport`.
 
 For **MacTeX**: download `MacTeX.pkg` from https://www.tug.org/mactex/ and run it manually (see [section 11](#11-latex)). Not in the Brewfile by design — the .pkg installer is the more reliable route for the 6 GB download.
 
-> 💡 The `Brewfile` keeps the VS Code extension list under `vscode "..."` lines but commented out by default — Settings Sync is the primary path for those. If you'd rather install them via Homebrew, uncomment those lines before running `brew bundle`.
+> 💡 VS Code extensions are not in the `Brewfile`. The one list is [`configs/vscode/extensions.txt`](./configs/vscode/extensions.txt), which `setup.sh` installs from; Settings Sync restores them too.
 
 ---
 

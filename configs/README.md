@@ -9,15 +9,13 @@ Quick reference for grabbing each config off your current Mac and dropping it in
 | **fastfetch** | `~/.config/fastfetch/config.jsonc`, `~/.config/fastfetch/eple.txt` | `configs/fastfetch/config.jsonc`, `configs/fastfetch/eple.txt` (the logo) |
 | **VS Code settings** | `~/Library/Application Support/Code/User/settings.json` | `configs/vscode/default/settings.json` (Tavle profile: `configs/vscode/tavle/settings.json`) |
 | **VS Code keybindings** | `~/Library/Application Support/Code/User/keybindings.json` | `configs/vscode/keybindings.json` |
-| **VS Code snippets** | `~/Library/Application Support/Code/User/snippets/` | `configs/vscode/snippets/` |
 | **VS Code extensions list** | (run `code --list-extensions`) | `configs/vscode/extensions.txt` |
 | **latexmk** | `~/.config/latexmk/latexmkrc` | `configs/latexmk/latexmkrc` |
 | **Spell-check, own words** | (read straight from the repo by Code Spell Checker) | `configs/cspell/ordliste.txt` |
 | **iTerm2 (archive)** ✅ | iTerm2 → Settings → General → Settings → *Export All Settings and Data* | `configs/iterm2/iterm2-settings.itermexport` |
-| **iTerm2 (folder)** *(alt)* | iTerm2 → Settings → General → Settings → *Save current settings to folder* | `configs/iterm2/com.googlecode.iterm2.plist` |
 | **iTerm2 colour presets** | Copied from the [hoest-theme](https://github.com/dagmortensj/hoest-theme) repository, not from the Mac. Double-click to import, then pick under Profiles → Colors → Color Presets | `configs/iterm2/farger/Høstlys.itermcolors`, `Høstkveld.itermcolors` |
 | **Git** | `~/.gitconfig` | `configs/.gitconfig` |
-| **Homebrew package list** | (run `brew bundle dump --file=Brewfile`) | `configs/Brewfile` |
+| **Homebrew package list** | Curated by hand, see the note at the top of the file | `configs/Brewfile` |
 | **SSH config** *(optional)* | `~/.ssh/config` | `configs/ssh/config` *(never commit private keys)* |
 
 ---
@@ -41,18 +39,15 @@ mkdir -p configs/fastfetch
 # VS Code
 cp "$HOME/Library/Application Support/Code/User/settings.json"    configs/vscode/default/settings.json
 cp "$HOME/Library/Application Support/Code/User/keybindings.json" configs/vscode/keybindings.json
-cp -R "$HOME/Library/Application Support/Code/User/snippets"      configs/vscode/snippets 2>/dev/null
 code --list-extensions > configs/vscode/extensions.txt
 
 # Git
 cp ~/.gitconfig configs/.gitconfig
-
-# Homebrew snapshot (NOTE: this overwrites the curated Brewfile —
-# only run after you've cleaned the current Mac to match the desired state).
-brew bundle dump --file=configs/Brewfile --force
 ```
 
-For **iTerm2**: open Settings → General → Settings → check *Load preferences from a custom folder or URL*, point it at `configs/iterm2/`, and tick *Save changes to folder when iTerm2 quits*. iTerm will write `com.googlecode.iterm2.plist` into that folder.
+The `Brewfile` is not part of this. It is a curated list, and `brew bundle dump` would fill it with everything installed on the Mac, including Python packages that belong in venvs. Edit it by hand.
+
+For **iTerm2**, export the archive as described in the table and replace `configs/iterm2/iterm2-settings.itermexport`.
 
 ---
 
