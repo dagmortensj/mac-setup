@@ -17,6 +17,7 @@
   },
   "display": {
     "separator": ": ",
+    "size": { "binaryPrefix": "jedec", "ndigits": 0 },   // "24 GB", not "24.00 GiB"
     "color": {
       "keys": "cyan"   // rust: a visual choice for the welcome screen, not a code role
     }
@@ -30,6 +31,8 @@
     { "type": "terminalfont", "key": "Terminal Font" },
     { "type": "cpu",          "key": "CPU" },
     { "type": "gpu",          "key": "GPU" },
+    { "type": "memory",       "key": "Memory", "format": "{total}" },
+    { "type": "disk",         "key": "Disk",   "folders": "/", "format": "{size-used} / {size-total} ({size-percentage})" },
     "break",
     { "type": "custom", "format": "{#40}   {#41}   {#46}   {#43}   {#42}   {#44}   {#45}   {#47}   {#}" },
     { "type": "custom", "format": "{#100}   {#101}   {#106}   {#103}   {#102}   {#104}   {#105}   {#107}   {#}" },

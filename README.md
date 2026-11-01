@@ -223,7 +223,7 @@ brew install fastfetch
 
 ### Where the config lives
 
-Fastfetch reads `~/.config/fastfetch/config.jsonc`. The config in this repo is a slimmed-down version showing OS, Kernel, Uptime, Shell, Terminal, Terminal Font, CPU, and GPU, with labels in rust. The logo is fastfetch's small macOS logo, kept as a local copy in `eple.txt` so each stripe can get its own colour: red, rust, orange, green, blue and plum from the top, the palette order. Below it, two rows of colour blocks show black, the six palette colours and white, normal on the first row and bright on the second.
+Fastfetch reads `~/.config/fastfetch/config.jsonc`. The config in this repo is a slimmed-down version showing OS, Kernel, Uptime, Shell, Terminal, Terminal Font, CPU, GPU, Memory (the total) and Disk (used and total), with labels in rust. The logo is fastfetch's small macOS logo, kept as a local copy in `eple.txt` so each stripe can get its own colour: red, rust, orange, green, blue and plum from the top, the palette order. Below it, two rows of colour blocks show black, the six palette colours and white, normal on the first row and bright on the second.
 
 To install it:
 
