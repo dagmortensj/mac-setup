@@ -80,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 # Høst-farger i ls: mapper i fet oransje, lenker i plum, kjørbare filer i rødt
 export LSCOLORS="Dxfxcxdxbxegedabagacad"
 
-# Høst-farger i kommandolinja, med samme roller som i VS Code. Terminalen har
+# Høst-farger i kommandolinja, med samme roller som i VS Code i Høstkveld. Terminalen har
 # Høst-paletten på de åtte fargeplassene: rød, grønn, gul = oransje, blå,
 # magenta = plum og cyan = rust.
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=yellow,bold'             # for, if, do, done: oransje og fet

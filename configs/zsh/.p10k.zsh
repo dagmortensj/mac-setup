@@ -192,7 +192,13 @@
   ##############################[ Høst: fargene i prompten ]##############################
   # Feltene i prompten har Høstkveld-fargene uansett tema, med mørk tekst. Prompten er
   # grensesnitt, som aksentfargen i VS Code, og følger ikke terminalpaletten.
+  # iTerm leser 24-bits farger fra escape-koder som Display P3, ikke sRGB, så der sendes de
+  # samme fargene omregnet til P3-koordinater; ellers lyser de mer enn i VS Code.
   typeset -g HOEST_PROMPT_TEKST=232 HOEST_PROMPT_SVAK=236 HOEST_PROMPT_GIT=0
+  typeset -g HOEST_ORANSJE='#ff851b' HOEST_GROENN='#7cac2f' HOEST_RUST='#f4623a' HOEST_PLOMME='#bb62c9' HOEST_ROED='#d54444'
+  if [[ $TERM_PROGRAM == iTerm.app || $LC_TERMINAL == iTerm2 ]]; then  # LC_TERMINAL følger med gjennom tmux og ssh
+    HOEST_ORANSJE='#ef8b3b' HOEST_GROENN='#86ab45' HOEST_RUST='#e36b47' HOEST_PLOMME='#af67c4' HOEST_ROED='#c54f4a'
+  fi
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
@@ -226,7 +232,7 @@
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
-  typeset -g POWERLEVEL9K_DIR_BACKGROUND='#ff851b'            # oransje
+  typeset -g POWERLEVEL9K_DIR_BACKGROUND=$HOEST_ORANSJE
   # Default current directory foreground color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$HOEST_PROMPT_TEKST
   # If directory is too long, shorten some of its segments to the shortest possible unique
@@ -365,10 +371,10 @@
 
   #####################################[ vcs: git status ]######################################
   # Version control background colors.
-  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND='#7cac2f'      # grønn
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='#f4623a'   # rust; rødt er for feil
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='#7cac2f'
-  typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND='#bb62c9' # plomme
+  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=$HOEST_GROENN
+  typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=$HOEST_RUST   # rust; rødt er for feil
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=$HOEST_GROENN
+  typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND=$HOEST_ROED   # en konflikt er en feil
   typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=8
 
   # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
@@ -1004,7 +1010,7 @@
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=0
-  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=4
+  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=$HOEST_PLOMME   # miljøet er noe du selv har gitt navn, som klassene dine
   # Don't show Python version next to the virtual environment name.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
   # If set to "false", won't show virtualenv if pyenv is already shown.
@@ -1018,7 +1024,7 @@
   #####################[ anaconda: conda environment (https://conda.io/) ]######################
   # Anaconda environment color.
   typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=0
-  typeset -g POWERLEVEL9K_ANACONDA_BACKGROUND=4
+  typeset -g POWERLEVEL9K_ANACONDA_BACKGROUND=$HOEST_PLOMME
 
   # Anaconda segment format. The following parameters are available within the expansion.
   #
@@ -1052,7 +1058,7 @@
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################
   # Pyenv color.
   typeset -g POWERLEVEL9K_PYENV_FOREGROUND=0
-  typeset -g POWERLEVEL9K_PYENV_BACKGROUND=4
+  typeset -g POWERLEVEL9K_PYENV_BACKGROUND=$HOEST_PLOMME
   # Hide python version if it doesn't come from one of these sources.
   typeset -g POWERLEVEL9K_PYENV_SOURCES=(shell local global)
   # If set to false, hide python version if it's the same as global:

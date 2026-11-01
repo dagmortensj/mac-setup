@@ -158,7 +158,7 @@ The `vscode` plugin (built into Oh My Zsh) adds aliases like `vsc .` to open the
 
 My `~/.zshrc` also runs `fastfetch` automatically when a new terminal opens — that's the line at the very bottom of the file.
 
-The command line is coloured with the same roles as the VS Code theme: `for`, `if` and the other reserved words in bold rust, quoted text in blue, `$variables` inside quotes in plum, options such as `-la` in orange, comments and history suggestions in grey, and a mistyped command in bold red. `ls` shows folders in bold orange and symlinks in plum (`LSCOLORS`). All of this uses the terminal's colour slots, so it follows the iTerm preset.
+The command line is coloured with the same roles as the VS Code theme in Høstkveld: `for`, `if` and the other reserved words in bold orange, quoted text in blue, `$variables` inside quotes in plum, options such as `-la` in rust, comments and history suggestions in grey, and a mistyped command in bold red. `ls` shows folders in bold orange and symlinks in plum (`LSCOLORS`). All of this uses the terminal's colour slots, so it follows the iTerm preset. The slots hold the hues in both presets, so in Høstlys the command line keeps orange for keywords where the editor uses rust.
 
 > 📁 *Config in this repo:* [`configs/zsh/.zshrc`](./configs/zsh/.zshrc)
 
@@ -191,7 +191,7 @@ p10k configure
 
 This writes `~/.p10k.zsh`, which is the file you save to share your prompt across machines.
 
-The prompt in this repo uses the Høst colours: the path segment is orange, and the git segment is green when clean and rust when there are uncommitted changes. The segments have dark text, which suits Høstkveld. For Høstlys, `.p10k.zsh` switches to light text when `HOEST_TEMA=lys` is set or the iTerm profile name contains "lys". The Tavle profile in VS Code sets `HOEST_TEMA=lys` for its integrated terminal.
+The prompt in this repo uses the Høst colours: the path segment is orange, the git segment is green when clean, rust when there are uncommitted changes and red in a conflict, and the Python environment (venv, conda, pyenv) is plum. The segments use the Høstkveld colours as fixed hex values with dark text in both themes, since the prompt is part of the interface rather than of the code and the dark Høstlys oranges do not carry dark text well. iTerm interprets 24-bit colours from escape codes as Display P3 rather than sRGB, so `.p10k.zsh` sends it the same colours converted to P3 coordinates; in VS Code and other terminals the sRGB values are used.
 
 > 📁 *Config in this repo:* [`configs/zsh/.p10k.zsh`](./configs/zsh/.p10k.zsh)
 
@@ -327,7 +327,7 @@ To rebuild `tex-oppstart/` after editing it, run `npx @vscode/vsce package` in t
 
 **Default** is the everyday profile. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline. The right-hand chat panel stays closed when a window opens. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one.
 
-**Tavle** is for coding on the board: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed. The integrated terminal gets `HOEST_TEMA=lys`, so the prompt has light text that reads well on Høstlys.
+**Tavle** is for coding on the board: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed.
 
 ### Keybindings
 
