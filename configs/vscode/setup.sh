@@ -18,9 +18,12 @@ install() {
   code --install-extension "$@" >/dev/null 2>&1 || { echo "ERROR: $1"; FEIL=1; }
 }
 
-# The Høst themes were called host-theme before version 3.5. VS Code sees the new
-# name as a different extension, so the old one is removed (nothing happens if it is gone).
-code --uninstall-extension dagmorten.host-theme >/dev/null 2>&1 || true
+# The Høst themes were called host-theme before version 3.5 and had the publisher
+# dagmorten before 3.6.1. VS Code sees each as a different extension, so the old ones
+# are removed (nothing happens if they are gone).
+for e in dagmorten.host-theme dagmorten.hoest-theme; do
+  code --uninstall-extension "$e" >/dev/null 2>&1 || true
+done
 
 # 1. Default profile
 mkdir -p "$U"
@@ -49,7 +52,9 @@ fi
 P="$U/profiles/$ID"; mkdir -p "$P"
 cp "$HER/tavle/settings.json" "$P/settings.json"
 cp "$HER/keybindings.json" "$P/keybindings.json"
-code --uninstall-extension dagmorten.host-theme --profile "Tavle" >/dev/null 2>&1 || true
+for e in dagmorten.host-theme dagmorten.hoest-theme; do
+  code --uninstall-extension "$e" --profile "Tavle" >/dev/null 2>&1 || true
+done
 for e in ms-python.python ms-toolsai.jupyter "$HER/hoest-theme.vsix"; do
   install "$e" --profile "Tavle" --force
 done
