@@ -189,14 +189,10 @@
   # Left prompt terminator for lines without any segments.
   typeset -g POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 
-  ##############################[ Høst: lys variant av prompten ]##############################
-  # Feltene i prompten har mørk tekst, som passer Høstkveld. I Høstlys er oransje og rust mørke,
-  # så teksten må være lys. Lys variant slås på med HOEST_TEMA=lys (Tavle-profilen i VS Code
-  # setter den) eller av en iTerm-profil med «lys» i navnet.
+  ##############################[ Høst: fargene i prompten ]##############################
+  # Feltene i prompten har Høstkveld-fargene uansett tema, med mørk tekst. Prompten er
+  # grensesnitt, som aksentfargen i VS Code, og følger ikke terminalpaletten.
   typeset -g HOEST_PROMPT_TEKST=232 HOEST_PROMPT_SVAK=236 HOEST_PROMPT_GIT=0
-  if [[ $HOEST_TEMA == lys || ${(L)ITERM_PROFILE} == *lys* ]]; then
-    HOEST_PROMPT_TEKST=15 HOEST_PROMPT_SVAK=7 HOEST_PROMPT_GIT=15
-  fi
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
@@ -230,7 +226,7 @@
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
-  typeset -g POWERLEVEL9K_DIR_BACKGROUND=3
+  typeset -g POWERLEVEL9K_DIR_BACKGROUND='#ff851b'            # oransje
   # Default current directory foreground color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$HOEST_PROMPT_TEKST
   # If directory is too long, shorten some of its segments to the shortest possible unique
@@ -369,10 +365,10 @@
 
   #####################################[ vcs: git status ]######################################
   # Version control background colors.
-  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=2
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=6   # rust (cyan-plassen); rødt er for feil
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=2
-  typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND=5
+  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND='#7cac2f'      # grønn
+  typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='#f4623a'   # rust; rødt er for feil
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='#7cac2f'
+  typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND='#bb62c9' # plomme
   typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=8
 
   # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
@@ -402,9 +398,9 @@
 
     # Styling for different parts of Git status.
     local       meta='%7F' # white foreground
-    local      clean="%${HOEST_PROMPT_GIT}F" # mørk tekst, lys i Høstlys
-    local   modified="%${HOEST_PROMPT_GIT}F" # mørk tekst, lys i Høstlys
-    local  untracked="%${HOEST_PROMPT_GIT}F" # mørk tekst, lys i Høstlys
+    local      clean="%${HOEST_PROMPT_GIT}F" # mørk tekst
+    local   modified="%${HOEST_PROMPT_GIT}F" # mørk tekst
+    local  untracked="%${HOEST_PROMPT_GIT}F" # mørk tekst
     local conflicted='%1F' # red foreground
 
     local res

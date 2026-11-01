@@ -83,15 +83,15 @@ export LSCOLORS="Dxfxcxdxbxegedabagacad"
 # Høst-farger i kommandolinja, med samme roller som i VS Code. Terminalen har
 # Høst-paletten på de åtte fargeplassene: rød, grønn, gul = oransje, blå,
 # magenta = plum og cyan = rust.
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=cyan,bold'               # for, if, do, done: rust og fet
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=yellow,bold'             # for, if, do, done: oransje og fet
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'           # tekst i anførselstegn: blå
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=magenta' # $variabel i tekst: plum
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=magenta'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=yellow'           # -la, --verbose: oransje
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=cyan'             # -la, --verbose: rust
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[comment]='fg=8'                             # kommentarer: grå
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=blue'                         # *.tex
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=magenta'

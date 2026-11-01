@@ -18,7 +18,7 @@
   "display": {
     "separator": ": ",
     "color": {
-      "keys": "cyan"
+      "keys": "cyan"   // rust: a visual choice for the welcome screen, not a code role
     }
   },
   "modules": [
