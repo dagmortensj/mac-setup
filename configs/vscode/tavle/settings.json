@@ -3,7 +3,7 @@
     // ingen popups, ingen røde streker og ingen automatisk innsetting.
 
     // ===== Utseende =====
-    // Eget tema, Høstlys, med fargene fra lualatex-malene:
+    // Eget tema, Høstlys, i jordfarger:
     // rust nøkkelord (fete kontrollord), oransje tall, blå strenger, grønne
     // funksjoner, plum klasser/typer/dekoratorer/self, grå kommentarer. Se github.com/dagmortensj/hoest-theme.
     "workbench.colorTheme": "Høstlys",

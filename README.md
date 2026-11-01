@@ -309,7 +309,7 @@ bash configs/vscode/setup.sh
 | `tavle/settings.json` | Tavle profile, for live coding in front of the class |
 | `keybindings.json` | Shared by both profiles |
 | `extensions.txt` | Marketplace extensions in the Default profile |
-| `hoest-theme.vsix` | The Høst themes, Høstlys (light) and Høstkveld (dark), built on the palette of the lualatex templates. They cover the whole workbench and LaTeX, BibTeX, Python (with Pylance semantic highlighting), Markdown, JSON, YAML, shell and diff, and add a button at the right of the status bar that switches between the two. Source, palette and documentation are in their own repository, [hoest-theme](https://github.com/dagmortensj/hoest-theme) |
+| `hoest-theme.vsix` | My own themes, Høstlys (light) and Høstkveld (dark), in earth tones. They cover the whole workbench and LaTeX, BibTeX, Python (with Pylance semantic highlighting), Markdown, JSON, YAML, shell and diff, and add a button at the right of the status bar that switches between the two. Source, palette and documentation are in their own repository, [hoest-theme](https://github.com/dagmortensj/hoest-theme) |
 | `tex-oppstart/` | Opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened (source and `.vsix`) |
 | `setup.sh` | Restores all of the above, plus `configs/latexmk/latexmkrc` |
 
