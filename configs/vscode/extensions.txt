@@ -1,5 +1,6 @@
 akamud.vscode-theme-onelight
 arthurlobo.easy-codesnap
+dagmortensj.hoest-theme
 james-yu.latex-workshop
 miguelsolorio.fluent-icons
 monokai.theme-monokai-pro-vscode

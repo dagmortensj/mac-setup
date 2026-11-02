@@ -295,7 +295,7 @@ That's the entire VS Code section of a fresh-Mac install when Settings Sync is e
 
 ### What Settings Sync does not cover
 
-Settings Sync restores settings, keybindings and both profiles, but not the two home-made extensions, which are not on the Marketplace, and not the global latexmk config. `configs/vscode/setup.sh` restores everything in one go and is safe to re-run (it backs up the current settings and keybindings first):
+Settings Sync restores settings, keybindings, both profiles and the Marketplace extensions, including [Høst Theme](https://marketplace.visualstudio.com/items?itemName=dagmortensj.hoest-theme). It does not restore `tex-oppstart`, which is home-made and not on the Marketplace, or the global latexmk config. `configs/vscode/setup.sh` restores everything in one go and is safe to re-run (it backs up the current settings and keybindings first):
 
 ```bash
 bash configs/vscode/setup.sh
@@ -308,17 +308,14 @@ bash configs/vscode/setup.sh
 | `default/settings.json` | Default profile, used for LaTeX and Python |
 | `tavle/settings.json` | Tavle profile, for live coding in front of the class |
 | `keybindings.json` | Shared by both profiles |
-| `extensions.txt` | Marketplace extensions in the Default profile |
-| `hoest-theme.vsix` | My own themes, Høstlys (light) and Høstkveld (dark), in earth tones. They cover the whole workbench and LaTeX, BibTeX, Python (with Pylance semantic highlighting), Markdown, JSON, YAML, shell and diff, and add a button at the right of the status bar that switches between the two. Source, palette and documentation are in their own repository, [hoest-theme](https://github.com/dagmortensj/hoest-theme) |
+| `extensions.txt` | Marketplace extensions in the Default profile, including my own [Høst Theme](https://marketplace.visualstudio.com/items?itemName=dagmortensj.hoest-theme) |
 | `tex-oppstart/` | Opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened (source and `.vsix`) |
 | `setup.sh` | Restores all of the above, plus `configs/latexmk/latexmkrc` |
 
-The Høst themes are developed in [hoest-theme](https://github.com/dagmortensj/hoest-theme). The `.vsix` here and the iTerm presets in `configs/iterm2/farger/` are copies, so that `setup.sh` works without it. After changing the theme there, refresh the copies and run `setup.sh` again:
+Both profiles use my own themes, Høstlys (light) and Høstkveld (dark), in earth tones: `dagmortensj.hoest-theme` on the Marketplace, developed in [hoest-theme](https://github.com/dagmortensj/hoest-theme). They cover the whole workbench and LaTeX, BibTeX, Python (with Pylance semantic highlighting), Markdown, JSON, YAML, shell and diff, and add a button at the right of the status bar that switches between the two. `setup.sh` installs the theme from the Marketplace in both profiles, so VS Code keeps it up to date. The iTerm presets in `configs/iterm2/farger/` are copies from the same repository, since presets have no marketplace; after a new version of the theme, refresh them:
 
 ```bash
-cp ../hoest-theme/vscode/hoest-theme.vsix configs/vscode/
 cp ../hoest-theme/iterm/*.itermcolors configs/iterm2/farger/
-bash configs/vscode/setup.sh
 ```
 
 To rebuild `tex-oppstart/` after editing it, run `npx @vscode/vsce package` in the folder.
@@ -640,4 +637,4 @@ For **MacTeX**: download `MacTeX.pkg` from https://www.tug.org/mactex/ and run i
 
 ---
 
-*Last updated: 2026-06-04*
+*Last updated: 2026-11-02*
