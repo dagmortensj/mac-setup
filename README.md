@@ -117,6 +117,17 @@ The terminal uses the Høst palette from the VS Code themes (red, rust, orange, 
 
 If the `.itermexport` archive above is older than the colour presets, import the archive first and then the preset.
 
+### Windows
+
+These settings are all inside the `.itermexport` archive; this is what they are, in case the archive has to be rebuilt by hand.
+
+- **Appearance → General → Theme: Minimal.** The title bar, tab bar and status bar all take the terminal background, so the window chrome follows Høstkveld/Høstlys with the system appearance.
+- **One big window, never resized.** The default profile has Columns/Rows set far larger than the screen, so a new window (⌘N) opens at full size but stays an ordinary window. Resizing an iTerm window back and forth garbles the prompt — the `─` line between the left and right prompt reaches the right edge, and zsh cannot redraw it correctly after the terminal reflows — so the window is sized once and left alone.
+- **Hotkey Window** (⌥Space) for quick commands: a second profile named `Hotkey Window`, full-width from the top of the screen, on all Spaces. It drops down over whatever is open and hides again on the same key. `~/.zshrc` skips fastfetch in it (it checks `$ITERM_PROFILE`).
+- **General → Window → Native full screen windows: off.** macOS full screen gives the window its own Space with nothing behind it, so transparency has nothing to show through; iTerm's own full screen keeps it.
+- **Titles:** window and tab titles show only the current path. oh-my-zsh sets them (`ZSH_THEME_TERM_TITLE_IDLE` and `ZSH_THEME_TERM_TAB_TITLE_IDLE` in `~/.zshrc`), and **Profiles → General → Title** is set to *Session Name* only, so iTerm does not append the job.
+- **Profiles → Terminal → Show mark indicators: off.** The prompt character already turns red after a failed command; the blue triangles say the same thing in the wrong colour.
+
 ---
 
 ## 4. Oh My Zsh
