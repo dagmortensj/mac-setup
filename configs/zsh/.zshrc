@@ -129,6 +129,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'                           # forslag fra h
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Run fastfetch on startup
-fastfetch
+# Window and tab title: just the path (oh-my-zsh defaults to user@host:path and a 15-character tab title)
+ZSH_THEME_TERM_TITLE_IDLE="%~"
+ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
+
+# Run fastfetch on startup, except in the hotkey window (iTerm sets ITERM_PROFILE to the profile name)
+[[ $ITERM_PROFILE == "Hotkey Window" ]] || fastfetch
 

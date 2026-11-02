@@ -156,7 +156,7 @@ zsh-syntax-highlighting has to be the last plugin, since it colours what the oth
 
 The `vscode` plugin (built into Oh My Zsh) adds aliases like `vsc .` to open the current folder. The `git` plugin adds dozens of git aliases like `gst` for `git status`.
 
-My `~/.zshrc` also runs `fastfetch` automatically when a new terminal opens — that's the line at the very bottom of the file.
+My `~/.zshrc` also runs `fastfetch` automatically when a new terminal opens — that's the line at the very bottom of the file. It is skipped in the iTerm hotkey window (the profile named `Hotkey Window`), which is for quick commands.
 
 The command line is coloured with the same roles as the VS Code theme in Høstkveld: `for`, `if` and the other reserved words in bold orange, quoted text in blue, `$variables` inside quotes in plum, options such as `-la` in rust, comments and history suggestions in grey, and a mistyped command in bold red. `ls` shows folders in bold orange and symlinks in plum (`LSCOLORS`). All of this uses the terminal's colour slots, so it follows the iTerm preset. The slots hold the hues in both presets, so in Høstlys the command line keeps orange for keywords where the editor uses rust.
 
