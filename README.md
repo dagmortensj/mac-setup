@@ -4,7 +4,7 @@ A personal, reproducible setup for a fresh Mac — terminal, editor, languages, 
 
 > **Goal:** open a brand-new Mac, follow this README top-to-bottom, end up with the same environment I had on the last machine.
 
-![Terminal preview](./screenshots/terminal.png)
+![Terminal preview](./screenshots/iterm.png)
 
 *iTerm2 + Powerlevel10k + Fastfetch on macOS 27 (Apple M5), in the Høstkveld colours.*
 
