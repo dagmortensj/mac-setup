@@ -133,6 +133,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'                           # forslag fra h
 ZSH_THEME_TERM_TITLE_IDLE="%~"
 ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
 
-# Run fastfetch on startup, except in the hotkey window (iTerm sets ITERM_PROFILE to the profile name)
-[[ $ITERM_PROFILE == "Hotkey Window" ]] || fastfetch
+# Run fastfetch on startup, except in the iTerm hotkey window (ITERM_PROFILE) and the VS Code terminal (TERM_PROGRAM)
+[[ $ITERM_PROFILE == "Hotkey Window" || $TERM_PROGRAM == "vscode" ]] || fastfetch
 
