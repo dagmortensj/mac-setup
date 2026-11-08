@@ -133,6 +133,20 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'                           # forslag fra h
 ZSH_THEME_TERM_TITLE_IDLE="%~"
 ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
 
+# The standard Python environment (configs/python/ in mac-setup, installed in
+# ~/.venvs/standard). These update the package list and uv.lock in the repo
+# and the environment itself; commit the two files afterwards.
+#   pyadd scipy        add a package
+#   pyremove scipy     remove a package
+#   pyupgrade          upgrade every package to its newest version
+# The repo is found by following the ~/.zshrc symlink back to mac-setup.
+MAC_SETUP="${${(%):-%x}:A:h:h:h}"
+[[ -f "$MAC_SETUP/configs/python/pyproject.toml" ]] || MAC_SETUP="$HOME/Developer/mac-setup"
+_pystd() { UV_PROJECT_ENVIRONMENT="$HOME/.venvs/standard" uv "$@" --project "$MAC_SETUP/configs/python"; }
+pyadd()     { _pystd add "$@"; }
+pyremove()  { _pystd remove "$@"; }
+pyupgrade() { _pystd lock --upgrade && _pystd sync --locked; }
+
 # Run fastfetch on startup, except in the iTerm hotkey window (ITERM_PROFILE) and the VS Code terminal (TERM_PROGRAM)
 [[ $ITERM_PROFILE == "Hotkey Window" || $TERM_PROGRAM == "vscode" ]] || fastfetch
 

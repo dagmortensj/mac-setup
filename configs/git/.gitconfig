@@ -1,0 +1,16 @@
+# ~/.gitconfig is a symlink to this file. It holds only settings that suit
+# anyone. Name, email and the GitHub sign-in live in ~/.gitconfig.local,
+# which install.sh creates and which never goes into the repo.
+#
+# Because ~/.gitconfig is a symlink, `git config --global ...` writes into
+# this file in the repo. Put personal settings in ~/.gitconfig.local instead:
+#   git config --file ~/.gitconfig.local user.name "Your Name"
+
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+
+# Last, so that the local file can override anything above.
+[include]
+	path = ~/.gitconfig.local

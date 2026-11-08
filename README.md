@@ -1,160 +1,175 @@
-# macOS Setup Guide
+# macOS Setup
 
-A personal, reproducible setup for a fresh Mac — terminal, editor, languages, and dotfiles all in one place.
+A reproducible setup for my Mac: the terminal, the editor, Python, LaTeX, the apps I use and a handful of macOS settings. One script, `install.sh`, builds all of it on a freshly erased Mac, and the configuration files in this repository stay the single source for it afterwards.
 
-> **Goal:** open a brand-new Mac, follow this README top-to-bottom, end up with the same environment I had on the last machine.
+The terminal look (iTerm2 in the Høst colours, Powerlevel10k, fastfetch) is meant to be usable by anyone. See [Only want the look?](#only-want-the-look).
 
 ![Terminal preview](./screenshots/iterm.png)
 
-*iTerm2 + Powerlevel10k + Fastfetch on macOS 27 (Apple M5), in the Høstkveld colours.*
+*iTerm2 + Powerlevel10k + fastfetch on macOS 27 (Apple M5), in the Høstkveld colours.*
 
 ---
 
-## Table of contents
+## Contents
 
-1. [Prerequisites](#1-prerequisites)
-2. [Homebrew](#2-homebrew)
-3. [iTerm2](#3-iterm2)
-4. [Oh My Zsh](#4-oh-my-zsh)
-5. [Powerlevel10k](#5-powerlevel10k)
-6. [Nerd Fonts (for icons in the prompt)](#6-nerd-fonts)
-7. [Fastfetch](#7-fastfetch)
-8. [VS Code](#8-vs-code)
-9. [Git](#9-git)
-10. [Python](#10-python)
-11. [LaTeX](#11-latex)
-12. [macOS tweaks (Studio Display fan fix, etc.)](#12-macos-tweaks)
-13. [Restoring configs from this repo](#13-restoring-configs-from-this-repo)
-14. [Useful links](#useful-links)
+1. [Quick start](#quick-start)
+2. [Only want the look?](#only-want-the-look)
+3. [What install.sh does](#what-installsh-does)
+4. [After install.sh](#after-installsh)
+5. [Reference](#reference): [Homebrew](#homebrew-and-the-brewfiles), [Terminal](#terminal), [Git](#git-and-github), [Python](#python), [VS Code](#vs-code), [LaTeX](#latex), [Apps](#apps), [macOS settings](#macos-settings)
+6. [Maintenance](#maintenance)
+7. [Before erasing a Mac](#before-erasing-a-mac)
+8. [Useful links](#useful-links)
 
 ---
 
-## 1. Prerequisites
+## Quick start
 
-Install the **Xcode Command Line Tools** — needed by Homebrew, Git, and most compilers.
+On a new or freshly erased Mac, after the Setup Assistant (sign in with your Apple ID there; do not use Migration Assistant or restore from Time Machine):
 
-```bash
-xcode-select --install
-```
-
-A dialog will pop up. Accept it and wait a few minutes. Verify:
-
-```bash
-xcode-select -p
-# /Library/Developer/CommandLineTools
-```
-
----
-
-## 2. Homebrew
-
-[Homebrew](https://brew.sh) is the package manager for macOS — almost everything else on this list installs through it.
-
-### Install
+Open **Terminal.app** and run these three commands, one at a time.
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### Add to your shell
-
-On Apple Silicon Macs, Homebrew installs to `/opt/homebrew`. Add it to your PATH:
+This installs Homebrew, and with it Apple's Command Line Tools (git, compilers). It asks for your password. When it finishes it prints "Next steps" with commands that add Homebrew to your PATH. You can skip them: `install.sh` finds Homebrew by itself and sets up the PATH for every new terminal. Running them does no harm either.
 
 ```bash
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
+mkdir -p ~/Developer && git clone https://github.com/dagmortensj/mac-setup ~/Developer/mac-setup
 ```
-
-### Verify
 
 ```bash
-brew doctor
-brew --version
+cd ~/Developer/mac-setup && ./install.sh
 ```
 
-> 💡 **Tip:** [`configs/Brewfile`](./configs/Brewfile) in this repo lists every package you'll need on a fresh setup. Run `brew bundle --file=configs/Brewfile` once Homebrew is installed to (re)install them all in one shot. The file is curated by hand — see the warning at the top of `Brewfile` before running `brew bundle dump`, which would overwrite it.
+At the start, `install.sh` asks for your name and email for git (only the first time) and for your password, which it needs for the macOS settings at the end. Homebrew asks for the password again, by itself, when it installs MacTeX, Teams and Logi Options+; it deliberately does not reuse an earlier one. So stay near the Mac until those are done. MacTeX is the slow part, about 6 GB, and its password prompt comes when the download has finished. If a prompt is left unanswered for a few minutes, that step fails; run the group again afterwards. Every step prints one line, and the full output is written to a log in `~/Library/Logs/mac-setup/`.
+
+When it is done, log out and in again and go through [After install.sh](#after-installsh).
+
+The repository should live in `~/Developer/mac-setup`. The script works from anywhere, but my VS Code settings (synced through Settings Sync) expect that path.
 
 ---
 
-## 3. iTerm2
+## Only want the look?
 
-[iTerm2](https://iterm2.com/) is a much-improved replacement for the default macOS Terminal — true color, split panes, better search, profile sync.
-
-### Install
+If you just want the terminal as it looks in the screenshot:
 
 ```bash
-brew install --cask iterm2
+git clone https://github.com/dagmortensj/mac-setup
+cd mac-setup && ./install.sh terminal
 ```
 
-### Restore my config
+This installs iTerm2, the MesloLGS NF font and fastfetch with Homebrew (install Homebrew first), sets up Oh My Zsh with Powerlevel10k and two plugins, and links `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh` and the fastfetch config to the files in your clone. Files already in those places are moved to `~/.mac-setup-backup/` first. If iTerm2 already has settings on your Mac, they are left alone; the [Terminal](#terminal) section explains how to import mine anyway.
 
-Two options — both work, pick one.
+Only the colours? Double-click `Høstkveld.itermcolors` or `Høstlys.itermcolors` in [`configs/iterm2/farger/`](./configs/iterm2/farger/) and pick the preset under **iTerm2 → Settings → Profiles → Colors → Color Presets**.
 
-**Option A — Export / Import archive (simplest, recommended):**
+The other groups are personal. Before running them on your own Mac, go through these files:
 
-On the **old** Mac:
-1. Open iTerm2 → **Settings (⌘,) → General → Settings**.
-2. Click **Export All Settings and Data** → save the `.itermexport` file.
-3. Drop it into [`configs/iterm2/`](./configs/iterm2/) in this repo.
+| File | What is personal in it |
+|---|---|
+| [`configs/brew/apps.Brewfile`](./configs/brew/apps.Brewfile) | My apps |
+| [`configs/repos.txt`](./configs/repos.txt) | My repositories |
+| [`configs/macos/defaults.sh`](./configs/macos/defaults.sh) | My macOS settings (dark mode, trackpad, Dock, Finder) |
+| [`install.sh`](./install.sh), `macos` group | The pmset change for a Studio Display, and removal of GarageBand and iMovie |
+| [`configs/zsh/.zshrc`](./configs/zsh/.zshrc) | fastfetch on every new terminal, and the `pyadd` functions |
 
-On the **new** Mac, after installing iTerm2:
-1. Open iTerm2 → **Settings → General → Settings**.
-2. Click **Import All Settings and Data** → pick [`configs/iterm2/iterm2-settings.itermexport`](./configs/iterm2/iterm2-settings.itermexport).
-3. Restart iTerm2 — every profile, key binding, color scheme, snippet, and pref is restored.
+Your git identity is not in the repository. `./install.sh dev` asks for it and stores it in `~/.gitconfig.local`.
 
-**Option B — Sync from a folder (good if you want plain-text diffs):**
+---
 
-1. Copy `com.googlecode.iterm2.plist` somewhere stable, e.g. `~/Documents/iterm2-config/`.
-2. Open iTerm2 → **Settings → General → Settings**.
-3. Check **Load preferences from a custom folder or URL** and point it at that folder.
-4. Choose **Save changes to folder when iTerm2 quits** so the repo stays in sync.
+## What install.sh does
 
-> 📁 *Config in this repo:* [`configs/iterm2/iterm2-settings.itermexport`](./configs/iterm2/iterm2-settings.itermexport)
+```text
+./install.sh                  everything: terminal dev apps repos macos
+./install.sh terminal         one group
+./install.sh dev macos        several groups (always run in the order above)
+./install.sh --dry-run        show what would happen, change nothing
+./install.sh --skip-casks     install command-line tools but no apps
+```
 
-### Colours
+| Group | Steps |
+|---|---|
+| `terminal` | [`terminal.Brewfile`](./configs/brew/terminal.Brewfile) (git, fastfetch, iTerm2, MesloLGS NF) · links `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.config/fastfetch/` · `~/.hushlogin` · Oh My Zsh · zsh-autosuggestions, zsh-syntax-highlighting, Powerlevel10k · iTerm2 settings (only if iTerm2 has none yet) |
+| `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` · builds the Python standard environment · points VS Code at it · installs tex-oppstart |
+| `apps` | [`apps.Brewfile`](./configs/brew/apps.Brewfile) |
+| `repos` | clones the repositories in [`repos.txt`](./configs/repos.txt) into `~/Developer` |
+| `macos` | [`defaults.sh`](./configs/macos/defaults.sh) · pmset for the Studio Display · removes GarageBand and iMovie if present (if macOS refuses, because Terminal lacks the App Management permission, drag them to the Bin instead) |
 
-The terminal uses the Høst palette from the VS Code themes (red, rust, orange, green, blue, plum), as iTerm colour presets in [`configs/iterm2/farger/`](./configs/iterm2/farger/): `Høstkveld.itermcolors` (dark, a little brighter and more saturated than the VS Code theme, since the window is semi-transparent and a terminal is used in short sessions) and `Høstlys.itermcolors` (light). Both are copies from the [Høst repository](https://github.com/dagmortensj/hoest-theme), where they are generated from the same palette as the VS Code themes. Double-click a file to import it, then pick it under **Settings → Profiles → Colors → Color Presets**. The cyan slot holds rust, so all six palette colours are available to fastfetch, the prompt and `ls`, and turquoise never appears.
+How it behaves:
 
-If the `.itermexport` archive above is older than the colour presets, import the archive first and then the preset.
+- **Every step prints OK, SKIP or FAIL.** A failed step does not stop the others; the summary lists what failed, and the log has the details. Fix the cause and run the script, or just that group, again.
+- **It can be run again at any time.** Homebrew only installs what is missing and never upgrades what is there (`brew bundle --no-upgrade`, so a re-run cannot start a 6 GB MacTeX download). Links that are already right are left alone. Repositories that are already cloned are not touched. iTerm2 settings are only imported when iTerm2 has none.
+- **Nothing is overwritten.** A file that is in the way of a link is moved to `~/.mac-setup-backup/<date>/` first. If it differed from the repository's version, the summary names it, so you can compare before deleting the backup.
+- **Questions come first, where possible.** The git identity and the password for the `macos` group are asked for at the start, and a background loop keeps `sudo` active. Homebrew asks for the password itself when a cask's installer needs it (MacTeX, Teams, Logi Options+); since version 7 it resets any earlier `sudo` on purpose. `caffeinate` keeps the Mac awake meanwhile.
+- **`--skip-casks`** is for a Mac where the apps were installed by hand. Homebrew would otherwise try to install them again and fail on the ones that already exist, and download MacTeX a second time.
+- It is written for the bash 3.2 that ships with macOS, and stops before changing anything if it is not on an Apple Silicon Mac, if Homebrew is missing, or if it is run with `sudo`.
 
-### Windows
+---
 
-These settings are all inside the `.itermexport` archive; this is what they are, in case the archive has to be rebuilt by hand.
+## After install.sh
+
+Some things cannot be scripted. The script prints this list at the end of a full run.
+
+1. **Log out and in again**, so that every macOS setting takes effect.
+2. **Sign in**: Dropbox (choose the folders and let it finish syncing), Teams, Outlook, and Claude (connect its folders again).
+3. **GitHub**: run `gh auth login`, choose HTTPS, and answer **No** to "Authenticate Git with your GitHub credentials?". `install.sh` has already told git to get the token from gh; answering Yes would make gh write the same thing into the shared `.gitconfig` in this repository.
+4. **VS Code**: turn on Settings Sync (gear icon → Settings Sync) with GitHub and choose **Merge**. Settings, keybindings, extensions and both profiles arrive. Then run `./install.sh dev` once more, so the profiles that Sync brought in also get the Python setting.
+5. **App Store**, under your account → Purchased: Word, Excel, PowerPoint, Outlook, OneNote, Pages, Numbers, Keynote, GeoGebra Classic 6, AdGuard for Safari. (Erasing a Mac removes Pages, Numbers and Keynote too.)
+6. **Download yourself**: SAFEQ Client (from school) and PASCO Capstone.
+7. **Safari web apps**: open Gmail and YouTube in Safari and use File → Add to Dock.
+8. **Set by hand**: Night Shift, display scaling, Control Center and the menu bar icons, Spotlight categories, the lock screen clock, the apps in the Dock.
+9. **Check** in System Settings that the settings from [`defaults.sh`](./configs/macos/defaults.sh) took effect. Apple sometimes renames a setting, and then the line runs without doing anything.
+10. **Permissions**: grant access under Privacy & Security when an app asks (Logi Options+, Dropbox, iTerm2). Rosetta is installed on demand the first time Steam or a game needs it.
+
+Also check:
+
+- `python3 -c "import numpy, matplotlib, tkinter"` in a new terminal works without errors.
+- In VS Code, a Python file shows `standard` (or `~/.venvs/standard`) as the interpreter in the status bar, and a notebook offers it as kernel.
+- The prompt shows its icons in iTerm2 and in the VS Code terminal (if not, the font is missing).
+
+---
+
+## Reference
+
+### Homebrew and the Brewfiles
+
+[Homebrew](https://brew.sh) installs almost everything. The packages are listed in three Brewfiles in [`configs/brew/`](./configs/brew/), one per group, so that someone who only wants the terminal look installs only what it needs.
+
+The Brewfiles are curated by hand. Do not regenerate them with `brew bundle dump`: it writes every package on the machine into the file, dependencies and leftovers included, and marks them all as wanted, so that `brew autoremove` can never clean them up again.
+
+To install one Brewfile by hand: `brew bundle --no-upgrade --file=configs/brew/dev.Brewfile`.
+
+Homebrew lives in `/opt/homebrew` on Apple Silicon. `~/.zprofile` adds it to the PATH with `brew shellenv`.
+
+### Terminal
+
+#### iTerm2
+
+[iTerm2](https://iterm2.com/) replaces Terminal.app: true colour, split panes, a hotkey window, better search.
+
+Its settings are kept as a snapshot in [`configs/iterm2/com.googlecode.iterm2.plist`](./configs/iterm2/com.googlecode.iterm2.plist). On a new Mac, `install.sh` imports it with `defaults import` before iTerm2 is opened for the first time. After that iTerm2 keeps its settings in the usual place on the Mac, and the snapshot in the repository only changes when you export it again (see [Maintenance](#iterm2-settings)). The snapshot leaves out everything iTerm2 rewrites by itself, such as window positions, update checks and its own counters, so `git diff` only shows real changes.
+
+To import the snapshot on a Mac where iTerm2 already has settings (this replaces them): quit iTerm2, then from Terminal.app run
+
+```bash
+defaults import com.googlecode.iterm2 configs/iterm2/com.googlecode.iterm2.plist
+```
+
+**Colours.** The terminal uses the Høst palette from the VS Code themes (red, rust, orange, green, blue, plum), as iTerm2 colour presets in [`configs/iterm2/farger/`](./configs/iterm2/farger/): `Høstkveld.itermcolors` (dark, a little brighter and more saturated than the VS Code theme, since the window is semi-transparent and a terminal is used in short sessions) and `Høstlys.itermcolors` (light). Both are copies from the [Høst repository](https://github.com/dagmortensj/hoest-theme), where they are generated from the same palette as the VS Code themes, and both are also inside the settings snapshot. The cyan slot holds rust, so all six palette colours are available to fastfetch, the prompt and `ls`, and turquoise never appears.
+
+**Windows.** These are part of the snapshot; this is what they are, in case they ever have to be set by hand.
 
 - **Appearance → General → Theme: Minimal.** The title bar, tab bar and status bar all take the terminal background, so the window chrome follows Høstkveld/Høstlys with the system appearance.
-- **One big window, never resized.** The default profile has Columns/Rows set far larger than the screen, so a new window (⌘N) opens at full size but stays an ordinary window. Resizing an iTerm window back and forth garbles the prompt — the `─` line between the left and right prompt reaches the right edge, and zsh cannot redraw it correctly after the terminal reflows — so the window is sized once and left alone.
-- **Hotkey Window** (⌥Space) for quick commands: a second profile named `Hotkey Window`, full-width from the top of the screen, on all Spaces. It drops down over whatever is open and hides again on the same key. `~/.zshrc` skips fastfetch in it (it checks `$ITERM_PROFILE`).
-- **General → Window → Native full screen windows: off.** macOS full screen gives the window its own Space with nothing behind it, so transparency has nothing to show through; iTerm's own full screen keeps it.
-- **Titles:** window and tab titles show only the current path. oh-my-zsh sets them (`ZSH_THEME_TERM_TITLE_IDLE` and `ZSH_THEME_TERM_TAB_TITLE_IDLE` in `~/.zshrc`), and **Profiles → General → Title** is set to *Session Name* only, so iTerm does not append the job.
+- **One big window, never resized.** Resizing an iTerm2 window back and forth garbles the prompt (the `─` line between the left and right prompt reaches the right edge, and zsh cannot redraw it correctly after the terminal reflows), so the window is sized once and left alone.
+- **Hotkey Window** (⌥Space) for quick commands: a second profile named `Hotkey Window`, full-width from the top of the screen, on all Spaces. It drops down over whatever is open and hides again on the same key. `~/.zshrc` skips fastfetch in it.
+- **General → Window → Native full screen windows: off.** macOS full screen gives the window its own Space with nothing behind it, so transparency has nothing to show through; iTerm2's own full screen keeps it.
+- **Titles:** window and tab titles show only the current path. Oh My Zsh sets them (`ZSH_THEME_TERM_TITLE_IDLE` and `ZSH_THEME_TERM_TAB_TITLE_IDLE` in `~/.zshrc`), and **Profiles → General → Title** is set to *Session Name* only, so iTerm2 does not append the job.
 - **Profiles → Terminal → Show mark indicators: off.** The prompt character already turns red after a failed command; the blue triangles say the same thing in the wrong colour.
 
----
+#### zsh and Oh My Zsh
 
-## 4. Oh My Zsh
-
-[Oh My Zsh](https://ohmyz.sh/) manages plugins, themes, and aliases for the `zsh` shell that ships with macOS.
-
-### Install
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-This creates `~/.oh-my-zsh/` and replaces your `~/.zshrc` (the old one is backed up automatically).
-
-### Plugins I use
-
-```bash
-# zsh-autosuggestions — greys out a suggested completion as you type
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# zsh-syntax-highlighting — colours commands red/green as you type them
-git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-```
-
-Then the `plugins=(...)` line in `~/.zshrc` looks like this:
+[Oh My Zsh](https://ohmyz.sh/) manages plugins and themes for the zsh that ships with macOS. `install.sh` installs it unattended and keeps the linked `~/.zshrc`. The plugins, in [`configs/zsh/.zshrc`](./configs/zsh/.zshrc):
 
 ```zsh
 plugins=(git
@@ -163,181 +178,74 @@ plugins=(git
          zsh-syntax-highlighting)
 ```
 
-zsh-syntax-highlighting has to be the last plugin, since it colours what the others have already set up.
+`git` and `vscode` come with Oh My Zsh (aliases such as `gst` for `git status` and `vsc .` to open the current folder). zsh-autosuggestions greys out a suggestion from your history as you type, and zsh-syntax-highlighting colours the command line; it has to be the last plugin, since it colours what the others have set up. Both are cloned into `~/.oh-my-zsh/custom/plugins/`.
 
-The `vscode` plugin (built into Oh My Zsh) adds aliases like `vsc .` to open the current folder. The `git` plugin adds dozens of git aliases like `gst` for `git status`.
+The command line is coloured with the same roles as the VS Code theme in Høstkveld: `for`, `if` and the other reserved words in bold orange, quoted text in blue, `$variables` inside quotes in plum, options such as `-la` in rust, comments and history suggestions in grey, and a mistyped command in bold red. `ls` shows folders in bold orange and symlinks in plum (`LSCOLORS`). All of this uses the terminal's colour slots, so it follows the iTerm2 preset.
 
-My `~/.zshrc` also runs `fastfetch` automatically when a new terminal opens — that's the line at the very bottom of the file. It is skipped in the iTerm hotkey window (the profile named `Hotkey Window`), which is for quick commands.
+`~/.zshrc` runs fastfetch when a terminal opens, except in the hotkey window and the VS Code terminal. `~/.hushlogin` (an empty file) hides the "Last login" line, so fastfetch is the first thing on screen.
 
-The command line is coloured with the same roles as the VS Code theme in Høstkveld: `for`, `if` and the other reserved words in bold orange, quoted text in blue, `$variables` inside quotes in plum, options such as `-la` in rust, comments and history suggestions in grey, and a mistyped command in bold red. `ls` shows folders in bold orange and symlinks in plum (`LSCOLORS`). All of this uses the terminal's colour slots, so it follows the iTerm preset. The slots hold the hues in both presets, so in Høstlys the command line keeps orange for keywords where the editor uses rust.
+The shell configuration is split in two: [`.zprofile`](./configs/zsh/.zprofile) sets the PATH (Homebrew, then the Python standard environment in front of it) and is read by login shells, which is what iTerm2 and the VS Code terminal start; [`.zshrc`](./configs/zsh/.zshrc) has everything else.
 
-> 📁 *Config in this repo:* [`configs/zsh/.zshrc`](./configs/zsh/.zshrc)
+#### Powerlevel10k
 
----
+[Powerlevel10k](https://github.com/romkatv/powerlevel10k) is the prompt. Its configuration is [`configs/zsh/.p10k.zsh`](./configs/zsh/.p10k.zsh). `p10k configure` runs the wizard again, but see [Maintenance](#editing-the-config-files) first: it rewrites the file.
 
-## 5. Powerlevel10k
+The prompt uses the Høst colours: the path segment is orange, the git segment is green when clean, rust when there are uncommitted changes and red in a conflict, and an activated Python environment is plum. The segments use the Høstkveld colours as fixed hex values with dark text in both themes, since the prompt is part of the interface rather than of the code and the dark Høstlys oranges do not carry dark text well. iTerm2 interprets 24-bit colours from escape codes as Display P3 rather than sRGB, so `.p10k.zsh` sends it the same colours converted to P3 coordinates; in VS Code and other terminals the sRGB values are used.
 
-[Powerlevel10k](https://github.com/romkatv/powerlevel10k) is the prompt theme — fast, configurable, shows git status, virtualenv, exit codes, etc.
+#### Font
 
-### Install
+The prompt needs a font with extra glyphs (folder icons, git branch arrows, the Apple logo). iTerm2, the VS Code editor and the VS Code terminal all use **MesloLGS NF**, the version of Meslo patched for Powerlevel10k, from the cask `font-meslo-for-powerlevel10k`. The general Nerd Fonts cask `font-meslo-lg-nerd-font` installs a font with a different name ("MesloLGS Nerd Font"), which the settings here do not use.
 
-```bash
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-```
+#### fastfetch
 
-### Activate
+[fastfetch](https://github.com/fastfetch-cli/fastfetch), the maintained successor to the archived neofetch, prints the Apple logo and system details. The config in [`configs/fastfetch/`](./configs/fastfetch/) shows OS, kernel, uptime, shell, terminal, terminal font, CPU, GPU, memory and disk, with labels in rust. The logo is fastfetch's small macOS logo, kept as a local copy in `eple.txt` so each stripe gets its own colour: red, rust, orange, green, blue and plum from the top. Below it, two rows of colour blocks show black, the six palette colours and white, normal and bright.
 
-In `~/.zshrc`, set:
+### Git and GitHub
 
-```zsh
-ZSH_THEME="powerlevel10k/powerlevel10k"
-```
+`~/.gitconfig` is a link to [`configs/git/.gitconfig`](./configs/git/.gitconfig), which holds only settings that suit anyone (`main` as default branch, merge on pull). It ends by including `~/.gitconfig.local`, which `install.sh` creates and which never goes into the repository. It holds:
 
-Restart iTerm2. The configuration wizard launches automatically the first time. To re-run it later:
+- your name and email;
+- the GitHub sign-in: git asks `gh` for the token over HTTPS. An empty `helper =` line comes first, which switches off the macOS keychain helper that Homebrew's git sets, so a renewed token is always picked up.
 
-```bash
-p10k configure
-```
+Sign in once with `gh auth login` (see [After install.sh](#after-installsh)). SSH keys are not used.
 
-This writes `~/.p10k.zsh`, which is the file you save to share your prompt across machines.
+Because `~/.gitconfig` is a link, `git config --global …` writes into the repository's file. Personal settings belong in the local file: `git config --file ~/.gitconfig.local …`.
 
-The prompt in this repo uses the Høst colours: the path segment is orange, the git segment is green when clean, rust when there are uncommitted changes and red in a conflict, and the Python environment (venv, conda, pyenv) is plum. The segments use the Høstkveld colours as fixed hex values with dark text in both themes, since the prompt is part of the interface rather than of the code and the dark Høstlys oranges do not carry dark text well. iTerm interprets 24-bit colours from escape codes as Display P3 rather than sRGB, so `.p10k.zsh` sends it the same colours converted to P3 coordinates; in VS Code and other terminals the sRGB values are used.
+### Python
 
-> 📁 *Config in this repo:* [`configs/zsh/.p10k.zsh`](./configs/zsh/.p10k.zsh)
+There is one Python environment for everything that is not a project of its own: small scripts in the teaching folders, quick calculations, notebooks. It is defined in [`configs/python/`](./configs/python/) and built in `~/.venvs/standard` by [uv](https://docs.astral.sh/uv/).
 
----
+- [`pyproject.toml`](./configs/python/pyproject.toml) lists the packages (numpy, matplotlib, jupyter), and [`uv.lock`](./configs/python/uv.lock) pins the exact version of each, so every Mac gets the same environment.
+- Python is pinned to 3.13 ([`.python-version`](./configs/python/.python-version)), and uv only uses Pythons it has installed itself. Homebrew's Python is not used at all, so a Homebrew upgrade cannot break the environment. uv's Python includes tkinter, so `turtle` works.
+- `~/.zprofile` puts `~/.venvs/standard/bin` first on the PATH: `python3 script.py` in a terminal and ⌘R in VS Code use it without any activation.
+- Packages are added and removed with three functions from `~/.zshrc`, which update the package list, the lock file and the environment together:
 
-## 6. Nerd Fonts
+  ```bash
+  pyadd scipy       # add a package
+  pyremove scipy    # remove it
+  pyupgrade         # upgrade everything to the newest versions
+  ```
 
-Powerlevel10k needs a font with extra glyphs — folder icons, git-branch arrows, OS logos — to render its prompt segments. iTerm2 (and VS Code's integrated terminal) use the same font.
+  Commit `pyproject.toml` and `uv.lock` afterwards. Do not use `pip install`: a package installed that way is not in the list, and the next `uv sync` removes it.
 
-```bash
-brew install --cask font-meslo-lg-nerd-font
-```
+A project of its own (a repository with its own dependencies) gets its own uv project instead: `uv init`, `uv add …`, and on another Mac `uv sync`.
 
-Then in **iTerm2 → Settings → Profiles → Text → Font**, pick `MesloLGS NF` (or whichever variant you prefer). Set it for both **Font** and **Non-ASCII Font**.
+To move to a newer Python later, change `.python-version` and `requires-python` in `pyproject.toml`, then run `pyupgrade`.
 
-Other good options: `font-fira-code-nerd-font`, `font-jetbrains-mono-nerd-font`, `font-hack-nerd-font`.
+### VS Code
 
----
+VS Code Settings Sync (with GitHub) is the source for settings, keybindings, snippets, extensions and both profiles. `install.sh` adds the two things Sync cannot carry:
 
-## 7. Fastfetch
+- **tex-oppstart**, a small home-made extension that opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened. It is not on the Marketplace, and Sync only restores Marketplace extensions. Source and `.vsix` are in [`configs/vscode/tex-oppstart/`](./configs/vscode/tex-oppstart/); rebuild it with `npx @vscode/vsce package` in that folder.
+- **The Python interpreter** (`python.defaultInterpreterPath`, pointing at `~/.venvs/standard`). It is a machine setting, which Sync leaves out on purpose, so the script writes it into the local settings of every profile.
 
-[Fastfetch](https://github.com/fastfetch-cli/fastfetch) prints a colored Apple logo and your system specs every time you open a terminal. It's the actively-maintained successor to [Neofetch](https://github.com/dylanaraps/neofetch), which was archived in 2024. Fastfetch starts noticeably faster (written in C, not bash) and tracks new macOS versions and Apple Silicon chips properly.
+[`configs/vscode/`](./configs/vscode/) also holds a snapshot of the settings, keybindings and extension list, with [`setup.sh`](./configs/vscode/setup.sh) to restore it without Settings Sync. That is a fallback; normally Sync does the job.
 
-### Install
+**Profiles.** *Default* is the everyday profile for LaTeX and Python. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline; its word list is [`configs/cspell/ordliste.txt`](./configs/cspell/ordliste.txt), read straight from this repository. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one. Python files are formatted with autopep8 on save. *Tavle* is for coding on the board in class: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed.
 
-```bash
-brew install fastfetch
-```
+Both profiles use my own themes, Høstlys and Høstkveld (`dagmortensj.hoest-theme` on the Marketplace, developed in [hoest-theme](https://github.com/dagmortensj/hoest-theme)), with a status bar button that switches between them.
 
-### Where the config lives
-
-Fastfetch reads `~/.config/fastfetch/config.jsonc`. The config in this repo is a slimmed-down version showing OS, Kernel, Uptime, Shell, Terminal, Terminal Font, CPU, GPU, Memory (the total) and Disk (used and total), with labels in rust. The logo is fastfetch's small macOS logo, kept as a local copy in `eple.txt` so each stripe can get its own colour: red, rust, orange, green, blue and plum from the top, the palette order. Below it, two rows of colour blocks show black, the six palette colours and white, normal on the first row and bright on the second.
-
-To install it:
-
-```bash
-mkdir -p ~/.config/fastfetch
-cp configs/fastfetch/config.jsonc configs/fastfetch/eple.txt ~/.config/fastfetch/
-fastfetch     # test it
-```
-
-Generate a fresh starter config (with every option commented) if you want to customize further:
-
-```bash
-fastfetch --gen-config
-```
-
-> 📁 *Config in this repo:* [`configs/fastfetch/config.jsonc`](./configs/fastfetch/config.jsonc)
-
-> 💡 `fastfetch` is already set to run on terminal start in my `.zshrc` (last line of the file).
-
-### Hide the "Last login" banner
-
-By default, every new terminal prints a `Last login: ... on ttys000` line at the top, which pushes fastfetch's output down by one line. Suppress it by creating an empty file in your home directory:
-
-```bash
-touch ~/.hushlogin
-```
-
-Open a new terminal — fastfetch becomes the very first thing on screen. The file is empty by design; its mere presence is the signal to the login shell.
-
-### Migrating from neofetch
-
-If you previously had neofetch installed:
-
-```bash
-brew uninstall neofetch
-rm -rf ~/.config/neofetch
-```
-
-Then update the last line of `~/.zshrc` from `neofetch` to `fastfetch` and open a new terminal.
-
----
-
-## 8. VS Code
-
-### Install
-
-```bash
-brew install --cask visual-studio-code
-```
-
-### Enable the `code` command
-
-After first launch, open the Command Palette (⇧⌘P) and run:
-
-> **Shell Command: Install 'code' command in PATH**
-
-Now `code .` opens the current folder from any terminal.
-
-### Restore everything via Settings Sync (recommended)
-
-VS Code's built-in **Settings Sync** handles the full restore automatically — settings, keybindings, snippets, tasks, the extensions list with their per-extension settings, UI state, and profiles.
-
-1. Open VS Code → click the ⚙️ (gear, bottom-left) → **Settings Sync...**
-2. Sign in with **GitHub** or **Microsoft** (the same account you used on the previous Mac).
-3. Pick what to sync (defaults are fine — settings + keybindings + extensions + UI state).
-4. Wait ~30 seconds. Done.
-
-That's the entire VS Code section of a fresh-Mac install when Settings Sync is enabled.
-
-### What Settings Sync does not cover
-
-Settings Sync restores settings, keybindings, both profiles and the Marketplace extensions, including [Høst Theme](https://marketplace.visualstudio.com/items?itemName=dagmortensj.hoest-theme). It does not restore `tex-oppstart`, which is home-made and not on the Marketplace, or the global latexmk config. `configs/vscode/setup.sh` restores everything in one go and is safe to re-run (it backs up the current settings and keybindings first):
-
-```bash
-bash configs/vscode/setup.sh
-```
-
-### Layout of `configs/vscode/`
-
-| Path | What it is |
-|---|---|
-| `default/settings.json` | Default profile, used for LaTeX and Python |
-| `tavle/settings.json` | Tavle profile, for live coding in front of the class |
-| `keybindings.json` | Shared by both profiles |
-| `extensions.txt` | Marketplace extensions in the Default profile, including my own [Høst Theme](https://marketplace.visualstudio.com/items?itemName=dagmortensj.hoest-theme) |
-| `tex-oppstart/` | Opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened (source and `.vsix`) |
-| `setup.sh` | Restores all of the above, plus `configs/latexmk/latexmkrc` |
-
-Both profiles use my own themes, Høstlys (light) and Høstkveld (dark), in earth tones: `dagmortensj.hoest-theme` on the Marketplace, developed in [hoest-theme](https://github.com/dagmortensj/hoest-theme). They cover the whole workbench and LaTeX, BibTeX, Python (with Pylance semantic highlighting), Markdown, JSON, YAML, shell and diff, and add a button at the right of the status bar that switches between the two. `setup.sh` installs the theme from the Marketplace in both profiles, so VS Code keeps it up to date. The iTerm presets in `configs/iterm2/farger/` are copies from the same repository, since presets have no marketplace; after a new version of the theme, refresh them:
-
-```bash
-cp ../hoest-theme/iterm/*.itermcolors configs/iterm2/farger/
-```
-
-To rebuild `tex-oppstart/` after editing it, run `npx @vscode/vsce package` in the folder.
-
-### Profiles
-
-**Default** is the everyday profile. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline. The right-hand chat panel stays closed when a window opens. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one.
-
-**Tavle** is for coding on the board: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed.
-
-### Keybindings
+**Keybindings**
 
 | Keys | Action |
 |---|---|
@@ -349,21 +257,93 @@ To rebuild `tex-oppstart/` after editing it, run `npx @vscode/vsce package` in t
 | `Ctrl+Cmd+Z` | Zen mode |
 | `Ctrl+Cmd+S` | Spell-check on/off |
 
-### Terminal integration with iTerm2 / Powerlevel10k
+The integrated terminal uses `MesloLGS NF` and zsh, and *Open in External Terminal* (⇧⌘C) opens iTerm2.
 
-Already configured in [`settings.json`](./configs/vscode/default/settings.json):
+### LaTeX
 
-```jsonc
-"terminal.integrated.fontFamily": "MesloLGS NF",
-"terminal.integrated.defaultProfile.osx": "zsh",
-"terminal.external.osxExec": "iTerm2.app"
+MacTeX is installed with Homebrew as `mactex-no-gui`: the full TeX Live distribution without TeXShop, BibDesk and LaTeXiT, since editing happens in VS Code. The cask downloads the official `MacTeX.pkg` (about 6 GB) and runs Apple's installer, so the result is the same as downloading it from tug.org. Use the cask `mactex` instead if you want the GUI apps.
+
+Packages are updated with `tlmgr` (the TeX Live manager), not with Homebrew:
+
+```bash
+sudo tlmgr update --self
+sudo tlmgr update --all
 ```
 
-That last line means *Open in External Terminal* (⇧⌘C) launches iTerm2 instead of Apple's Terminal.app.
+Homebrew only comes in when a new TeX Live year is released. `brew upgrade` then downloads the whole package again, and a plain `brew upgrade` starts that download without warning. `brew pin` does not work on casks, so upgrade formulae and casks separately and take MacTeX when you want it:
 
-### Keeping the snapshot fresh
+```bash
+brew upgrade --formula                  # routine upgrades, never touches casks
+brew upgrade --cask mactex-no-gui       # when you want the new TeX Live year
+```
 
-Settings Sync handles the live state, but if you want the committed files to stay in sync (so the GitHub view of the repo reflects your current setup), refresh them once in a while:
+The global latexmk configuration, [`configs/latexmk/latexmkrc`](./configs/latexmk/latexmkrc), is linked to `~/.config/latexmk/latexmkrc`. It is a fallback for projects without their own `.latexmkrc` and picks LuaLaTeX when the main file or a local `.sty`/`.cls` uses fontspec, unicode-math or Lua, and pdfLaTeX otherwise.
+
+### Apps
+
+[`apps.Brewfile`](./configs/brew/apps.Brewfile) installs Claude, Dropbox, Microsoft Teams, Google Chrome, Discord, Steam, Qobuz and Logi Options+. All of them update themselves; Homebrew knows that and leaves them alone on a plain `brew upgrade`. Removing one with `brew uninstall --cask --zap <name>` also removes the settings and support files it leaves behind.
+
+App Store apps (Office, Pages, Numbers, Keynote, GeoGebra, AdGuard) are installed by hand from the App Store, which takes a couple of minutes. A command-line tool for the App Store exists (`mas`), but it is unofficial and the least reliable part such a setup could have, so it is not used here.
+
+Xcode is not installed. Homebrew, git, gcc, Python and MacTeX only need the Command Line Tools, which the Homebrew installer brings.
+
+### macOS settings
+
+[`configs/macos/defaults.sh`](./configs/macos/defaults.sh) sets, with `defaults write`: dark mode; orange accent, highlight and icon colour; text size L; Norwegian quotation marks «» and ‘’; natural scrolling off, tap to click, pointer speed 1.5, no swipe between pages; Dock icon size 53, no recent apps, minimise into the app icon, no bottom-right hot corner; Finder in column view with the path bar, searching the current folder, no recent tags, new windows in iCloud Drive; clicking the wallpaper does not reveal the desktop, no margins between tiled windows; the weekday in the menu bar clock. Each line is commented. Some only take effect after logging out.
+
+To find out what a setting is called: `defaults read > before.txt`, change it in System Settings, `defaults read > after.txt`, `diff before.txt after.txt`. The changed key becomes a new line in the file.
+
+#### Studio Display fan during sleep
+
+The Studio Display's fan spun up every 15 to 20 minutes while the MacBook was asleep. The cause was the MacBook's maintenance wakes (Power Nap and TCP keepalive), visible as `rtc/SleepService`, `rtc/Maintenance` and `wifibt ... E_TKO_TCP` entries in `pmset -g log`; each wake woke the display. The `macos` group switches both off:
+
+```bash
+sudo pmset -a powernap 0          # no Mail, Calendar, iCloud or Time Machine syncing during sleep
+sudo pmset -c tcpkeepalive 0      # on the charger: no waking to keep network connections
+```
+
+Find My does not update the location while the Mac sleeps on the charger, which is fine for a docked Mac. Waking with the keyboard or mouse is not affected. Both can be undone by running them with `1`. A major macOS update can reset them; `pmset -g | grep -E "powernap|tcpkeepalive"` shows the current values (both should be 0).
+
+---
+
+## Maintenance
+
+### Editing the config files
+
+`~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.gitconfig`, `~/.config/fastfetch/*` and `~/.config/latexmk/latexmkrc` are links into this repository. Edit them in either place; it is the same file, and `git status` in the repository shows the change straight away. Nothing has to be copied back.
+
+Some tools replace a file instead of editing it, which turns the link into an ordinary file; `p10k configure` can do that. Run `./install.sh terminal` afterwards: it notices, moves the new file to `~/.mac-setup-backup/`, puts the link back and tells you that the file differed, so you can copy the new content into the repository.
+
+Links depend on the repository staying where it is. If it is moved, run `./install.sh terminal dev` from the new place to point them there.
+
+### Adding a program
+
+Add a line to the right Brewfile in [`configs/brew/`](./configs/brew/), install it with `brew bundle --no-upgrade --file=…` or `./install.sh <group>`, and commit. A tool needed only once (for converting a file, say) does not belong in a Brewfile; install it, use it, and `brew uninstall` it again.
+
+### Python packages
+
+`pyadd`, `pyremove` and `pyupgrade`, then commit `configs/python/`. See [Python](#python).
+
+### iTerm2 settings
+
+After changing something in iTerm2 that you want to keep:
+
+```bash
+scripts/iterm-export.sh
+git diff configs/iterm2/
+```
+
+The script exports iTerm2's current settings without the keys that change by themselves and writes them as sorted XML. It can run while iTerm2 is open.
+
+When the Høst theme gets new colours, refresh the presets from the theme repository as well:
+
+```bash
+cp ../hoest-theme/iterm/*.itermcolors configs/iterm2/farger/
+```
+
+### VS Code snapshot
+
+Settings Sync keeps VS Code current. The snapshot in `configs/vscode/` is only for the fallback script; refresh it now and then:
 
 ```bash
 cp "$HOME/Library/Application Support/Code/User/settings.json"    configs/vscode/default/settings.json
@@ -371,281 +351,29 @@ cp "$HOME/Library/Application Support/Code/User/keybindings.json" configs/vscode
 code --list-extensions > configs/vscode/extensions.txt
 ```
 
-Then commit the diff.
-
 ---
 
-## 9. Git
-
-### Install
-
-Git ships with the Xcode CLI tools, but installing through Homebrew gets you a newer version:
-
-```bash
-brew install git
-```
-
-### Configure identity
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
-git config --global init.defaultBranch main
-git config --global pull.rebase false
-```
-
-[`configs/.gitconfig`](./configs/.gitconfig) already holds all four, so on a restore it is enough to copy that file (section 13).
-
-### SSH key for GitHub
-
-```bash
-ssh-keygen -t ed25519 -C "you@example.com"
-eval "$(ssh-agent -s)"
-ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-pbcopy < ~/.ssh/id_ed25519.pub
-```
-
-Paste into [github.com → Settings → SSH and GPG keys](https://github.com/settings/keys).
-
-> 📁 *Config in this repo:* [`configs/.gitconfig`](./configs/.gitconfig)
-
----
-
-## 10. Python
-
-**The rule that fixes 90% of Python pain on macOS:** install Python once via Homebrew, never `pip install` anything globally, and create a virtual environment for every project.
-
-### Step 1 — Install Python
-
-```bash
-brew install python
-```
-
-This puts `python3` at `/opt/homebrew/bin/python3`. The system Python at `/usr/bin/python3` is for macOS itself — leave it alone.
-
-Verify:
-
-```bash
-python3 --version          # → Python 3.x.x
-which python3              # → /opt/homebrew/bin/python3
-pip3 --version
-```
-
-### Step 2 — One venv per project
-
-For every project (no exceptions, even tiny scripts):
-
-```bash
-cd ~/code/my-project
-
-# create a virtual environment in .venv/
-python3 -m venv .venv
-
-# activate it — your prompt now shows the venv name in parentheses
-source .venv/bin/activate
-
-# install whatever this project needs, INTO the venv
-pip install numpy matplotlib jupyterlab
-
-# work on the project ...
-
-# when you're done with this terminal:
-deactivate
-```
-
-Three things to remember once you've done this a few times:
-
-1. **`source .venv/bin/activate`** is the only command that varies. The rest is `pip install` like normal — but everything goes into `.venv/` instead of polluting the system Python.
-2. **Add `.venv/` to your project's `.gitignore`** — it's machine-specific and rebuildable.
-3. **Pin versions before sharing or deploying:**
-   ```bash
-   pip freeze > requirements.txt
-   ```
-   On a fresh checkout: `pip install -r requirements.txt`.
-
-### Why no global pip installs?
-
-Different projects need different versions of `numpy`, `pandas`, etc. Installing into one shared Python guarantees a dependency conflict eventually, and on macOS it can also break Homebrew or system tools. Venvs cost about 3 seconds to create and remove the entire class of problem.
-
-If you ever see "this would break system packages — use --break-system-packages" when running pip, that's macOS / Homebrew telling you to make a venv. Listen to it.
-
-### Optional: jupyter inside a venv
-
-If you use Jupyter notebooks, install it inside the project's venv too:
-
-```bash
-source .venv/bin/activate
-pip install jupyterlab ipykernel
-python -m ipykernel install --user --name=my-project
-jupyter lab
-```
-
-The `ipykernel install` line registers the venv as a kernel choice in JupyterLab.
-
-### Worth knowing — modern alternatives
-
-- [**`uv`**](https://docs.astral.sh/uv/) — newer, dramatically faster, replaces `pip` + `venv` + version management in one tool. If I were starting from zero today, this is what I'd use:
-  ```bash
-  brew install uv
-  uv python install 3.12
-  uv venv && source .venv/bin/activate
-  uv pip install numpy matplotlib
-  ```
-  Same mental model as `python -m venv` + `pip install` — just faster and with better lockfiles.
-- [**`pyenv`**](https://github.com/pyenv/pyenv) — install and switch between multiple Python versions side-by-side. Useful when one project needs 3.10 and another needs 3.12.
-- [**`conda` / `mamba`**](https://github.com/conda-forge/miniforge) — best when you need scientific stacks with heavy non-Python dependencies (CUDA, MKL, large compiled libraries). Overkill for most general use.
-
----
-
-## 11. LaTeX
-
-### Install MacTeX (what I use)
-
-The simplest path is the official MacTeX installer — a single `.pkg` that puts everything you need on disk in one go.
-
-1. Download from https://www.tug.org/mactex/mactex-download.html (~6 GB)
-2. Double-click `MacTeX.pkg` → follow the installer prompts
-3. Restart your terminal so `pdflatex`, `xelatex`, and `latexmk` end up on `PATH`
-4. Verify:
-   ```bash
-   which latexmk
-   pdflatex --version
-   ```
-
-This installs the full TeX Live distribution plus GUI apps (TeXShop, BibDesk, LaTeXiT). Editing happens in VS Code via LaTeX Workshop; the GUI apps are mostly there as fallback.
-
-> 💡 **Why not Homebrew?** `brew install --cask mactex` works too and pulls the same package, but the official `.pkg` is more reliable for the initial install — you get Apple's installer UI, signed packages, and progress feedback for a 6 GB download. After that, `tlmgr` (the TeX Live manager) handles updates from inside the install.
-
-### Update packages
-
-```bash
-sudo tlmgr update --self
-sudo tlmgr update --all
-```
-
-### Smaller alternative (if disk space matters)
-
-[BasicTeX](https://www.tug.org/mactex/morepackages.html) is ~100 MB and you `tlmgr install` what you need on demand:
-
-```bash
-brew install --cask basictex
-sudo tlmgr update --self
-sudo tlmgr install latexmk collection-fontsrecommended
-```
-
-### VS Code integration
-
-Already in [`extensions.txt`](./configs/vscode/extensions.txt) and [`settings.json`](./configs/vscode/default/settings.json):
-
-- **`james-yu.latex-workshop`** — auto-builds on save (`latex-workshop.latex.autoBuild.run: "onSave"`), opens the PDF inside VS Code, supports SyncTeX (Alt+E to jump to source from the PDF — that's a custom keybinding in [`keybindings.json`](./configs/vscode/keybindings.json)).
-- Error/warning popups are turned off (`latex-workshop.message.error.show: false`) so build failures don't spam notifications — check the Problems panel instead.
-
----
-
-## 12. macOS tweaks
-
-Some macOS settings have no checkbox anywhere in System Settings — they only exist as `pmset`, `defaults`, or similar shell commands. They're trivial to apply once you know about them, easy to forget, and may quietly get reset by a major macOS upgrade. Worth re-checking after any large OS update.
-
-### Studio Display fan during sleep
-
-**Problem:** Studio Display fans spin up periodically when the MacBook is asleep — quiet for a while, then back on in a 15–20 minute cycle.
-
-**Cause:** Not the display itself. The MacBook does *maintenance wakes* (Power Nap + TCP keepalive) every few minutes while asleep. Each wake re-engages the display and spins its fan. Confirmed via `rtc/SleepService`, `rtc/Maintenance`, and `wifibt ... E_TKO_TCP` entries in `pmset -g log`.
-
-**Fix:**
-
-```bash
-sudo pmset -a powernap 0
-sudo pmset -c tcpkeepalive 0
-```
-
-- `powernap 0` — stops scheduled Mail / Calendar / iCloud / Time Machine syncing during sleep. (The main culprit.)
-- `tcpkeepalive 0` — stops the Mac waking to maintain network connections. Find My location won't update *while asleep* (still works when awake). Acceptable trade-off for a docked desktop setup.
-
-Both are reversible — re-run with `1` instead of `0` to undo.
-
-**Check current state:**
-
-```bash
-pmset -g | grep -E "powernap|tcpkeepalive|womp"
-# want: powernap 0, tcpkeepalive 0, womp 0
-```
-
-**Verify it worked.** After sleeping the Mac 20+ minutes:
-
-```bash
-pmset -g log | grep -i "wake from"
-```
-
-`rtc/SleepService` and `rtc/Maintenance` lines shouldn't appear after the time you ran the commands. Occasional `USB-C_plug` wakes are normal.
-
-**Notes:**
-
-- These commands don't affect waking the Mac with keyboard/mouse — that's HID activity, a separate system.
-- Settings persist across reboots.
-- A major macOS update or SMC/NVRAM reset may revert them — re-run if the fan cycle ever returns.
-- `-a` = all power sources, `-c` = charger only, `-b` = battery only.
-
----
-
-## 13. Restoring configs from this repo
-
-The fast path on a fresh Mac, after Homebrew, Oh My Zsh and Powerlevel10k are installed (sections 2, 4, 5):
-
-```bash
-# 1. every brew package and cask, including iTerm2, VS Code and the Nerd Font
-brew bundle --file=configs/Brewfile
-
-# the two zsh plugins that .zshrc expects (section 4)
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-# 2. shell + prompt
-cp configs/zsh/.zshrc      ~/.zshrc
-cp configs/zsh/.p10k.zsh   ~/.p10k.zsh
-
-# 3. fastfetch
-mkdir -p ~/.config/fastfetch
-cp configs/fastfetch/config.jsonc configs/fastfetch/eple.txt ~/.config/fastfetch/
-
-# 4. VS Code — profiles, keybindings, extensions and latexmkrc
-#    (needs the code command: open VS Code once and run Shell Command: Install 'code' command in PATH)
-bash configs/vscode/setup.sh
-
-# 5. Git
-cp configs/.gitconfig ~/.gitconfig
-
-# 6. Hide the "Last login" banner so fastfetch is the first thing on screen
-touch ~/.hushlogin
-
-# 7. start a fresh shell with the new config
-exec zsh
-```
-
-For **iTerm2**: open it once, then **Settings → General → Settings → Import All Settings and Data** → pick `configs/iterm2/iterm2-settings.itermexport`.
-
-For **MacTeX**: download `MacTeX.pkg` from https://www.tug.org/mactex/ and run it manually (see [section 11](#11-latex)). Not in the Brewfile by design — the .pkg installer is the more reliable route for the 6 GB download.
-
-> 💡 VS Code extensions are not in the `Brewfile`. The one list is [`configs/vscode/extensions.txt`](./configs/vscode/extensions.txt), which `setup.sh` installs from; Settings Sync restores them too.
+## Before erasing a Mac
+
+1. Commit and push this repository and every other repository in `~/Developer`. Anything in `~/Developer` that is not in git is lost.
+2. Copy `~/.mac-setup-backup/` (the files `install.sh` moved aside), and `~/.zshenv` if you have one, to Dropbox. Look through the backups first for settings that should go into the repository.
+3. Run `scripts/iterm-export.sh` and commit, so the newest iTerm2 settings are in the snapshot.
+4. In VS Code, check that Settings Sync is on, that Profiles is ticked, and when it last synced.
+5. Let iCloud Drive and Dropbox finish uploading.
+6. Check for local files outside iCloud, Dropbox and git (Pictures, Movies, Music, fonts in `~/Library/Fonts`, keys in `~/.ssh`).
+7. Make a Time Machine backup, as a safety net only.
+8. Erase: System Settings → General → Transfer or Reset → Erase All Content and Settings. Then follow the [Quick start](#quick-start).
 
 ---
 
 ## Useful links
 
-- Homebrew docs — https://docs.brew.sh
-- iTerm2 docs — https://iterm2.com/documentation.html
-- Oh My Zsh wiki — https://github.com/ohmyzsh/ohmyzsh/wiki
-- Powerlevel10k — https://github.com/romkatv/powerlevel10k
-- Nerd Fonts — https://www.nerdfonts.com
-- fastfetch — https://github.com/fastfetch-cli/fastfetch
-- VS Code docs — https://code.visualstudio.com/docs
-- pyenv — https://github.com/pyenv/pyenv
-- uv — https://docs.astral.sh/uv/
-- MacTeX — https://www.tug.org/mactex/
-- LaTeX Workshop — https://github.com/James-Yu/LaTeX-Workshop
-
----
-
-*Last updated: 2026-11-02*
+- Homebrew: https://docs.brew.sh, Brew Bundle: https://docs.brew.sh/Brew-Bundle-and-Brewfile
+- iTerm2: https://iterm2.com/documentation.html
+- Oh My Zsh: https://github.com/ohmyzsh/ohmyzsh/wiki
+- Powerlevel10k: https://github.com/romkatv/powerlevel10k
+- fastfetch: https://github.com/fastfetch-cli/fastfetch
+- uv: https://docs.astral.sh/uv/
+- VS Code: https://code.visualstudio.com/docs, Settings Sync: https://code.visualstudio.com/docs/configure/settings-sync
+- MacTeX: https://www.tug.org/mactex/
+- LaTeX Workshop: https://github.com/James-Yu/LaTeX-Workshop

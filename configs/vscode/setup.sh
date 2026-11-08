@@ -1,7 +1,11 @@
 #!/bin/bash
-# Restores the VS Code setup: Default profile (LaTeX + Python), Tavle profile
-# (live coding in class), keybindings, the Marketplace extensions (Høst Theme
-# among them), the home-made tex-oppstart extension and the global latexmk config. Safe to re-run; backs up settings and keybindings.
+# Fallback only. VS Code Settings Sync is the normal way to restore VS Code,
+# and install.sh installs tex-oppstart. Use this script if Settings Sync is
+# not available: it restores the Default profile (LaTeX + Python), the Tavle
+# profile (live coding in class), keybindings, the Marketplace extensions
+# (Høst Theme among them) and tex-oppstart from the snapshot in this folder.
+# Safe to re-run; backs up settings and keybindings. The latexmk config is a
+# symlink made by install.sh, so it is not handled here.
 #
 # An extension that fails to install is reported and the script carries on;
 # it exits with status 1 at the end if anything failed.
@@ -45,7 +49,7 @@ find_tavle() {
 ID="$(find_tavle)"
 if [ -z "$ID" ]; then
   code --profile "Tavle" --new-window >/dev/null 2>&1 || true
-  for i in $(seq 1 30); do ID="$(find_tavle)"; [ -n "$ID" ] && break; sleep 1; done
+  for _ in $(seq 1 30); do ID="$(find_tavle)"; [ -n "$ID" ] && break; sleep 1; done
 fi
 [ -z "$ID" ] && { echo "ERROR: Tavle profile not found. Create it in VS Code (Profiles > New Profile > Tavle) and re-run."; exit 1; }
 P="$U/profiles/$ID"; mkdir -p "$P"
@@ -58,10 +62,5 @@ for e in ms-python.python ms-toolsai.jupyter dagmortensj.hoest-theme; do
   install "$e" --profile "Tavle" --force
 done
 echo "OK: Tavle profile"
-
-# 3. Global latexmk config (engine fallback for projects without .latexmkrc)
-mkdir -p "$HOME/.config/latexmk"
-cp "$HER/../latexmk/latexmkrc" "$HOME/.config/latexmk/latexmkrc"
-echo "OK: latexmkrc"
 
 exit "$FEIL"

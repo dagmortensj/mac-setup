@@ -10,3 +10,6 @@ configs/**/*.private*
 configs/**/*.secret*
 *.local.json
 .env
+
+# Python standard environment, if uv ever builds it inside the repo
+configs/python/.venv/

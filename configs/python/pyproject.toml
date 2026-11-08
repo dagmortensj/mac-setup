@@ -1,0 +1,21 @@
+# The standard Python environment for small scripts and notebooks outside any
+# project. install.sh builds it in ~/.venvs/standard with `uv sync --locked`.
+# Add or remove packages with pyadd / pyremove (defined in .zshrc), which also
+# update uv.lock; then commit both files.
+[project]
+name = "standard"
+version = "1.0"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "jupyter",
+    "matplotlib",
+    "numpy",
+]
+
+[tool.uv]
+package = false
+# Use only Pythons that uv has installed itself, never Homebrew's or the
+# system's, so a Homebrew upgrade can never break this environment.
+python-preference = "only-managed"
+# The lock file only needs to cover macOS.
+environments = ["sys_platform == 'darwin'"]

@@ -28,6 +28,13 @@ brew "python"
 cask "iterm2"
 cask "visual-studio-code"
 
+# ─── LaTeX ──────────────────────────────────────────────────────────────
+# Full TeX Live without TeXShop, BibDesk and LaTeXiT (editing happens in
+# VS Code). About 6 GB, and the installer asks for the admin password, so
+# `brew bundle` stops and waits for it. Packages are updated with tlmgr; see
+# README §11 before running `brew upgrade` when a new TeX Live year is out.
+cask "mactex-no-gui"
+
 # ─── Fonts ──────────────────────────────────────────────────────────────
 cask "font-meslo-lg-nerd-font"   # MesloLGS NF, for the icons in the Powerlevel10k prompt
 

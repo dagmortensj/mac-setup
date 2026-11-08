@@ -1,0 +1,5 @@
+# Repositories that `./install.sh repos` clones into ~/Developer.
+# One HTTPS URL per line. A repository that is already there is left alone.
+https://github.com/dagmortensj/lualatex-templates
+https://github.com/dagmortensj/pdflatex-templates
+https://github.com/dagmortensj/hoest-theme
