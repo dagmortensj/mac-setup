@@ -238,6 +238,7 @@ VS Code Settings Sync (with GitHub) is the source for settings, keybindings, sni
 
 - **tex-oppstart**, a small home-made extension that opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened. It is not on the Marketplace, and Sync only restores Marketplace extensions. Source and `.vsix` are in [`configs/vscode/tex-oppstart/`](./configs/vscode/tex-oppstart/); rebuild it with `npx @vscode/vsce package` in that folder.
 - **The Python interpreter** (`python.defaultInterpreterPath`, pointing at `~/.venvs/standard`). It is a machine setting, which Sync leaves out on purpose, so the script writes it into the local settings of every profile.
+- **No environment activation in the terminal** (`python-envs.terminal.autoActivationType: off` and `python.terminal.activateEnvironment: false`). The standard environment is already first on PATH. When VS Code activates it, it types an activation command into a new terminal, and that collides with the command ⌘R types, which leaves the terminal at a `dquote>` prompt.
 
 [`configs/vscode/`](./configs/vscode/) also holds a snapshot of the settings, keybindings and extension list, with [`setup.sh`](./configs/vscode/setup.sh) to restore it without Settings Sync. That is a fallback; normally Sync does the job.
 

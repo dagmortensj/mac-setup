@@ -376,10 +376,16 @@ python_env() {
   "$VENV/bin/python" -c "import numpy, matplotlib, tkinter; print('numpy', numpy.__version__, 'matplotlib', matplotlib.__version__, 'tk', tkinter.TkVersion)"
 }
 
-# python.defaultInterpreterPath is a machine setting, which Settings Sync
-# leaves out, so it is written into this Mac's VS Code settings: the default
+# VS Code's Python settings, written into this Mac's settings: the default
 # profile and every other profile that exists. Run `./install.sh dev` again
 # after Settings Sync has brought in the other profiles.
+#   python.defaultInterpreterPath           the standard environment
+#   python-envs.terminal.autoActivationType off
+#   python.terminal.activateEnvironment     false
+# The environment is already first on PATH, so the terminal needs no
+# activation; the activation command VS Code types into a new terminal
+# otherwise collides with the command that Cmd+R types. The first two are
+# machine settings, which Settings Sync leaves out.
 vscode_python() {
   local user="$HOME/Library/Application Support/Code/User" f
   local files=("$user/settings.json")
@@ -387,7 +393,7 @@ vscode_python() {
     [ -f "$f" ] && files+=("$f")
   done
   if [ "$DRY" = 1 ]; then
-    would "point VS Code's Python at $(pretty "$VENV") (${#files[@]} settings file(s))"
+    would "point VS Code's Python at $(pretty "$VENV") and turn off terminal activation (${#files[@]} settings file(s))"
     return 0
   fi
   if [ ! -x "$VENV/bin/python" ]; then
@@ -397,34 +403,42 @@ vscode_python() {
   "$VENV/bin/python" - "$VENV/bin/python" "${files[@]}" <<'PY'
 import json, os, re, sys
 
-key = "python.defaultInterpreterPath"
-value = sys.argv[1]
-entry = f'"{key}": {json.dumps(value)}'
-pattern = re.compile(r'"' + re.escape(key) + r'"\s*:\s*"(?:[^"\\]|\\.)*"')
+settings = {
+    "python.defaultInterpreterPath": sys.argv[1],
+    "python-envs.terminal.autoActivationType": "off",
+    "python.terminal.activateEnvironment": False,
+}
+scalar = r'(?:"(?:[^"\\]|\\.)*"|true|false|null|-?\d+(?:\.\d+)?)'
+
+def set_key(text, key, value):
+    entry = f'"{key}": {json.dumps(value)}'
+    pattern = re.compile(r'"' + re.escape(key) + r'"\s*:\s*' + scalar)
+    if pattern.search(text):
+        return pattern.sub(lambda m: entry, text, count=1)
+    start = text.find("{")
+    if start < 0:
+        raise ValueError("no { found")
+    rest = text[start + 1:]
+    # Comments do not count as content when deciding on the comma.
+    bare = re.sub(r"//[^\n]*|/\*.*?\*/", "", rest, flags=re.S).strip()
+    if bare in ("", "}"):
+        return text[:start + 1] + "\n    " + entry + "\n" + rest.lstrip()
+    return text[:start + 1] + "\n    " + entry + "," + rest
 
 for path in sys.argv[2:]:
     if not os.path.exists(path):
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, "w", encoding="utf-8") as f:
-            f.write("{\n    " + entry + "\n}\n")
-        print("created", path)
-        continue
-    with open(path, encoding="utf-8") as f:
-        text = f.read()
-    if pattern.search(text):
-        new = pattern.sub(lambda m: entry, text, count=1)
+        text = "{}\n"
     else:
-        start = text.find("{")
-        if start < 0:
-            sys.exit(f"not a settings file: {path}")
-        rest = text[start + 1:]
-        # Comments do not count as content when deciding on the comma.
-        bare = re.sub(r"//[^\n]*|/\*.*?\*/", "", rest, flags=re.S).strip()
-        if bare in ("", "}"):
-            new = text[:start + 1] + "\n    " + entry + "\n" + rest.lstrip()
-        else:
-            new = text[:start + 1] + "\n    " + entry + "," + rest
-    if new != text:
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+    new = text
+    try:
+        for key, value in settings.items():
+            new = set_key(new, key, value)
+    except ValueError:
+        sys.exit(f"not a settings file: {path}")
+    if new != text or not os.path.exists(path):
         with open(path, "w", encoding="utf-8") as f:
             f.write(new)
         print("updated", path)
