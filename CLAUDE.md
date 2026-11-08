@@ -23,6 +23,7 @@ The repository lives in `~/Developer/mac-setup`. Some synced VS Code settings de
 - **Git:** Dag-Morten commits and pushes himself. Do not commit or push; give him the commands. Remotes are HTTPS (`https://github.com/dagmortensj/...`), never SSH.
 - **Brewfiles are curated by hand.** Never run `brew bundle dump`. Add or remove single lines.
 - **No permanent installs without asking.** If a task needs a tool once (converting a figure, say), ask before installing it, and remove it again afterwards unless he wants to keep it. Only tools he wants to keep go into a Brewfile.
+- **Running Python:** `pyrun file.py` uses the nearest project `.venv`, otherwise the standard environment; ⌘R in VS Code calls it. Projects build their `.venv` with `uv sync` and run things with `uv run`.
 - **Python packages** go into the standard environment with `pyadd` / `pyremove` (or `uv add/remove --project configs/python` with `UV_PROJECT_ENVIRONMENT=~/.venvs/standard`). Never `pip install`.
 - **iTerm2 changes** are saved with `scripts/iterm-export.sh`, never by editing the plist by hand.
 - **`.zshrc` and `.zprofile` cannot be read** through Claude's device shell (Permission denied), not even in `configs/zsh/`. Read the committed version with `git show HEAD:configs/zsh/.zshrc`, and give Dag-Morten terminal commands for changes.

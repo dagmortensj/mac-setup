@@ -91,7 +91,7 @@ Your git identity is not in the repository. `./install.sh dev` asks for it and s
 | Group | Steps |
 |---|---|
 | `terminal` | [`terminal.Brewfile`](./configs/brew/terminal.Brewfile) (git, fastfetch, iTerm2, MesloLGS NF) · links `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.config/fastfetch/` · `~/.hushlogin` · Oh My Zsh · zsh-autosuggestions, zsh-syntax-highlighting, Powerlevel10k · iTerm2 settings (only if iTerm2 has none yet) |
-| `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` · builds the Python standard environment · points VS Code at it · installs tex-oppstart |
+| `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` and `~/.config/uv/uv.toml` · builds the Python standard environment · points VS Code at it · installs tex-oppstart |
 | `apps` | [`apps.Brewfile`](./configs/brew/apps.Brewfile) |
 | `repos` | clones the repositories in [`repos.txt`](./configs/repos.txt) into `~/Developer` · links the `CLAUDE.md` files (see [Claude](#claude)) |
 | `macos` | [`defaults.sh`](./configs/macos/defaults.sh) · pmset for the Studio Display · removes GarageBand and iMovie if present (if macOS refuses, because Terminal lacks the App Management permission, drag them to the Bin instead) |
@@ -236,7 +236,18 @@ There is one Python environment for everything that is not a project of its own:
 
   Commit `pyproject.toml` and `uv.lock` afterwards. Do not use `pip install`: a package installed that way is not in the list, and the next `uv sync` removes it.
 
-A project of its own (a repository with its own dependencies) gets its own uv project instead: `uv init`, `uv add …`, and on another Mac `uv sync`.
+A project of its own (a repository with its own dependencies, such as `schroedinger`) has its own environment in a `.venv` folder inside the project. After cloning, one command builds it from the project's `pyproject.toml`:
+
+```bash
+uv sync                  # add --extra test for optional dependencies, if the project has them
+uv run pytest            # uv run uses the project's environment, no activation needed
+```
+
+The first `uv sync` writes `uv.lock`; commit it so the environment is the same everywhere. A new project starts with `uv init` and `uv add …`.
+
+`pyrun file.py` (from `~/.zshrc`) runs a file with the right Python: the `.venv` of the project the file is in, found by looking in the current folder and the folders above it, or the standard environment when there is none. ⌘R in VS Code uses it, so loose teaching files and project files both just run.
+
+[`configs/uv/uv.toml`](./configs/uv/uv.toml), linked to `~/.config/uv/uv.toml`, makes every project use only Pythons that uv installed itself, like the standard environment.
 
 To move to a newer Python later, change `.python-version` and `requires-python` in `pyproject.toml`, then run `pyupgrade`.
 
@@ -260,7 +271,7 @@ Both profiles use my own themes, Høstlys and Høstkveld (`dagmortensj.hoest-the
 |---|---|
 | `Cmd+B` / `Alt+Cmd+B` / `Cmd+J` | Left sidebar / right panel / bottom panel (VS Code defaults) |
 | `Cmd+S` | Save only |
-| `Cmd+R` in Python | Save and run the file with `python3` in the integrated terminal, from the file's folder |
+| `Cmd+R` in Python | Save and run the file with `pyrun` in the integrated terminal, from the file's folder (the project's `.venv` if there is one, otherwise the standard environment) |
 | `Cmd+R` in LaTeX | Save and build |
 | `Alt+E` | SyncTeX: jump from source to PDF |
 | `Ctrl+Cmd+Z` | Zen mode |

@@ -13,6 +13,7 @@ Where each file goes on the Mac, and how it gets there. "Link" means that `insta
 | `git/.gitconfig` | `~/.gitconfig` | link (`dev`); personal settings go in `~/.gitconfig.local`, which is not in the repo |
 | `latexmk/latexmkrc` | `~/.config/latexmk/latexmkrc` | link (`dev`) |
 | `python/` | `~/.venvs/standard` | built with `uv sync --locked` (`dev`) |
+| `uv/uv.toml` | `~/.config/uv/uv.toml` | link (`dev`) |
 | `vscode/tex-oppstart/` | VS Code extension | installed from the `.vsix` (`dev`) |
 | `vscode/default/`, `vscode/tavle/`, `vscode/keybindings.json`, `vscode/extensions.txt` | VS Code | snapshot for `vscode/setup.sh`, the fallback when Settings Sync is not used |
 | `cspell/ordliste.txt` | (stays here) | read straight from the repo by Code Spell Checker |

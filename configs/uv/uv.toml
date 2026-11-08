@@ -1,0 +1,6 @@
+# Global uv settings, linked to ~/.config/uv/uv.toml by install.sh (dev).
+# They apply to every project, the standard environment included.
+
+# Use only Pythons that uv has installed itself, never Homebrew's or the
+# system's, so a Homebrew upgrade can never break a project's environment.
+python-preference = "only-managed"

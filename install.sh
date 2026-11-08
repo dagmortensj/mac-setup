@@ -365,8 +365,11 @@ git_config() {
   return "$ok"
 }
 
-latexmk_link() {
-  link configs/latexmk/latexmkrc "$HOME/.config/latexmk/latexmkrc"
+tool_links() {
+  local ok=0
+  link configs/latexmk/latexmkrc "$HOME/.config/latexmk/latexmkrc" || ok=1
+  link configs/uv/uv.toml "$HOME/.config/uv/uv.toml" || ok=1
+  return "$ok"
 }
 
 # The standard Python environment, from configs/python/ (uv.lock pins every
@@ -472,7 +475,7 @@ group_dev() {
   slow "Homebrew: dev.Brewfile. MacTeX is about 6 GB, and Homebrew asks for your password when it installs it"
   step "Homebrew: dev.Brewfile" brew_bundle dev
   step "Git config (link and ~/.gitconfig.local)" git_config
-  step "latexmk config (link)" latexmk_link
+  step "latexmk and uv config (links)" tool_links
   step "Python standard environment" python_env
   step "VS Code: Python interpreter" vscode_python
   step "VS Code: tex-oppstart" tex_oppstart

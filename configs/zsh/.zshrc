@@ -147,6 +147,18 @@ pyadd()     { _pystd add "$@"; }
 pyremove()  { _pystd remove "$@"; }
 pyupgrade() { _pystd lock --upgrade && _pystd sync --locked; }
 
+# pyrun file.py: runs a file with the .venv of the project it is in (looked for
+# in the current folder and upwards), or with the standard environment when
+# there is none. Cmd+R in VS Code uses it.
+pyrun() {
+  local d=$PWD
+  while [[ $d != / ]]; do
+    if [[ -x $d/.venv/bin/python ]]; then "$d/.venv/bin/python" "$@"; return; fi
+    d=${d:h}
+  done
+  python3 "$@"
+}
+
 # Run fastfetch on startup, except in the iTerm hotkey window (ITERM_PROFILE) and the VS Code terminal (TERM_PROGRAM)
 [[ $ITERM_PROFILE == "Hotkey Window" || $TERM_PROGRAM == "vscode" ]] || fastfetch
 

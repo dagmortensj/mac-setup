@@ -3,6 +3,7 @@
 [
     // ===== Cmd+R: lag resultatet =====
     // Python: lagre og kjør fila i terminalen nederst. Fokus blir i editoren.
+    // pyrun (fra .zshrc) bruker prosjektets .venv hvis fila ligger i et prosjekt, ellers standardmiljøet.
     {
         "key": "cmd+r",
         "command": "runCommands",
@@ -12,7 +13,7 @@
                 "workbench.action.terminal.focus",
                 {
                     "command": "workbench.action.terminal.sendSequence",
-                    "args": { "text": "cd \"${fileDirname}\" && clear && python3 \"${fileBasename}\"\u000D" }
+                    "args": { "text": "cd \"${fileDirname}\" && clear && pyrun \"${fileBasename}\"\u000D" }
                 },
                 "workbench.action.focusActiveEditorGroup"
             ]
