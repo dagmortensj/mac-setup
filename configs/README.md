@@ -18,6 +18,8 @@ Where each file goes on the Mac, and how it gets there. "Link" means that `insta
 | `cspell/ordliste.txt` | (stays here) | read straight from the repo by Code Spell Checker |
 | `brew/*.Brewfile` | Homebrew packages | `brew bundle --no-upgrade` (`terminal`, `dev`, `apps`) |
 | `repos.txt` | `~/Developer/<name>` | cloned (`repos`) |
+| `claude/developer/CLAUDE.md` | `~/Developer/CLAUDE.md` | relative link (`repos`) |
+| `claude/<repo>/CLAUDE.md` | `~/Developer/<repo>/CLAUDE.md` | relative link, plus `CLAUDE.md` in the repo's `.git/info/exclude` (`repos`) |
 | `macos/defaults.sh` | macOS settings | run (`macos`) |
 
 ## What never goes in here

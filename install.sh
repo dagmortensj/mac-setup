@@ -115,17 +115,22 @@ slow() {
   [ "$DRY" = 1 ] || echo "      $1 ..."
 }
 
-# link SOURCE DESTINATION: makes DESTINATION a symlink to SOURCE (a path in
-# the repo). Whatever is at DESTINATION already is moved to the backup folder
-# first. A regular file that differs from the repo's version is remembered,
-# so the summary can point it out.
+# link SOURCE DESTINATION [relative]: makes DESTINATION a symlink to SOURCE
+# (a path in the repo). With "relative", the link holds a relative path, so it
+# also works where the folders are mounted somewhere else. Whatever is at
+# DESTINATION already is moved to the backup folder first. A regular file that
+# differs from the repo's version is remembered, so the summary can point it out.
 link() {
-  local src="$REPO/$1" dest="$2" rel
+  local src="$REPO/$1" dest="$2" rel target
   if [ ! -e "$src" ]; then
     echo "missing in the repo: $1"
     return 1
   fi
-  if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
+  target="$src"
+  if [ "$3" = "relative" ]; then
+    target="$(/usr/bin/python3 -c 'import os, sys; print(os.path.relpath(sys.argv[1], os.path.dirname(sys.argv[2])))' "$src" "$dest")" || return 1
+  fi
+  if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$target" ]; then
     echo "already linked: $dest"
     return 0
   fi
@@ -148,7 +153,7 @@ link() {
     mv "$dest" "$BACKUP/$rel" || return 1
     echo "moved $dest to $BACKUP/$rel"
   fi
-  ln -s "$src" "$dest" && echo "linked $dest -> $src"
+  ln -s "$target" "$dest" && echo "linked $dest -> $target"
 }
 
 # brew_bundle NAME: installs what is missing from configs/brew/NAME.Brewfile.
@@ -494,6 +499,33 @@ clone_repo() {
   mkdir -p "$HOME/Developer" && git clone --quiet "$1" "$dest"
 }
 
+# CLAUDE.md files. The originals are in configs/claude/: developer/ for
+# ~/Developer/CLAUDE.md and <repo>/ for ~/Developer/<repo>/CLAUDE.md. The
+# files in place are relative links to them, and each repo keeps CLAUDE.md
+# out of git with .git/info/exclude. Repos that are not cloned are skipped.
+claude_links() {
+  local dir name dest exclude ok=0
+  for dir in "$REPO"/configs/claude/*/; do
+    [ -f "$dir/CLAUDE.md" ] || continue
+    name="$(basename "$dir")"
+    if [ "$name" = "developer" ]; then dest="$HOME/Developer"; else dest="$HOME/Developer/$name"; fi
+    if [ ! -d "$dest" ]; then
+      echo "not cloned, skipped: $dest"
+      continue
+    fi
+    link "configs/claude/$name/CLAUDE.md" "$dest/CLAUDE.md" relative || ok=1
+    exclude="$dest/.git/info/exclude"
+    if [ "$name" != "developer" ] && [ -d "$dest/.git" ] && ! grep -qx 'CLAUDE.md' "$exclude" 2>/dev/null; then
+      if [ "$DRY" = 1 ]; then
+        would "add CLAUDE.md to $(pretty "$exclude")"
+      else
+        mkdir -p "$dest/.git/info" && echo 'CLAUDE.md' >>"$exclude" || ok=1
+      fi
+    fi
+  done
+  return "$ok"
+}
+
 group_repos() {
   local url
   [ -f "$REPO/configs/repos.txt" ] || { step "Repositories" false; return; }
@@ -501,6 +533,7 @@ group_repos() {
     case "$url" in ''|\#*) continue ;; esac
     step "Clone $(basename "$url" .git)" clone_repo "$url"
   done <"$REPO/configs/repos.txt"
+  step "CLAUDE.md files (links)" claude_links
 }
 
 # ---------------------------------------------------------------- macos

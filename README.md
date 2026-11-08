@@ -16,7 +16,7 @@ The terminal look (iTerm2 in the Høst colours, Powerlevel10k, fastfetch) is mea
 2. [Only want the look?](#only-want-the-look)
 3. [What install.sh does](#what-installsh-does)
 4. [After install.sh](#after-installsh)
-5. [Reference](#reference): [Homebrew](#homebrew-and-the-brewfiles), [Terminal](#terminal), [Git](#git-and-github), [Python](#python), [VS Code](#vs-code), [LaTeX](#latex), [Apps](#apps), [macOS settings](#macos-settings)
+5. [Reference](#reference): [Homebrew](#homebrew-and-the-brewfiles), [Terminal](#terminal), [Git](#git-and-github), [Claude](#claude), [Python](#python), [VS Code](#vs-code), [LaTeX](#latex), [Apps](#apps), [macOS settings](#macos-settings)
 6. [Maintenance](#maintenance)
 7. [Before erasing a Mac](#before-erasing-a-mac)
 8. [Useful links](#useful-links)
@@ -93,7 +93,7 @@ Your git identity is not in the repository. `./install.sh dev` asks for it and s
 | `terminal` | [`terminal.Brewfile`](./configs/brew/terminal.Brewfile) (git, fastfetch, iTerm2, MesloLGS NF) · links `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.config/fastfetch/` · `~/.hushlogin` · Oh My Zsh · zsh-autosuggestions, zsh-syntax-highlighting, Powerlevel10k · iTerm2 settings (only if iTerm2 has none yet) |
 | `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` · builds the Python standard environment · points VS Code at it · installs tex-oppstart |
 | `apps` | [`apps.Brewfile`](./configs/brew/apps.Brewfile) |
-| `repos` | clones the repositories in [`repos.txt`](./configs/repos.txt) into `~/Developer` |
+| `repos` | clones the repositories in [`repos.txt`](./configs/repos.txt) into `~/Developer` · links the `CLAUDE.md` files (see [Claude](#claude)) |
 | `macos` | [`defaults.sh`](./configs/macos/defaults.sh) · pmset for the Studio Display · removes GarageBand and iMovie if present (if macOS refuses, because Terminal lacks the App Management permission, drag them to the Bin instead) |
 
 How it behaves:
@@ -210,6 +210,14 @@ The prompt needs a font with extra glyphs (folder icons, git branch arrows, the 
 Sign in once with `gh auth login` (see [After install.sh](#after-installsh)). SSH keys are not used.
 
 Because `~/.gitconfig` is a link, `git config --global …` writes into the repository's file. Personal settings belong in the local file: `git config --file ~/.gitconfig.local …`.
+
+### Claude
+
+Instructions for Claude live in `CLAUDE.md` files: one for all work in `~/Developer`, and one in some of the repositories. They are not committed in those repositories (each lists `CLAUDE.md` in `.git/info/exclude`), so the originals are kept here, in [`configs/claude/`](./configs/claude/): `developer/CLAUDE.md` for `~/Developer/CLAUDE.md`, and `<repo>/CLAUDE.md` for `~/Developer/<repo>/CLAUDE.md`. The `repos` group links them into place with relative links, which also work inside Claude's own shell, where the folders are mounted under a different path. Edit them through the link; the change shows up in this repository.
+
+To add one for another repository, create `configs/claude/<repo>/CLAUDE.md` and run `./install.sh repos`.
+
+This repository's own [`CLAUDE.md`](./CLAUDE.md) is an ordinary committed file.
 
 ### Python
 

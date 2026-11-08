@@ -138,6 +138,7 @@
     ],
 
     // ===== Annet =====
+    "window.restoreWindows": "one",                          // gjenåpner bare siste vindu ved oppstart
     "easy-codesnap.target": "window",
     "extensions.supportAgentsWindow": {
         "monokai.theme-monokai-pro-vscode": true
