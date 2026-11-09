@@ -2,7 +2,7 @@
 
 Dette er hovedinstruksene for alt arbeid i `~/Developer`. Hvert repo kan ha sin egen `CLAUDE.md` med det som gjelder bare der — les den også før du rører repoet. GitHub-brukeren er **dagmortensj**.
 
-Stil: konsis og direkte. Snakk norsk med Dag-Morten. Dokumentasjon, commit-meldinger og README i repoene er på engelsk der de allerede er det.
+Mine generelle skriveregler (språk, LaTeX, fasit, fagspråk og stil) står i preferansene på claude.ai og i `~/.claude/CLAUDE.md`, og gjentas ikke her. Dokumentasjon, commit-meldinger og README i repoene er på engelsk der de allerede er det.
 
 ## Arbeidsflyt: rett i repoene
 
@@ -54,15 +54,9 @@ Følg malens konvensjoner (repoets `README.md` og hver mals egen `README.md`).
 
 **Overføring av gammelt dokument til ny mal:** kopier alltid over en **ren kopi av den nye malen** (main + sty + alt), og flytt det gamle *innholdet* inn i den. Aldri motsatt vei. Ikke alle malens miljøer trengs — vurder ut fra det gamle dokumentet, og **fjern ubrukt boilerplate** fra malens `main`.
 
-**Linjeskift i .tex-filer:** **ett avsnitt per linje**, uten harde linjeskift inne i avsnittet. Dag-Morten har myk linjebryting i VS Code. Matematikkmiljøer, lister (`\item` på egen linje) og kode skrives som før. Gamle filer rettes med `~/Developer/mac-setup/scripts/unwrap-tex.py`.
+**Gamle .tex-filer med harde linjeskift** rettes med `~/Developer/mac-setup/scripts/unwrap-tex.py`.
 
 **Vektorer med pil:** begge malsettene definerer `\vv` i stilfila, så last ikke `esvect`. Skriv `\vv{F}` med indeksen utenfor pila (`\vv{F}_1`, aldri `\vv{F_1}`), og `\overrightarrow{AB}` over flere symboler. Ikke `\vec`.
-
-**Display-matte:** aldri `\tfrac` i align eller frittstående ligninger — alltid `\frac` der.
-
-**Fasit og løsningsforslag i fysikk:** finn symbolsk formel først, sett inn tall helt til slutt. Ingen mellomregninger med tallverdier.
-
-**Norsk fysikkprosa:** aldri «regnestykke» — bruk «utledning», «beregning» eller «regning». «Hastighet» er vektoren, «fart» er størrelsen.
 
 ## Kompilering
 
