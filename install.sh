@@ -502,35 +502,15 @@ clone_repo() {
   mkdir -p "$HOME/Developer" && git clone --quiet "$1" "$dest"
 }
 
-# CLAUDE.md files. The originals are in configs/claude/: claude-code/ for
-# ~/.claude/CLAUDE.md (read by Claude Code in every folder), developer/ for
-# ~/Developer/CLAUDE.md and <repo>/ for ~/Developer/<repo>/CLAUDE.md. The
-# files in place are relative links to them, and each repo keeps CLAUDE.md
-# out of git with .git/info/exclude. Repos that are not cloned are skipped.
+# The two CLAUDE.md files that belong to the working environment rather than
+# to a repository: configs/claude/claude-code/ for ~/.claude/CLAUDE.md (read
+# by Claude Code in every folder) and configs/claude/developer/ for
+# ~/Developer/CLAUDE.md. Both are relative links. Each repository keeps its
+# own CLAUDE.md, committed in that repository.
 claude_links() {
-  local dir name dest exclude ok=0
-  for dir in "$REPO"/configs/claude/*/; do
-    [ -f "$dir/CLAUDE.md" ] || continue
-    name="$(basename "$dir")"
-    case "$name" in
-      claude-code) dest="$HOME/.claude" ;;
-      developer)   dest="$HOME/Developer" ;;
-      *)           dest="$HOME/Developer/$name" ;;
-    esac
-    if [ ! -d "$dest" ] && [ "$name" != "claude-code" ]; then
-      echo "not cloned, skipped: $dest"
-      continue
-    fi
-    link "configs/claude/$name/CLAUDE.md" "$dest/CLAUDE.md" relative || ok=1
-    exclude="$dest/.git/info/exclude"
-    if [ "$name" != "developer" ] && [ -d "$dest/.git" ] && ! grep -qx 'CLAUDE.md' "$exclude" 2>/dev/null; then
-      if [ "$DRY" = 1 ]; then
-        would "add CLAUDE.md to $(pretty "$exclude")"
-      else
-        mkdir -p "$dest/.git/info" && echo 'CLAUDE.md' >>"$exclude" || ok=1
-      fi
-    fi
-  done
+  local ok=0
+  link configs/claude/claude-code/CLAUDE.md "$HOME/.claude/CLAUDE.md" relative || ok=1
+  link configs/claude/developer/CLAUDE.md "$HOME/Developer/CLAUDE.md" relative || ok=1
   return "$ok"
 }
 

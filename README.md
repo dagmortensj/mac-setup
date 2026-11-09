@@ -93,7 +93,7 @@ Your git identity is not in the repository. `./install.sh dev` asks for it and s
 | `terminal` | [`terminal.Brewfile`](./configs/brew/terminal.Brewfile) (git, fastfetch, iTerm2, MesloLGS NF) · links `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.config/fastfetch/` · `~/.hushlogin` · Oh My Zsh · zsh-autosuggestions, zsh-syntax-highlighting, Powerlevel10k · iTerm2 settings (only if iTerm2 has none yet) |
 | `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` and `~/.config/uv/uv.toml` · builds the Python standard environment · points VS Code at it · installs tex-oppstart |
 | `apps` | [`apps.Brewfile`](./configs/brew/apps.Brewfile) |
-| `repos` | clones the repositories in [`repos.txt`](./configs/repos.txt) into `~/Developer` · links the `CLAUDE.md` files (see [Claude](#claude)) |
+| `repos` | clones the repositories in [`repos.txt`](./configs/repos.txt) into `~/Developer` · links `~/.claude/CLAUDE.md` and `~/Developer/CLAUDE.md` (see [Claude](#claude)) |
 | `macos` | [`defaults.sh`](./configs/macos/defaults.sh) · pmset for the Studio Display · removes GarageBand and iMovie if present (if macOS refuses, because Terminal lacks the App Management permission, drag them to the Bin instead) |
 
 How it behaves:
@@ -213,11 +213,9 @@ Because `~/.gitconfig` is a link, `git config --global …` writes into the repo
 
 ### Claude
 
-Instructions for Claude live in `CLAUDE.md` files: one for Claude Code in VS Code, one for all work in `~/Developer`, and one in some of the repositories. They are not committed in those repositories (each lists `CLAUDE.md` in `.git/info/exclude`), so the originals are kept here, in [`configs/claude/`](./configs/claude/): `claude-code/CLAUDE.md` for `~/.claude/CLAUDE.md`, `developer/CLAUDE.md` for `~/Developer/CLAUDE.md`, and `<repo>/CLAUDE.md` for `~/Developer/<repo>/CLAUDE.md`.
+Instructions for Claude live in `CLAUDE.md` files. Each repository has its own, committed in that repository, so it comes along whenever the repository is cloned. The two that belong to the working environment rather than to a repository are kept here, in [`configs/claude/`](./configs/claude/): `claude-code/CLAUDE.md` for `~/.claude/CLAUDE.md`, and `developer/CLAUDE.md` for `~/Developer/CLAUDE.md`.
 
 Claude Code reads `~/.claude/CLAUDE.md` in every folder it is opened in, so that file only holds what it needs when helping with documents in VS Code: the LaTeX conventions, the rules for physics solutions and Norwegian terminology, and the writing style. In `~/Developer` it also reads `developer/CLAUDE.md`, and in the subject folders in Dropbox the `CLAUDE.md` there. The same LaTeX rules therefore stand in several files, and in the preferences on claude.ai, because Claude Code and the Claude app do not read the same files; a rule that changes has to be changed in all of them. The `repos` group links them into place with relative links, which also work inside Claude's own shell, where the folders are mounted under a different path. Edit them through the link; the change shows up in this repository.
-
-To add one for another repository, create `configs/claude/<repo>/CLAUDE.md` and run `./install.sh repos`.
 
 This repository's own [`CLAUDE.md`](./CLAUDE.md) is an ordinary committed file.
 

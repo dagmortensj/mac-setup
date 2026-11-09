@@ -21,7 +21,6 @@ Where each file goes on the Mac, and how it gets there. "Link" means that `insta
 | `repos.txt` | `~/Developer/<name>` | cloned (`repos`) |
 | `claude/claude-code/CLAUDE.md` | `~/.claude/CLAUDE.md` | relative link (`repos`); read by Claude Code in every folder |
 | `claude/developer/CLAUDE.md` | `~/Developer/CLAUDE.md` | relative link (`repos`) |
-| `claude/<repo>/CLAUDE.md` | `~/Developer/<repo>/CLAUDE.md` | relative link, plus `CLAUDE.md` in the repo's `.git/info/exclude` (`repos`) |
 | `macos/defaults.sh` | macOS settings | run (`macos`) |
 
 ## What never goes in here

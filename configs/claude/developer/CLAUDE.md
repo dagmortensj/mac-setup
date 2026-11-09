@@ -33,7 +33,7 @@ Dag-Morten redigerer filene selv mellom promptene. Disse endringene er hans, og 
 
 ## Git: Dag-Morten committer og pusher selv
 
-**`CLAUDE.md` committes ikke i prosjektrepoene.** Originalene ligger i mac-setup: `configs/claude/developer/CLAUDE.md` (denne fila) og `configs/claude/<repo>/CLAUDE.md`. `~/Developer/CLAUDE.md` og hvert repos `CLAUDE.md` er lenker dit, og `CLAUDE.md` står i repoets `.git/info/exclude`. Rediger gjennom lenken som vanlig; endringen havner i mac-setup, og Dag-Morten committer den der. En ny `CLAUDE.md` for et repo lages i `mac-setup/configs/claude/<repo>/`, og `./install.sh repos` lenker den på plass.
+**Hvert repo har sin egen `CLAUDE.md`, committet i repoet**, med det som gjelder akkurat det repoet. Personlige regler hører ikke hjemme der, siden repoene er offentlige og kan deles med andre; de står i denne fila og i `~/.claude/CLAUDE.md`. Denne fila er en lenke til `mac-setup/configs/claude/developer/CLAUDE.md`; rediger gjennom lenken, så havner endringen i mac-setup.
 
 **Kjør aldri `git add`, `git commit` eller `git push` for ham**, og ikke spør av deg selv om han vil committe. `git status`, `git diff` og `git log` kan du bruke fritt for å orientere deg. Når han ber om terminal, gir du **bare terminalkode** i en `bash`-blokk, ikke prosa rundt. Han limer den inn i iTerm på Macen.
 

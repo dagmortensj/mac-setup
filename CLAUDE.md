@@ -16,7 +16,7 @@ The repository lives in `~/Developer/mac-setup`. Some synced VS Code settings de
 - `configs/iterm2/com.googlecode.iterm2.plist`: iTerm2 settings snapshot, written by `scripts/iterm-export.sh`.
 - `configs/macos/defaults.sh`: macOS settings.
 - `configs/vscode/`: tex-oppstart, plus a settings snapshot for the fallback `setup.sh`. Settings Sync is the real source for VS Code.
-- `configs/claude/`: the originals of `~/.claude/CLAUDE.md` for Claude Code (`claude-code/`), `~/Developer/CLAUDE.md` (`developer/`) and of the other repositories' `CLAUDE.md` files, which are not committed there. The files in place are relative links to these.
+- `configs/claude/`: the originals of `~/.claude/CLAUDE.md` for Claude Code (`claude-code/`) and `~/Developer/CLAUDE.md` (`developer/`). The files in place are relative links to these. Other repositories commit their own `CLAUDE.md`.
 
 ## Rules
 
