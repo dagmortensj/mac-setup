@@ -213,7 +213,9 @@ Because `~/.gitconfig` is a link, `git config --global …` writes into the repo
 
 ### Claude
 
-Instructions for Claude live in `CLAUDE.md` files: one for all work in `~/Developer`, and one in some of the repositories. They are not committed in those repositories (each lists `CLAUDE.md` in `.git/info/exclude`), so the originals are kept here, in [`configs/claude/`](./configs/claude/): `developer/CLAUDE.md` for `~/Developer/CLAUDE.md`, and `<repo>/CLAUDE.md` for `~/Developer/<repo>/CLAUDE.md`. The `repos` group links them into place with relative links, which also work inside Claude's own shell, where the folders are mounted under a different path. Edit them through the link; the change shows up in this repository.
+Instructions for Claude live in `CLAUDE.md` files: one for Claude Code in VS Code, one for all work in `~/Developer`, and one in some of the repositories. They are not committed in those repositories (each lists `CLAUDE.md` in `.git/info/exclude`), so the originals are kept here, in [`configs/claude/`](./configs/claude/): `claude-code/CLAUDE.md` for `~/.claude/CLAUDE.md`, `developer/CLAUDE.md` for `~/Developer/CLAUDE.md`, and `<repo>/CLAUDE.md` for `~/Developer/<repo>/CLAUDE.md`.
+
+Claude Code reads `~/.claude/CLAUDE.md` in every folder it is opened in, so that file only holds what it needs when helping with documents in VS Code: the LaTeX conventions, the rules for physics solutions and Norwegian terminology, and the writing style. In `~/Developer` it also reads `developer/CLAUDE.md`, and in the subject folders in Dropbox the `CLAUDE.md` there. The same LaTeX rules therefore stand in several files, and in the preferences on claude.ai, because Claude Code and the Claude app do not read the same files; a rule that changes has to be changed in all of them. The `repos` group links them into place with relative links, which also work inside Claude's own shell, where the folders are mounted under a different path. Edit them through the link; the change shows up in this repository.
 
 To add one for another repository, create `configs/claude/<repo>/CLAUDE.md` and run `./install.sh repos`.
 

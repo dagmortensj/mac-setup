@@ -502,7 +502,8 @@ clone_repo() {
   mkdir -p "$HOME/Developer" && git clone --quiet "$1" "$dest"
 }
 
-# CLAUDE.md files. The originals are in configs/claude/: developer/ for
+# CLAUDE.md files. The originals are in configs/claude/: claude-code/ for
+# ~/.claude/CLAUDE.md (read by Claude Code in every folder), developer/ for
 # ~/Developer/CLAUDE.md and <repo>/ for ~/Developer/<repo>/CLAUDE.md. The
 # files in place are relative links to them, and each repo keeps CLAUDE.md
 # out of git with .git/info/exclude. Repos that are not cloned are skipped.
@@ -511,8 +512,12 @@ claude_links() {
   for dir in "$REPO"/configs/claude/*/; do
     [ -f "$dir/CLAUDE.md" ] || continue
     name="$(basename "$dir")"
-    if [ "$name" = "developer" ]; then dest="$HOME/Developer"; else dest="$HOME/Developer/$name"; fi
-    if [ ! -d "$dest" ]; then
+    case "$name" in
+      claude-code) dest="$HOME/.claude" ;;
+      developer)   dest="$HOME/Developer" ;;
+      *)           dest="$HOME/Developer/$name" ;;
+    esac
+    if [ ! -d "$dest" ] && [ "$name" != "claude-code" ]; then
       echo "not cloned, skipped: $dest"
       continue
     fi
