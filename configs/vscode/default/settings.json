@@ -19,6 +19,24 @@
     "extensions.ignoreRecommendations": true,
     "update.showReleaseNotes": false,
     "breadcrumbs.enabled": false,
+    "workbench.layoutControl.enabled": false,                  // ingen layoutknapper i tittellinjen
+    "workbench.browser.showInTitleBar": false,                 // ingen nettleserknapp i tittellinjen
+
+    // ===== Utforsker =====
+    // Hjelpefilene fra LaTeX vises ikke i mappetreet. De ligger fortsatt på disken.
+    "files.exclude": {
+        "**/*.aux": true,
+        "**/*.bbl": true,
+        "**/*.bcf": true,
+        "**/*.blg": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.fls": true,
+        "**/*.log": true,
+        "**/*.out": true,
+        "**/*.run.xml": true,
+        "**/*.synctex.gz": true,
+        "**/*.toc": true
+    },
 
     // ===== Editor =====
     "editor.fontFamily": "MesloLGS NF",
@@ -49,6 +67,7 @@
     "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.external.osxExec": "iTerm2.app",
+    "terminal.integrated.initialHint": false,
 
     // ===== Sikkerhet (workspace trust av) =====
     "security.workspace.trust.enabled": false,
@@ -83,6 +102,10 @@
     },
 
     // ===== Python =====
+    // Felles uv-miljø i ~/.venvs/standard. Terminalen aktiverer ikke miljøer selv.
+    "python.defaultInterpreterPath": "/Users/dag.morten.sj/.venvs/standard/bin/python",
+    "python.terminal.activateEnvironment": false,
+    "python-envs.terminal.autoActivationType": "off",
     "[python]": {
         "editor.formatOnSave": true,                           // bare Python, ikke .tex
         "editor.formatOnType": true,
@@ -137,7 +160,12 @@
         }
     ],
 
+    // ===== Claude Code =====
+    "claudeCode.preferredLocation": "panel",
+    "claudeCode.hideOnboarding": true,
+
     // ===== Annet =====
+    "git.openRepositoryInParentFolders": "always",
     "window.restoreWindows": "one",                          // gjenåpner bare siste vindu ved oppstart
     "easy-codesnap.target": "window",
     "extensions.supportAgentsWindow": {
