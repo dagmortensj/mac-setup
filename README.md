@@ -148,7 +148,7 @@ Homebrew lives in `/opt/homebrew` on Apple Silicon. `~/.zprofile` adds it to the
 
 [iTerm2](https://iterm2.com/) replaces Terminal.app: true colour, split panes, a hotkey window, better search.
 
-Its settings are kept as a snapshot in [`configs/iterm2/com.googlecode.iterm2.plist`](./configs/iterm2/com.googlecode.iterm2.plist). On a new Mac, `install.sh` imports it with `defaults import` before iTerm2 is opened for the first time. After that iTerm2 keeps its settings in the usual place on the Mac, and the snapshot in the repository only changes when you export it again (see [Maintenance](#iterm2-settings)). The snapshot leaves out everything iTerm2 rewrites by itself, such as window positions, update checks and its own counters, so `git diff` only shows real changes.
+Its settings are kept as a snapshot in [`configs/iterm2/com.googlecode.iterm2.plist`](./configs/iterm2/com.googlecode.iterm2.plist). On a new Mac, `install.sh` imports it with `defaults import` before iTerm2 is opened for the first time. After that iTerm2 keeps its settings in the usual place on the Mac, and the snapshot in the repository only changes when you export it again (see [Maintenance](#iterm2-settings)). The snapshot leaves out everything iTerm2 rewrites by itself, such as window positions, update checks and its own counters, and the working directory of a profile that does not start in one, so `git diff` only shows real changes.
 
 To import the snapshot on a Mac where iTerm2 already has settings (this replaces them): quit iTerm2, then from Terminal.app run
 
@@ -253,13 +253,15 @@ To move to a newer Python later, change `.python-version` and `requires-python` 
 
 ### VS Code
 
-VS Code Settings Sync (with GitHub) is the source for settings, keybindings, snippets, extensions and both profiles. `install.sh` adds the two things Sync cannot carry:
+VS Code Settings Sync (with GitHub) is the source for settings, keybindings, snippets, extensions and both profiles. `install.sh` adds the three things Sync cannot carry:
 
-- **tex-oppstart**, a small home-made extension that opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened. It is not on the Marketplace, and Sync only restores Marketplace extensions. Source and `.vsix` are in [`configs/vscode/tex-oppstart/`](./configs/vscode/tex-oppstart/); rebuild it with `npx @vscode/vsce package` in that folder.
+- **tex-oppstart**, a small home-made extension that opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened. It is not on the Marketplace, and Sync only restores Marketplace extensions. Source and `.vsix` are in [`configs/vscode/tex-oppstart/`](./configs/vscode/tex-oppstart/); rebuild it with `npx @vscode/vsce package` in that folder. That needs Node.js, which this setup does not install: `brew install node`, build, and `brew uninstall node` again.
 - **The Python interpreter** (`python.defaultInterpreterPath`, pointing at `~/.venvs/standard`). It is a machine setting, which Sync leaves out on purpose, so the script writes it into the local settings of every profile.
 - **No environment activation in the terminal** (`python-envs.terminal.autoActivationType: off` and `python.terminal.activateEnvironment: false`). The standard environment is already first on PATH. When VS Code activates it, it types an activation command into a new terminal, and that collides with the command ⌘R types, which leaves the terminal at a `dquote>` prompt.
 
 [`configs/vscode/`](./configs/vscode/) also holds a snapshot of the settings, keybindings and extension list, with [`setup.sh`](./configs/vscode/setup.sh) to restore it without Settings Sync. That is a fallback; normally Sync does the job.
+
+**Workspaces.** Multi-root workspaces are kept as `.code-workspace` files in [`configs/vscode/workspaces/`](./configs/vscode/workspaces/) and opened from there (File → Open Workspace from File). `undervisning.code-workspace` opens the subject folders in `Dropbox/jobb-vgs/` that are in use. The folders are stored as paths relative to the workspace file, so they resolve while the repository is in `~/Developer/mac-setup` and Dropbox is in its default place, `~/Library/CloudStorage/Dropbox`.
 
 **Profiles.** *Default* is the everyday profile for LaTeX and Python. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline; its word list is [`configs/cspell/ordliste.txt`](./configs/cspell/ordliste.txt), read straight from this repository. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one. Python files are formatted with autopep8 on save. *Tavle* is for coding on the board in class: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed.
 
@@ -298,6 +300,8 @@ brew upgrade --cask mactex-no-gui       # when you want the new TeX Live year
 ```
 
 The global latexmk configuration, [`configs/latexmk/latexmkrc`](./configs/latexmk/latexmkrc), is linked to `~/.config/latexmk/latexmkrc`. It is a fallback for projects without their own `.latexmkrc` and picks LuaLaTeX when the main file or a local `.sty`/`.cls` uses fontspec, unicode-math or Lua, and pdfLaTeX otherwise.
+
+[`scripts/unwrap-tex.py`](./scripts/unwrap-tex.py) rewrites `.tex` files that have hard line breaks inside paragraphs, so that each paragraph becomes one line (VS Code soft-wraps them). It changes the files in place and leaves the preamble, comments, mathematics, tables, code and TikZ alone, so the PDF stays the same: `python3 scripts/unwrap-tex.py file.tex`.
 
 ### Apps
 
@@ -380,7 +384,7 @@ code --list-extensions > configs/vscode/extensions.txt
 3. Run `scripts/iterm-export.sh` and commit, so the newest iTerm2 settings are in the snapshot.
 4. In VS Code, check that Settings Sync is on, that Profiles is ticked, and when it last synced.
 5. Let iCloud Drive and Dropbox finish uploading.
-6. Check for local files outside iCloud, Dropbox and git (Pictures, Movies, Music, fonts in `~/Library/Fonts`, keys in `~/.ssh`).
+6. Check for local files outside iCloud, Dropbox and git (Pictures, Movies, Music, fonts in `~/Library/Fonts`, keys in `~/.ssh`), and for Claude Code settings in `~/.claude/`: only `CLAUDE.md` there is a link into this repository, the rest is local.
 7. Make a Time Machine backup, as a safety net only.
 8. Erase: System Settings → General → Transfer or Reset → Erase All Content and Settings. Then follow the [Quick start](#quick-start).
 

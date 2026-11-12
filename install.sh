@@ -37,7 +37,7 @@ GIT_NAME=""
 GIT_EMAIL=""
 
 usage() {
-  sed -n '2,13p' "$REPO/install.sh" | sed 's/^# \{0,1\}//'
+  sed -n '2,14p' "$REPO/install.sh" | sed 's/^# \{0,1\}//'
 }
 
 die() {

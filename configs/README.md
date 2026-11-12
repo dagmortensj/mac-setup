@@ -16,6 +16,7 @@ Where each file goes on the Mac, and how it gets there. "Link" means that `insta
 | `uv/uv.toml` | `~/.config/uv/uv.toml` | link (`dev`) |
 | `vscode/tex-oppstart/` | VS Code extension | installed from the `.vsix` (`dev`) |
 | `vscode/default/`, `vscode/tavle/`, `vscode/keybindings.json`, `vscode/extensions.txt` | VS Code | snapshot for `vscode/setup.sh`, the fallback when Settings Sync is not used |
+| `vscode/workspaces/*.code-workspace` | (stays here) | opened from the repo in VS Code; folder paths are relative to the file |
 | `cspell/ordliste.txt` | (stays here) | read straight from the repo by Code Spell Checker |
 | `brew/*.Brewfile` | Homebrew packages | `brew bundle --no-upgrade` (`terminal`, `dev`, `apps`) |
 | `repos.txt` | `~/Developer/<name>` | cloned (`repos`) |

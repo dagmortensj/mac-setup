@@ -5,7 +5,9 @@
 #
 # Keys that change on their own (window positions, update checks, run counters,
 # everything iTerm2 marks NoSync) are left out, so the file only changes when a
-# setting does. The file is written as sorted XML so that git diff is readable.
+# setting does. A profile's working directory is left out too, unless the
+# profile is set to start in it: iTerm2 stores a path there even when it is not
+# used. The file is written as sorted XML so that git diff is readable.
 #
 # iTerm2 hands every change to macOS straight away, so this can run while
 # iTerm2 is open.
@@ -50,6 +52,12 @@ VOLATILE_KEYS = {
 
 kept = {k: v for k, v in prefs.items()
         if k not in VOLATILE_KEYS and not k.startswith(VOLATILE_PREFIXES)}
+
+# A profile that starts in the home folder (Custom Directory: No) still
+# carries a path in Working Directory. It is never read, so it is dropped.
+for profile in kept.get("New Bookmarks", []):
+    if profile.get("Custom Directory") == "No":
+        profile.pop("Working Directory", None)
 
 with open(out, "wb") as f:
     plistlib.dump(kept, f, fmt=plistlib.FMT_XML, sort_keys=True)

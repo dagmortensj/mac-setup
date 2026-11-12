@@ -3219,8 +3219,6 @@
 			<integer>-1</integer>
 			<key>Window Type</key>
 			<integer>15</integer>
-			<key>Working Directory</key>
-			<string>/Users/joshjohanning</string>
 			<key>tmux Pane Title</key>
 			<string>Solarized</string>
 		</dict>
@@ -4822,8 +4820,6 @@
 			<integer>100</integer>
 			<key>Window Type</key>
 			<integer>2</integer>
-			<key>Working Directory</key>
-			<string>/Users/joshjohanning</string>
 			<key>tmux Pane Title</key>
 			<string>Solarized</string>
 		</dict>

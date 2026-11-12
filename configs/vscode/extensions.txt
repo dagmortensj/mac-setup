@@ -1,4 +1,5 @@
 akamud.vscode-theme-onelight
+anthropic.claude-code
 arthurlobo.easy-codesnap
 dagmortensj.hoest-theme
 james-yu.latex-workshop
