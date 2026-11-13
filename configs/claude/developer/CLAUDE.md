@@ -46,6 +46,7 @@ Små skript og notatbøker kjøres i standardmiljøet `~/.venvs/standard` (uv, P
 ## Begrensninger i `device_bash`
 
 - Filer som heter `.zshrc` eller `.zprofile` kan ikke leses, heller ikke i repoet (`Permission denied`). Bruk `git -C ~/Developer/mac-setup show HEAD:configs/zsh/.zshrc` for å lese den committede versjonen, og be Dag-Morten om terminalkode hvis fila må endres.
+- `~/.claude/CLAUDE.md` og fila den lenker til, `mac-setup/configs/claude/claude-code/CLAUDE.md`, kan heller ikke leses direkte (`Permission denied`). Les den committede versjonen med `git -C ~/Developer/mac-setup show HEAD:configs/claude/claude-code/CLAUDE.md` før du skriver LaTeX eller prosa i et repo.
 - Sletting (`rm`, `mv` ut av en mappe) krever at han godkjenner det først.
 
 ## LaTeX-dokumenter skrevet med malene
