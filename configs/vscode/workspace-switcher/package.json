@@ -1,7 +1,7 @@
 {
   "name": "workspace-switcher",
   "displayName": "Workspace Switcher",
-  "description": "Status bar button that switches between the .code-workspace files in a folder.",
+  "description": "Status bar buttons that open the .code-workspace files in a folder.",
   "version": "1.0.0",
   "publisher": "dagmorten",
   "engines": {
@@ -16,11 +16,6 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "workspaceSwitcher.next",
-        "title": "Switch to Next",
-        "category": "Workspace"
-      },
       {
         "command": "workspaceSwitcher.choose",
         "title": "Choose from List",
@@ -38,12 +33,23 @@
         "workspaceSwitcher.folder": {
           "type": "string",
           "default": "${userHome}/Developer/mac-setup/configs/vscode/workspaces",
-          "description": "The folder with the .code-workspace files the button switches between."
+          "description": "The folder with the .code-workspace files that get a button each."
+        },
+        "workspaceSwitcher.order": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "undervisning",
+            "skriving"
+          ],
+          "description": "Workspace names in the order their buttons stand, from the left. Workspaces not named here follow alphabetically."
         },
         "workspaceSwitcher.showClose": {
           "type": "boolean",
           "default": true,
-          "description": "Show the cross that closes the open workspace, next to its name in the status bar."
+          "description": "Show the cross that closes the open workspace, before the buttons in the status bar."
         }
       }
     }

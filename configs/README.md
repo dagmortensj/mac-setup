@@ -18,7 +18,7 @@ Where each file goes on the Mac, and how it gets there. "Link" means that `insta
 | `vscode/tex-preambel/` | VS Code extension | installed from the `.vsix` into the Writing profile (`dev`) |
 | `vscode/workspace-switcher/` | VS Code extension | installed from the `.vsix` into both profiles (`dev`) |
 | `vscode/default/settings.json`, `vscode/writing/settings.json`, `vscode/keybindings.json`, `vscode/extensions.txt` | VS Code | a copy: `vscode/setup.sh save` refreshes it from the Mac, `vscode/setup.sh restore` puts it back, and `vscode/setup.sh check` compares the two |
-| `vscode/workspaces/*.code-workspace` | (stays here) | opened from the repo in VS Code, by hand or with the workspace-switcher button; folder paths are relative to the file |
+| `vscode/workspaces/*.code-workspace` | (stays here) | opened from the repo in VS Code, by hand or with the workspace-switcher buttons; folder paths are relative to the file |
 | `cspell/ordliste.txt` | (stays here) | read straight from the repo by Code Spell Checker |
 | `brew/*.Brewfile` | Homebrew packages | `brew bundle --no-upgrade` (`terminal`, `dev`, `apps`) |
 | `repos.txt` | `~/Developer/<name>` | cloned (`repos`) |

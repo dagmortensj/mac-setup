@@ -19,7 +19,7 @@
     "workbench.layoutControl.enabled": false,
     "workbench.browser.showInTitleBar": false,
     "window.commandCenter": false,
-    "window.title": "${dirty}${activeEditorShort}",            // bare filnavnet; arbeidsflata står på knappen nede til venstre
+    "window.title": "${dirty}${activeEditorShort}",            // bare filnavnet; arbeidsflata står på knappene nede til venstre
     "breadcrumbs.enabled": false,
     "extensions.ignoreRecommendations": true,
     "update.showReleaseNotes": false,

@@ -1,18 +1,18 @@
-// A button at the left end of the status bar with the name of the open
-// workspace. A click opens the next .code-workspace file in
-// workspaceSwitcher.folder in the same window, so with two workspaces the
-// button toggles between them, the way the theme button toggles between the
-// themes. The command "Workspace: Choose from List" in the command palette
-// shows them all.
+// Buttons at the left end of the status bar, one for each .code-workspace
+// file in workspaceSwitcher.folder. A click opens that workspace in the same
+// window, and the button of the open workspace is coloured, the way the
+// classroom button is while its mode is on. The buttons stand in the order
+// given by workspaceSwitcher.order; workspaces not named there follow
+// alphabetically. The command "Workspace: Choose from List" in the command
+// palette shows them all.
 //
-// Before the name, in the very corner, stands a small cross that closes the
-// workspace, the way a tab in macOS has its cross first. It leaves
-// an empty window, where the button reads "workspace". Switching between
-// workspaces and leaving them are thus two separate actions. The cross is only
-// there while a workspace is open, and workspaceSwitcher.showClose turns it
-// off in a profile that never leaves its workspace.
+// Before the buttons, in the very corner, stands a small cross that closes the
+// workspace, the way a tab in macOS has its cross first. It leaves an empty
+// window, where no button is coloured. The cross is only there while a
+// workspace is open, and workspaceSwitcher.showClose turns it off in a profile
+// that never leaves its workspace.
 //
-// The button switches workspace only. The profile is switched from the gear
+// The buttons switch workspace only. The profile is switched from the gear
 // menu, and VS Code remembers it per workspace: a workspace opens in the
 // profile it last had.
 const vscode = require('vscode');
@@ -36,31 +36,25 @@ function nameOf(file) {
   return path.basename(file, EXTENSION);
 }
 
-// Every workspace file in the folder, sorted, with its full path.
+// Every workspace file in the folder with its full path: first the ones named
+// in workspaceSwitcher.order, in that order, then the rest alphabetically.
 function files() {
   const dir = folder();
+  const order = vscode.workspace.getConfiguration('workspaceSwitcher').get('order') || [];
+  const rank = (name) => (order.indexOf(name) === -1 ? order.length : order.indexOf(name));
   try {
-    return fs.readdirSync(dir).filter((f) => f.endsWith(EXTENSION)).sort().map((f) => path.join(dir, f));
+    return fs
+      .readdirSync(dir)
+      .filter((f) => f.endsWith(EXTENSION))
+      .sort((x, y) => rank(nameOf(x)) - rank(nameOf(y)) || x.localeCompare(y))
+      .map((f) => path.join(dir, f));
   } catch (e) {
     return [];
   }
 }
 
-// The one after the open workspace in the list, or the first if none is open.
-// An empty string when there is no other workspace to switch to.
-function nextFile() {
-  const all = files();
-  const current = openFile();
-  const next = all[(all.indexOf(current) + 1) % (all.length || 1)];
-  return next && next !== current ? next : '';
-}
-
-async function next() {
-  const file = nextFile();
-  if (!file) {
-    vscode.window.showInformationMessage(`Workspace: no other workspace in ${folder()}`);
-    return;
-  }
+async function open(file) {
+  if (!file || file === openFile()) return;
   await vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(file));
 }
 
@@ -78,16 +72,9 @@ async function close() {
 
 function activate(context) {
   // Left-aligned items stand in descending priority from the left, so high
-  // priorities put the two at the edge, before the error and warning count:
-  // the cross first (100000), then the name (99999).
-  const button = vscode.window.createStatusBarItem('workspaceSwitcher.next', vscode.StatusBarAlignment.Left, 99999);
-  button.name = 'Workspace';
-  button.command = 'workspaceSwitcher.next';
-  const target = nextFile();
-  button.tooltip = target ? `Switch to ${nameOf(target)}` : 'Workspace';
-  const file = openFile();
-  button.text = `$(folder) ${file ? nameOf(file) : 'workspace'}`;
-  button.show();
+  // priorities put them at the edge, before the error and warning count: the
+  // cross first (100000), then the workspaces (99999 and downwards).
+  const current = openFile();
 
   const cross = vscode.window.createStatusBarItem('workspaceSwitcher.close', vscode.StatusBarAlignment.Left, 100000);
   cross.name = 'Close Workspace';
@@ -95,12 +82,27 @@ function activate(context) {
   cross.text = '$(close)';
   cross.tooltip = 'Close workspace';
   const showClose = vscode.workspace.getConfiguration('workspaceSwitcher').get('showClose');
-  if (file && showClose !== false) cross.show();
+  if (current && showClose !== false) cross.show();
+  context.subscriptions.push(cross);
+
+  files().forEach((file, i) => {
+    const name = nameOf(file);
+    const button = vscode.window.createStatusBarItem(`workspaceSwitcher.open.${name}`, vscode.StatusBarAlignment.Left, 99999 - i);
+    button.name = `Workspace: ${name}`;
+    button.text = name;
+    if (file === current) {
+      button.tooltip = `${name} is open`;
+      button.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
+    } else {
+      button.tooltip = `Open ${name}`;
+      button.command = { command: 'workspaceSwitcher.open', title: `Open ${name}`, arguments: [file] };
+    }
+    button.show();
+    context.subscriptions.push(button);
+  });
 
   context.subscriptions.push(
-    button,
-    cross,
-    vscode.commands.registerCommand('workspaceSwitcher.next', next),
+    vscode.commands.registerCommand('workspaceSwitcher.open', (file) => (file ? open(file) : choose())),
     vscode.commands.registerCommand('workspaceSwitcher.choose', choose),
     vscode.commands.registerCommand('workspaceSwitcher.close', close),
   );
