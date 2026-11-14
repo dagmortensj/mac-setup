@@ -36,6 +36,13 @@ function nameOf(file) {
   return path.basename(file, EXTENSION);
 }
 
+// The name as it is shown, with a capital first letter like the other labels
+// in the status bar. The files keep their lower-case names.
+function label(file) {
+  const name = nameOf(file);
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
 // Every workspace file in the folder with its full path: first the ones named
 // in workspaceSwitcher.order, in that order, then the rest alphabetically.
 function files() {
@@ -60,7 +67,7 @@ async function open(file) {
 
 async function choose() {
   const current = openFile();
-  const items = files().map((file) => ({ label: nameOf(file), description: file === current ? 'open now' : '', file }));
+  const items = files().map((file) => ({ label: label(file), description: file === current ? 'open now' : '', file }));
   const picked = await vscode.window.showQuickPick(items, { placeHolder: 'Switch workspace' });
   if (!picked || picked.file === current) return;
   await vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(picked.file));
@@ -86,8 +93,8 @@ function activate(context) {
   context.subscriptions.push(cross);
 
   files().forEach((file, i) => {
-    const name = nameOf(file);
-    const button = vscode.window.createStatusBarItem(`workspaceSwitcher.open.${name}`, vscode.StatusBarAlignment.Left, 99999 - i);
+    const name = label(file);
+    const button = vscode.window.createStatusBarItem(`workspaceSwitcher.open.${nameOf(file)}`, vscode.StatusBarAlignment.Left, 99999 - i);
     button.name = `Workspace: ${name}`;
     button.text = name;
     if (file === current) {
