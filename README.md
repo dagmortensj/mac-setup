@@ -91,7 +91,7 @@ Your git identity is not in the repository. `./install.sh dev` asks for it and s
 | Group | Steps |
 |---|---|
 | `terminal` | [`terminal.Brewfile`](./configs/brew/terminal.Brewfile) (git, fastfetch, iTerm2, MesloLGS NF) · links `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.config/fastfetch/` · `~/.hushlogin` · Oh My Zsh · zsh-autosuggestions, zsh-syntax-highlighting, Powerlevel10k · iTerm2 settings (only if iTerm2 has none yet) |
-| `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` and `~/.config/uv/uv.toml` · builds the Python standard environment · points VS Code at it · installs the home-made VS Code extensions |
+| `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · makes TeX Live's biber ARM-only (see [LaTeX](#latex)) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` and `~/.config/uv/uv.toml` · builds the Python standard environment · points VS Code at it · installs the home-made VS Code extensions |
 | `apps` | [`apps.Brewfile`](./configs/brew/apps.Brewfile) |
 | `repos` | clones the repositories in [`repos.txt`](./configs/repos.txt) into `~/Developer` · links `~/.claude/CLAUDE.md` and `~/Developer/CLAUDE.md` (see [Claude](#claude)) |
 | `macos` | [`defaults.sh`](./configs/macos/defaults.sh) · pmset for the Studio Display · removes GarageBand and iMovie if present (if macOS refuses, because Terminal lacks the App Management permission, drag them to the Bin instead) |
@@ -307,13 +307,17 @@ Packages are updated with `tlmgr` (the TeX Live manager), not with Homebrew:
 ```bash
 sudo tlmgr update --self
 sudo tlmgr update --all
+scripts/biber-arm64.sh
 ```
+
+The last line is for biber, the program that sorts bibliographies for biblatex. MacTeX ships it as a universal binary with both Intel and ARM code, and on its first run, and whenever macOS has cleared its unpacked copy from the temporary folder, biber calls `lipo` to cut out the part for this Mac. That call can fail, and biber then stops before reading anything (`extracting arm64 binary with lipo failed`), so every document that uses biblatex loses its bibliography. [`scripts/biber-arm64.sh`](./scripts/biber-arm64.sh) cuts out the ARM part once, checks that it runs, and puts it in place of the universal file, keeping the original in `~/.mac-setup-backup/<date>/`. The version stays the one TeX Live ships, which matters because biber and biblatex must match; the Homebrew formula `biber` follows its own release schedule and is not a substitute. `tlmgr update` and a new TeX Live year bring the universal file back, so run the script after both. When biber is already ARM-only it says so and changes nothing. It asks for the password, since TeX Live belongs to root. The `dev` group runs it right after MacTeX is installed, while Homebrew's password is still valid; if it is not, the step is skipped with a note to run the script by hand.
 
 Homebrew only comes in when a new TeX Live year is released. `brew upgrade` then downloads the whole package again, and a plain `brew upgrade` starts that download without warning. `brew pin` does not work on casks, so upgrade formulae and casks separately and take MacTeX when you want it:
 
 ```bash
 brew upgrade --formula                  # routine upgrades, never touches casks
 brew upgrade --cask mactex-no-gui       # when you want the new TeX Live year
+scripts/biber-arm64.sh                  # after the new year, see above
 ```
 
 The global latexmk configuration, [`configs/latexmk/latexmkrc`](./configs/latexmk/latexmkrc), is linked to `~/.config/latexmk/latexmkrc`. It is a fallback for projects without their own `.latexmkrc` and picks LuaLaTeX when the main file or a local `.sty`/`.cls` uses fontspec, unicode-math or Lua, and pdfLaTeX otherwise.
@@ -326,7 +330,7 @@ The global latexmk configuration, [`configs/latexmk/latexmkrc`](./configs/latexm
 
 App Store apps (Office, Pages, Numbers, Keynote, GeoGebra, AdGuard) are installed by hand from the App Store, which takes a couple of minutes. A command-line tool for the App Store exists (`mas`), but it is unofficial and the least reliable part such a setup could have, so it is not used here.
 
-Xcode is not installed. Homebrew, git, gcc, Python and MacTeX only need the Command Line Tools, which the Homebrew installer brings.
+Xcode is not installed. Homebrew, git, gcc, Python and MacTeX only need the Command Line Tools, which the Homebrew installer brings. They also provide the `lipo` that `scripts/biber-arm64.sh` uses.
 
 ### macOS settings
 

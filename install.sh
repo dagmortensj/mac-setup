@@ -372,6 +372,30 @@ tool_links() {
   return "$ok"
 }
 
+# TeX Live's biber as an ARM-only program, so it never has to unpack itself
+# with lipo (see scripts/biber-arm64.sh). The script prints its own status
+# line, which goes to the log; its last line becomes the note here. Exit code
+# 10 means biber was already ARM-only. Run inside step, the script has no
+# terminal to ask for the password in, so without a valid sudo session it
+# skips and the note says to run it by hand.
+biber_arm64() {
+  local out rc msg
+  if [ "$DRY" = 1 ]; then
+    out="$("$REPO/scripts/biber-arm64.sh" --dry-run)"
+  else
+    out="$("$REPO/scripts/biber-arm64.sh")"
+  fi
+  rc=$?
+  echo "$out"
+  msg="$(printf '%s\n' "$out" | tail -n 1 | sed 's/^[A-Z]* *//')"
+  case "$rc" in
+    0)  [ "$DRY" = 1 ] && would "replace TeX Live's universal biber with its arm64 part"
+        return 0 ;;
+    10) NOTE=" (already ARM-only)"; return 0 ;;
+    *)  NOTE=" ($msg)"; return "$rc" ;;
+  esac
+}
+
 # The standard Python environment, from configs/python/ (uv.lock pins every
 # version). uv downloads Python 3.13 itself the first time.
 python_env() {
@@ -503,6 +527,7 @@ vscode_extensions() {
 group_dev() {
   slow "Homebrew: dev.Brewfile. MacTeX is about 6 GB, and Homebrew asks for your password when it installs it"
   step "Homebrew: dev.Brewfile" brew_bundle dev
+  step "biber: ARM-only" biber_arm64
   step "Git config (link and ~/.gitconfig.local)" git_config
   step "latexmk and uv config (links)" tool_links
   step "Python standard environment" python_env
