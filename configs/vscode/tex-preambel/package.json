@@ -1,0 +1,11 @@
+{
+  "name": "tex-preambel",
+  "displayName": "TeX-preambel",
+  "description": "Folder sammen preamblen når en .tex-fil åpnes, så teksten begynner ved \\begin{document}.",
+  "version": "1.0.0",
+  "publisher": "dagmorten",
+  "engines": { "vscode": "^1.70.0" },
+  "categories": ["Other"],
+  "activationEvents": ["onLanguage:latex"],
+  "main": "./extension.js"
+}

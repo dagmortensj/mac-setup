@@ -11,15 +11,22 @@
     "workbench.preferredDarkColorTheme": "Høstkveld",
     "editor.bracketPairColorization.enabled": true,             // Høstlys gir alle klammer samme grå farge
     "window.autoDetectColorScheme": false,
+    "window.zoomLevel": 1,                                    // hele grensesnittet 20 % større; skriftstørrelsene under er valgt ut fra det
     "workbench.activityBar.location": "top",
     "workbench.startupEditor": "none",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "workbench.tips.enabled": false,
+    "workbench.layoutControl.enabled": false,                  // ingen layoutknapper i tittellinjen
+    "workbench.browser.showInTitleBar": false,
+    "window.commandCenter": false,                             // ingen søkeboks og piler i tittellinjen, bare mappenavnet
+    "extensions.ignoreRecommendations": true,
+    "update.showReleaseNotes": false,
     "breadcrumbs.enabled": false,
+    "window.title": "${activeFolderShort}",                    // mappa til fila som er åpen
 
     // ===== Tekst =====
     "editor.fontFamily": "MesloLGS NF",
-    "editor.fontSize": 20,
+    "editor.fontSize": 20,                                    // 24 px på skjermen med zoomen over, lesbart fra klasserommet
     "editor.lineHeight": 1.5,
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
@@ -55,6 +62,14 @@
     "editor.renderValidationDecorations": "off",
     "problems.decorations.enabled": false,
     "python.languageServer": "None",
+
+    // ===== Python =====
+    // Samme miljø som i Default: det felles uv-miljøet i ~/.venvs/standard, så
+    // statuslinjen og kjør-knappen ikke faller tilbake på macOS sin Python 3.9.
+    // Terminalen aktiverer ikke miljøer selv; Cmd+R kjører med pyrun.
+    "python.defaultInterpreterPath": "/Users/dag.morten.sj/.venvs/standard/bin/python",
+    "python.terminal.activateEnvironment": false,
+    "python-envs.terminal.autoActivationType": "off",
 
     // ===== Det du skriver, blir stående som du skrev det =====
     "editor.autoClosingBrackets": "never",

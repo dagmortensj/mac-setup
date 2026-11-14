@@ -471,6 +471,63 @@ tex_oppstart() {
   "$code" --install-extension "$vsix" --force
 }
 
+# arbeidsflate, the status bar button that switches workspace and profile, is
+# home-made too. It goes into Default always and into writing once Settings
+# Sync or setup.sh has created that profile. Tavle is left without it: on the
+# board only loose folders are opened.
+arbeidsflate_ext() {
+  local code vsix="$REPO/configs/vscode/arbeidsflate/arbeidsflate-1.0.0.vsix" storage p rc=0
+  storage="$HOME/Library/Application Support/Code/User/globalStorage/storage.json"
+  code="$(command -v code)" || code="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+  if [ ! -x "$code" ]; then
+    NOTE=" (VS Code is not installed)"
+    [ "$DRY" = 1 ] && { would "install arbeidsflate once VS Code is installed"; return 0; }
+    return 3
+  fi
+  if [ "$DRY" = 1 ]; then would "install the VS Code extension arbeidsflate in the Default and writing profiles"; return 0; fi
+  if "$code" --list-extensions 2>/dev/null | grep -qx 'dagmorten.arbeidsflate'; then
+    echo "already installed: Default"
+  else
+    "$code" --install-extension "$vsix" --force || rc=1
+  fi
+  for p in writing; do
+    grep -q "\"name\": *\"$p\"" "$storage" 2>/dev/null || { echo "no $p profile yet"; continue; }
+    if "$code" --list-extensions --profile "$p" 2>/dev/null | grep -qx 'dagmorten.arbeidsflate'; then
+      echo "already installed: $p"
+    else
+      "$code" --install-extension "$vsix" --profile "$p" --force || rc=1
+    fi
+  done
+  return "$rc"
+}
+
+# The writing profile uses two home-made extensions, tex-oppstart and
+# tex-preambel. Settings Sync brings the profile itself but only Marketplace
+# extensions, so they are installed into it here once the profile exists.
+tex_writing() {
+  local code dir="$REPO/configs/vscode" storage listed
+  storage="$HOME/Library/Application Support/Code/User/globalStorage/storage.json"
+  code="$(command -v code)" || code="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+  if [ ! -x "$code" ]; then
+    NOTE=" (VS Code is not installed)"
+    [ "$DRY" = 1 ] && { would "install tex-oppstart and tex-preambel in the writing profile once VS Code is installed"; return 0; }
+    return 3
+  fi
+  if ! grep -q '"name": *"writing"' "$storage" 2>/dev/null; then
+    NOTE=" (no writing profile yet: turn on Settings Sync or run configs/vscode/setup.sh writing)"
+    [ "$DRY" = 1 ] && { would "install tex-oppstart and tex-preambel once the writing profile exists"; return 0; }
+    return 3
+  fi
+  listed="$("$code" --list-extensions --profile writing 2>/dev/null)"
+  if echo "$listed" | grep -qx 'dagmorten.tex-oppstart' && echo "$listed" | grep -qx 'dagmorten.tex-preambel'; then
+    echo "already installed"
+    return 0
+  fi
+  if [ "$DRY" = 1 ]; then would "install tex-oppstart and tex-preambel in the VS Code profile writing"; return 0; fi
+  "$code" --install-extension "$dir/tex-oppstart/tex-oppstart-1.0.0.vsix" --profile writing --force &&
+    "$code" --install-extension "$dir/tex-preambel/tex-preambel-1.0.0.vsix" --profile writing --force
+}
+
 group_dev() {
   slow "Homebrew: dev.Brewfile. MacTeX is about 6 GB, and Homebrew asks for your password when it installs it"
   step "Homebrew: dev.Brewfile" brew_bundle dev
@@ -479,6 +536,8 @@ group_dev() {
   step "Python standard environment" python_env
   step "VS Code: Python interpreter" vscode_python
   step "VS Code: tex-oppstart" tex_oppstart
+  step "VS Code: writing profile extensions" tex_writing
+  step "VS Code: arbeidsflate" arbeidsflate_ext
 }
 
 # ---------------------------------------------------------------- apps

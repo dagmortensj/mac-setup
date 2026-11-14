@@ -1,5 +1,6 @@
 {
     // ===== Utseende =====
+    "window.zoomLevel": 1,                                    // hele grensesnittet 20 % større; skriftstørrelsene under er valgt ut fra det
     "workbench.colorTheme": "Høstkveld",                       // Høst-temaet; Høstlys er det lyse
     "workbench.preferredLightColorTheme": "Høstlys",          // knappen nede til høyre bytter mellom disse
     "workbench.preferredDarkColorTheme": "Høstkveld",
@@ -21,6 +22,7 @@
     "breadcrumbs.enabled": false,
     "workbench.layoutControl.enabled": false,                  // ingen layoutknapper i tittellinjen
     "workbench.browser.showInTitleBar": false,                 // ingen nettleserknapp i tittellinjen
+    "window.title": "${activeFolderShort}",                    // mappa til fila som er åpen, ikke «undervisning (Workspace)»
 
     // ===== Utforsker =====
     // Hjelpefilene fra LaTeX vises ikke i mappetreet. De ligger fortsatt på disken.
@@ -40,7 +42,7 @@
 
     // ===== Editor =====
     "editor.fontFamily": "MesloLGS NF",
-    "editor.fontSize": 13,
+    "editor.fontSize": 13,                                    // 15,6 px på skjermen med zoomen over
     "editor.lineHeight": 1.5,
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,

@@ -1,0 +1,363 @@
+{
+    // Profil for skriving i LaTeX: bare teksten, uten linjenummer, faner,
+    // forslag og popups. Mappetreet står til venstre, PDF-en til høyre
+    // (tex-oppstart), og preamblen er foldet sammen (tex-preambel).
+
+    // ===== Utseende =====
+    "workbench.colorTheme": "Høstlys",
+    "workbench.preferredLightColorTheme": "Høstlys",          // knappen nede til høyre bytter mellom disse
+    "workbench.preferredDarkColorTheme": "Høstkveld",
+    "window.autoDetectColorScheme": false,
+    "window.zoomLevel": 1,                                    // hele grensesnittet 20 % større; skriftstørrelsene under er valgt ut fra det
+    // Som i Default: ikonene øverst i venstrefanen, og tannhjulet (profilbytte)
+    // og kontoknappen oppe til høyre i tittellinjen. Med "hidden" forsvinner de to.
+    "workbench.activityBar.location": "top",
+    "workbench.editor.showTabs": "none",                      // filnavnet står i tittellinjen
+    "workbench.startupEditor": "none",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "workbench.tips.enabled": false,
+    "workbench.layoutControl.enabled": false,
+    "workbench.browser.showInTitleBar": false,
+    "window.commandCenter": false,
+    "window.title": "${dirty}${activeEditorShort}",            // bare filnavnet; arbeidsflata står på knappen nede til høyre
+    "breadcrumbs.enabled": false,
+    "extensions.ignoreRecommendations": true,
+    "update.showReleaseNotes": false,
+    // Statuslinjen står: der er knappen som bytter mellom Høstlys og Høstkveld.
+
+    // ===== Dempet LaTeX =====
+    // Kommandoer, \begin/\end, miljønavn, etiketter og referanser settes i
+    // samme grå som klammene, uten fet skrift, så prosaen er det som står i
+    // full kontrast. Matematikk, seksjonstitler og uthevet tekst er som i
+    // temaet. Slett hele denne innstillingen for å få temaets vanlige farger.
+    "editor.tokenColorCustomizations": {
+        "[Høstlys]": {
+            "textMateRules": [
+                {
+                    "scope": [
+                        "keyword.control.preamble.latex",
+                        "keyword.control.include.latex",
+                        "storage.type.function.latex",
+                        "keyword.other.item.latex",
+                        "storage.type.function.tex",
+                        "keyword.control.tex",
+                        "keyword.control.catcode.tex",
+                        "support.function.be.latex",
+                        "support.function.section.latex",
+                        "variable.parameter.function.latex",
+                        "support.function.general.latex",
+                        "support.function.general.tex",
+                        "support.function.emph.latex",
+                        "support.function.textbf.latex",
+                        "support.function.textit.latex",
+                        "support.function.texttt.latex",
+                        "support.function.url.latex",
+                        "support.function.footnote.latex",
+                        "support.function.marginpar.latex",
+                        "support.function.verb.latex",
+                        "keyword.control.ref.latex",
+                        "keyword.control.label.latex",
+                        "keyword.control.cite.latex",
+                        "constant.other.general.math.tex",
+                        "constant.other.math.tex",
+                        "support.function.textcolor.latex",
+                        "support.function.textsubscript.latex",
+                        "support.function.textsuperscript.latex",
+                        "support.function.textsc.latex",
+                        "support.function.textsf.latex",
+                        "support.function.textrm.latex",
+                        "support.function.underline.latex",
+                        "meta.group.braces.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex support.function.be.latex",
+                        "meta.group.braces.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.general.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.math.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.list.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.tabular.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.frame.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.latex.tikz support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.general.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.math.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.list.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.tabular.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.frame.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.latex.tikz support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.general.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.math.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.list.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.tabular.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.frame.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.latex.tikz variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.general.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.math.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.list.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.tabular.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.frame.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.latex.tikz variable.parameter.function.latex",
+                        "variable.parameter.definition.label.latex",
+                        "constant.other.reference.label.latex",
+                        "constant.other.reference.citation.latex",
+                        "support.class.latex",
+                        "constant.other.citation.latex",
+                        "markup.underline.link.latex",
+                        "keyword.control.ref.latex punctuation.definition.keyword.latex",
+                        "keyword.control.cite.latex punctuation.definition.keyword.latex",
+                        "support.function.url.latex punctuation.definition.function.latex",
+                        "support.function.siunitx.latex",
+                        "support.function.mhchem.latex",
+                        "meta.parameter.optional.latex variable.parameter.function.latex"
+                    ],
+                    "settings": { "foreground": "#796b5b", "fontStyle": "" }
+                }
+            ]
+        },
+        "[Høstkveld]": {
+            "textMateRules": [
+                {
+                    "scope": [
+                        "keyword.control.preamble.latex",
+                        "keyword.control.include.latex",
+                        "storage.type.function.latex",
+                        "keyword.other.item.latex",
+                        "storage.type.function.tex",
+                        "keyword.control.tex",
+                        "keyword.control.catcode.tex",
+                        "support.function.be.latex",
+                        "support.function.section.latex",
+                        "variable.parameter.function.latex",
+                        "support.function.general.latex",
+                        "support.function.general.tex",
+                        "support.function.emph.latex",
+                        "support.function.textbf.latex",
+                        "support.function.textit.latex",
+                        "support.function.texttt.latex",
+                        "support.function.url.latex",
+                        "support.function.footnote.latex",
+                        "support.function.marginpar.latex",
+                        "support.function.verb.latex",
+                        "keyword.control.ref.latex",
+                        "keyword.control.label.latex",
+                        "keyword.control.cite.latex",
+                        "constant.other.general.math.tex",
+                        "constant.other.math.tex",
+                        "support.function.textcolor.latex",
+                        "support.function.textsubscript.latex",
+                        "support.function.textsuperscript.latex",
+                        "support.function.textsc.latex",
+                        "support.function.textsf.latex",
+                        "support.function.textrm.latex",
+                        "support.function.underline.latex",
+                        "meta.group.braces.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex support.function.be.latex",
+                        "meta.group.braces.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.general.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.math.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.list.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.tabular.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.frame.latex support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.latex.tikz support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.general.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.math.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.list.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.tabular.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.frame.latex support.function.be.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.latex.tikz support.function.be.latex",
+                        "meta.group.braces.latex meta.function.environment.general.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.math.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.list.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.tabular.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.frame.latex variable.parameter.function.latex",
+                        "meta.group.braces.latex meta.function.environment.latex.tikz variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.general.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.math.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.list.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.tabular.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.frame.latex variable.parameter.function.latex",
+                        "meta.parameter.newcommand.latex meta.function.environment.latex.tikz variable.parameter.function.latex",
+                        "variable.parameter.definition.label.latex",
+                        "constant.other.reference.label.latex",
+                        "constant.other.reference.citation.latex",
+                        "support.class.latex",
+                        "constant.other.citation.latex",
+                        "markup.underline.link.latex",
+                        "keyword.control.ref.latex punctuation.definition.keyword.latex",
+                        "keyword.control.cite.latex punctuation.definition.keyword.latex",
+                        "support.function.url.latex punctuation.definition.function.latex",
+                        "support.function.siunitx.latex",
+                        "support.function.mhchem.latex",
+                        "meta.parameter.optional.latex variable.parameter.function.latex"
+                    ],
+                    "settings": { "foreground": "#a69786", "fontStyle": "" }
+                }
+            ]
+        }
+    },
+
+    // ===== Utforsker =====
+    // Hjelpefilene fra LaTeX vises ikke i mappetreet. De ligger fortsatt på disken.
+    // Ingen liste over åpne filer, og ingen git-farger eller merker på filnavnene.
+    "files.exclude": {
+        "**/*.aux": true,
+        "**/*.bbl": true,
+        "**/*.bcf": true,
+        "**/*.blg": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.fls": true,
+        "**/*.log": true,
+        "**/*.out": true,
+        "**/*.run.xml": true,
+        "**/*.synctex.gz": true,
+        "**/*.toc": true
+    },
+    "explorer.openEditors.visible": 0,
+    "explorer.compactFolders": false,                         // hver mappe på sin egen linje, ikke dikt/Tidsrom
+    "explorer.decorations.badges": false,
+    "explorer.decorations.colors": false,
+    "git.decorations.enabled": false,
+    "scm.diffDecorations": "none",
+
+    // ===== Tekst =====
+    "editor.fontFamily": "MesloLGS NF",
+    "editor.fontSize": 13,                                    // 15,6 px på skjermen med zoomen over
+    "editor.lineHeight": 1.7,
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "none",
+    "editor.padding.top": 24,
+    "editor.cursorSurroundingLines": 6,                       // linja du skriver på, står aldri helt nederst
+    "editor.detectIndentation": false,
+
+    // ===== Ingenting i margen =====
+    "editor.lineNumbers": "off",
+    "editor.glyphMargin": false,
+    "editor.showFoldingControls": "mouseover",                // foldepilene vises bare under pekeren
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.renderLineHighlight": "none",
+    "editor.renderWhitespace": "none",
+    "editor.guides.indentation": false,
+    "editor.overviewRulerBorder": false,
+    "editor.hideCursorInOverviewRuler": true,
+
+    // ===== Ingen forslag eller autofullføring =====
+    // Ctrl+Mellomrom henter fortsatt forslag når du ber om dem (\cite, \ref).
+    "editor.quickSuggestions": {
+        "other": "off",
+        "comments": "off",
+        "strings": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.wordBasedSuggestions": "off",
+    "editor.parameterHints.enabled": false,
+    "editor.inlineSuggest.enabled": false,
+    "editor.snippetSuggestions": "none",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.tabCompletion": "off",
+
+    // ===== Ingen popups og ingen feilstreker =====
+    // Stavekontrollen tegner sine egne prikker og er ikke berørt.
+    "editor.hover.enabled": "off",
+    "editor.lightbulb.enabled": "off",
+    "editor.codeLens": false,
+    "editor.inlayHints.enabled": "off",
+    "editor.occurrencesHighlight": "off",
+    "editor.selectionHighlight": false,
+    "editor.renderValidationDecorations": "off",
+    "problems.decorations.enabled": false,
+    "chat.disableAIFeatures": true,
+
+    // ===== Terminal =====
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.minimumContrastRatio": 1,
+    "terminal.integrated.tabs.enabled": false,
+    "terminal.integrated.persistentSessionReviveProcess": "never",
+    "terminal.integrated.initialHint": false,
+
+    // ===== Sikkerhet (workspace trust av) =====
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.startupPrompt": "never",
+    "security.workspace.trust.untrustedFiles": "open",
+
+    // ===== LaTeX Workshop =====
+    "latex-workshop.latex.autoBuild.run": "never",                // Cmd+R bygger
+    // Én oppskrift uten motorvalg: .latexmkrc i prosjektmappa bestemmer
+    // (lualatex/pdflatex). Uten slik fil avgjør ~/.config/latexmk/latexmkrc.
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "-outdir=%OUTDIR%", "%DOC%"],
+            "env": {}
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        { "name": "latexmk", "tools": ["latexmk"] }
+    ],
+    "latex-workshop.latex.recipe.default": "first",
+    "latex-workshop.view.pdf.viewer": "tab",                       // PDF i egen fane ...
+    "latex-workshop.view.pdf.tab.editorGroup": "right",            // ... til høyre for koden
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.view.outline.sync.viewer": true,
+    "latex-workshop.message.error.show": false,
+    "latex-workshop.message.warning.show": false,
+    "latex-workshop.message.log.show": false,
+    "workbench.editorAssociations": {
+        "*.pdf": "latex-workshop-pdf-hook"
+    },
+
+    // ===== Stavekontroll: bare LaTeX og Markdown, norsk og engelsk =====
+    // Et ord godtas hvis det finnes i en av ordbøkene. Ctrl+Cmd+S slår av/på.
+    "cSpell.enabled": true,
+    "cSpell.language": "nb,en",
+    "cSpell.enabledFileTypes": {
+        "*": false,
+        "latex": true,
+        "markdown": true
+    },
+    "cSpell.checkOnlyEnabledFileTypes": true,
+    // Diskré prikket understreking i stedet for bølgestrek, og ikke i Problems-panelet
+    "cSpell.diagnosticLevel": "Hint",
+    "cSpell.useCustomDecorations": true,
+    "cSpell.textDecorationLine": "underline",
+    "cSpell.textDecorationStyle": "dotted",
+    "cSpell.textDecorationColor": "#e08a2c",
+    "cSpell.textDecorationThickness": "1.5px",
+    "cSpell.showInRuler": false,                             // ingen merker i rullefeltet
+    // Sammensatte ord godtas når delene finnes i ordboka (banefart, sirklingsfarten),
+    // og ord med stor forbokstav (navn som Kepler, Rutherford) sjekkes ikke.
+    "cSpell.allowCompoundWords": true,
+    "cSpell.ignoreRegExpList": ["/(?<!\\p{L})\\p{Lu}\\p{L}+/gu"],
+    // Egne ord ligger i mac-setup, så de følger med i git og overskrives ikke
+    // når settings.json kopieres inn. Cmd+. på et ord → «Add to ordliste».
+    "cSpell.customDictionaries": {
+        "ordliste": {
+            "name": "ordliste",
+            "path": "${userHome}/Developer/mac-setup/configs/cspell/ordliste.txt",
+            "addWords": true,
+            "scope": "user"
+        }
+    },
+    // Hopp over kommandoer, argumenter som er nøkler/filnavn, og all matematikk
+    "cSpell.languageSettings": [
+        {
+            "languageId": "latex",
+            "ignoreRegExpList": [
+                "/\\\\(?:label|ref|eqref|autoref|cref|Cref|cite[pt]?|input|include|includegraphics|usepackage|RequirePackage|documentclass|begin|end|url|href|bibliography|bibliographystyle|addbibresource|graphicspath|newcommand|renewcommand|DeclareMathOperator|hypersetup|setmainfont|setmathfont|SI|si|qty|unit|usetikzlibrary|usephysicsmodule|tikzset|pgfplotsset|sisetup|captionsetup|newtheorem|theoremstyle|setlength|addtolength|hspace|vspace|geometry|color|textcolor|definecolor|pagestyle|thispagestyle)\\*?(?:\\[[^\\]]*\\])*\\{[^}]*\\}/g",
+                "/\\\\[a-zA-Z@]+/g",
+                "/\\\\[a-zA-Z@]+\\*?\\[[^\\]]*\\]/g",
+                "/\\$[^$]*\\$/g",
+                "/\\\\\\([\\s\\S]*?\\\\\\)/g",
+                "/\\\\\\[[\\s\\S]*?\\\\\\]/g",
+                "/\\\\begin\\{(equation|align|alignat|gather|multline|flalign|eqnarray|tikzpicture|lstlisting|verbatim|minted)\\*?\\}[\\s\\S]*?\\\\end\\{\\1\\*?\\}/g"
+            ]
+        }
+    ],
+
+    // ===== Annet =====
+    "git.openRepositoryInParentFolders": "always",
+    "window.restoreWindows": "one"
+}
