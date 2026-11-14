@@ -91,7 +91,7 @@ Your git identity is not in the repository. `./install.sh dev` asks for it and s
 | Group | Steps |
 |---|---|
 | `terminal` | [`terminal.Brewfile`](./configs/brew/terminal.Brewfile) (git, fastfetch, iTerm2, MesloLGS NF) · links `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh`, `~/.config/fastfetch/` · `~/.hushlogin` · Oh My Zsh · zsh-autosuggestions, zsh-syntax-highlighting, Powerlevel10k · iTerm2 settings (only if iTerm2 has none yet) |
-| `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` and `~/.config/uv/uv.toml` · builds the Python standard environment · points VS Code at it · installs tex-oppstart |
+| `dev` | [`dev.Brewfile`](./configs/brew/dev.Brewfile) (gh, gcc, progress, uv, VS Code, MacTeX) · links `~/.gitconfig` · creates `~/.gitconfig.local` · links `~/.config/latexmk/latexmkrc` and `~/.config/uv/uv.toml` · builds the Python standard environment · points VS Code at it · installs the home-made VS Code extensions |
 | `apps` | [`apps.Brewfile`](./configs/brew/apps.Brewfile) |
 | `repos` | clones the repositories in [`repos.txt`](./configs/repos.txt) into `~/Developer` · links `~/.claude/CLAUDE.md` and `~/Developer/CLAUDE.md` (see [Claude](#claude)) |
 | `macos` | [`defaults.sh`](./configs/macos/defaults.sh) · pmset for the Studio Display · removes GarageBand and iMovie if present (if macOS refuses, because Terminal lacks the App Management permission, drag them to the Bin instead) |
@@ -114,7 +114,7 @@ Some things cannot be scripted. The script prints this list at the end of a full
 1. **Log out and in again**, so that every macOS setting takes effect.
 2. **Sign in**: Dropbox (choose the folders and let it finish syncing), Teams, Outlook, and Claude (connect its folders again).
 3. **GitHub**: run `gh auth login`, choose HTTPS, and answer **No** to "Authenticate Git with your GitHub credentials?". `install.sh` has already told git to get the token from gh; answering Yes would make gh write the same thing into the shared `.gitconfig` in this repository.
-4. **VS Code**: turn on Settings Sync (gear icon → Settings Sync) with GitHub and choose **Merge**. Settings, keybindings, extensions and the profiles arrive. Then run `./install.sh dev` once more, so the profiles that Sync brought in also get the home-made extensions and the Python setting.
+4. **VS Code**: turn on Settings Sync (gear icon → Settings Sync) with GitHub and choose **Merge**. Settings, keybindings, extensions and the profiles arrive. Then run `./install.sh dev` once more, so the profiles that Sync brought in also get the Python setting and the home-made extensions.
 5. **App Store**, under your account → Purchased: Word, Excel, PowerPoint, Outlook, OneNote, Pages, Numbers, Keynote, GeoGebra Classic 6, AdGuard for Safari. (Erasing a Mac removes Pages, Numbers and Keynote too.)
 6. **Download yourself**: SAFEQ Client (from school) and PASCO Capstone.
 7. **Safari web apps**: open Gmail and YouTube in Safari and use File → Add to Dock.
@@ -253,23 +253,36 @@ To move to a newer Python later, change `.python-version` and `requires-python` 
 
 ### VS Code
 
-VS Code Settings Sync (with GitHub) is the source for settings, keybindings, snippets, extensions and the profiles. `install.sh` adds the five things Sync cannot carry:
+VS Code and Settings Sync (with GitHub) own the settings. They are changed in VS Code, and Sync carries settings, keybindings, snippets, the Marketplace extensions, the interface state (which icons and panels are hidden) and the profiles to a new Mac and to any other computer. The rule is the same for both profiles.
 
-- **tex-oppstart**, a small home-made extension that opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened. It is not on the Marketplace, and Sync only restores Marketplace extensions. Source and `.vsix` are in [`configs/vscode/tex-oppstart/`](./configs/vscode/tex-oppstart/); rebuild it with `npx @vscode/vsce package` in that folder. That needs Node.js, which this setup does not install: `brew install node`, build, and `brew uninstall node` again.
-- **tex-preambel**, a second home-made extension, used only in the *writing* profile. It folds the preamble of a `.tex` file into one line when the file is opened, so the text begins at `\begin{document}`; click the folded line to open it. Source and `.vsix` are in [`configs/vscode/tex-preambel/`](./configs/vscode/tex-preambel/), and it is rebuilt the same way. `install.sh` installs it and tex-oppstart into the writing profile once that profile exists.
+[`configs/vscode/`](./configs/vscode/) holds a copy of the settings (`default/settings.json` and `writing/settings.json`), the shared `keybindings.json` and the extension list, as a record in git and for a Mac where Sync is not available. [`setup.sh`](./configs/vscode/setup.sh) moves them in either direction:
 
-- **arbeidsflate**, a third home-made extension, installed in the Default and writing profiles. Tavle is left without it, since only loose folders are opened on the board and a stray click would replace the folder in front of the class. It puts a button at the right end of the status bar, just left of the theme button, with the name of the open workspace; a click opens the next `.code-workspace` file in `configs/vscode/workspaces/` in the same window, so with two workspaces the button toggles between them, as the theme button does with the themes. The command *Workspace: Choose from List* in the command palette lists them all. The button switches workspace only. The profile is switched from the gear menu, and VS Code remembers it per workspace: a workspace opens in the profile it last had, so once `writing.code-workspace` has been set to the writing profile, switching to it with the button brings both.
+| Command | What it does |
+|---|---|
+| `setup.sh check` | Reports anything that is not as it should be, and changes nothing: profiles other than Default and Writing, a settings file that differs from the copy here, a home-made extension that is missing, misplaced or different from the one in the repository, a `.vsix` that does not match its source, and leftover backup files |
+| `setup.sh save` | Copies the Mac's settings, keybindings and extension list into the repository. Run it now and then, and commit. It refuses to save the Default settings while classroom mode is on |
+| `setup.sh restore` | Copies the repository's settings and keybindings onto the Mac, and creates the Writing profile if it is missing. A file it replaces is first moved to `settings-backup/` in VS Code's User folder |
+| `setup.sh restore --extensions` | The same, and installs the extensions: for a Mac without Settings Sync, or to reinstall a home-made extension that has changed |
+
+`save` and `restore` take `default` or `writing` as a further argument, to handle one profile only.
+
+`install.sh` adds what Sync cannot carry:
+
+- **tex-oppstart**, a small home-made extension that opens `main.tex` and the PDF viewer when a folder with `main.tex` is opened. None of the home-made extensions is on the Marketplace, and Sync only restores Marketplace extensions. Source and `.vsix` of each are in its folder under [`configs/vscode/`](./configs/vscode/); rebuild one with `npx @vscode/vsce package` in that folder. That needs Node.js, which this setup does not install: `brew install node`, build, and `brew uninstall node` again.
+- **tex-preambel**, used only in the *Writing* profile. It folds the preamble of a `.tex` file into one line when the file is opened, so the text begins at `\begin{document}`; click the folded line to open it.
+
+- **workspace-switcher**, in both profiles. It puts a button at the left end of the status bar, with the name of the open workspace; a click opens the next `.code-workspace` file in `configs/vscode/workspaces/` in the same window, so with two workspaces the button toggles between them. Before the name, in the corner, stands a small cross that closes the workspace and leaves an empty window in the same profile, for the times when loose folders are opened instead; there the button reads `workspace`. The button switches workspace only. A profile is never switched by hand: VS Code remembers it per workspace, so `skriving.code-workspace`, once set to the Writing profile, brings that profile with it.
+
+- **classroom-mode**, in the Default profile. A button with a mortarboard at the right end of the status bar turns classroom mode on and off: the setup for showing code on a projector, with the Høstlys theme, font size 20, and no suggestions, hovers, light bulbs, red squiggles, auto-closing brackets or format-on-save, so that what gets typed stays exactly as typed. Nothing is reloaded, so the open file, the cursor and the other extensions are untouched, and it works in whatever folder is open. While the mode is on the button is highlighted and reads *Classroom*. What the mode means is written in one place, the setting `classroomMode.settings` (its default is in the extension's `package.json`). Turning it on writes those values into the user settings, as every toggle in VS Code does, and remembers what each was before; turning it off puts exactly those back. The mode therefore survives a restart, and stays on until the button is clicked. It was a separate profile at first; a profile reloads the window and binds the folder to itself, which does not suit a mode that is used on the same folders as the Default profile.
 
 - **The Python interpreter** (`python.defaultInterpreterPath`, pointing at `~/.venvs/standard`). It is a machine setting, which Sync leaves out on purpose, so the script writes it into the local settings of every profile.
 - **No environment activation in the terminal** (`python-envs.terminal.autoActivationType: off` and `python.terminal.activateEnvironment: false`). The standard environment is already first on PATH. When VS Code activates it, it types an activation command into a new terminal, and that collides with the command ⌘R types, which leaves the terminal at a `dquote>` prompt.
 
-[`configs/vscode/`](./configs/vscode/) also holds a snapshot of the settings, keybindings and extension list, with [`setup.sh`](./configs/vscode/setup.sh) to restore it without Settings Sync. That is a fallback; normally Sync does the job.
+**Workspaces.** Multi-root workspaces are kept as `.code-workspace` files in [`configs/vscode/workspaces/`](./configs/vscode/workspaces/) and opened from there (File → Open Workspace from File). `undervisning.code-workspace` opens the subject folders in `Dropbox/jobb-vgs/` that are in use, and `skriving.code-workspace` is the workspace for the Writing profile, with the writing folder. The workspace-switcher button in the status bar switches between them, and its cross leaves them. The folders are stored as paths relative to the workspace file, so they resolve while the repository is in `~/Developer/mac-setup` and Dropbox is in its default place, `~/Library/CloudStorage/Dropbox`.
 
-**Workspaces.** Multi-root workspaces are kept as `.code-workspace` files in [`configs/vscode/workspaces/`](./configs/vscode/workspaces/) and opened from there (File → Open Workspace from File). `undervisning.code-workspace` opens the subject folders in `Dropbox/jobb-vgs/` that are in use, and `writing.code-workspace` is the workspace for the writing profile, with the writing folder. The arbeidsflate button in the status bar switches between them. The folders are stored as paths relative to the workspace file, so they resolve while the repository is in `~/Developer/mac-setup` and Dropbox is in its default place, `~/Library/CloudStorage/Dropbox`.
+**Profiles.** *Default* is the everyday profile for LaTeX and Python. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline; its word list is [`configs/cspell/ordliste.txt`](./configs/cspell/ordliste.txt), read straight from this repository. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one. Python files are formatted with autopep8 on save. Classroom mode, described above, is this profile's setup for showing code in class. *Writing* is for writing prose in LaTeX with nothing else on screen: the Høstlys theme at font size 15, no line numbers, tabs, suggestions, hovers or squiggles, the folder tree in the left sidebar and the preamble folded away. LaTeX commands, environment names, labels and references are set in the same grey as the braces, so the prose is what stands in full contrast; mathematics and section titles keep the theme's colours. It has LaTeX Workshop, the spell checker, tex-preambel and the workspace button, and neither Python, Claude Code, classroom mode nor tex-oppstart: the profile is only used in the writing workspace, where files are opened from the folder tree. `configs/vscode/setup.sh restore --extensions` creates it on a Mac that has neither it nor Settings Sync.
 
-**Profiles.** *Default* is the everyday profile for LaTeX and Python. Spell-check (Norwegian Bokmål and English together) runs only in LaTeX and Markdown, skips commands, labels, references and all mathematics, and marks issues with a faint dotted underline; its word list is [`configs/cspell/ordliste.txt`](./configs/cspell/ordliste.txt), read straight from this repository. LaTeX Workshop builds with a single `latexmk` recipe without an engine flag; each project's `.latexmkrc` picks the engine, and `~/.config/latexmk/latexmkrc` decides for projects without one. Python files are formatted with autopep8 on save. *Tavle* is for coding on the board in class: the Høstlys theme, font size 20, and no suggestions, autocomplete, hovers, light bulbs, AI features, red squiggles, auto-closing brackets or format-on-save. What gets typed stays exactly as typed. *writing* is for writing prose in LaTeX with nothing else on screen: the Høstlys theme at font size 15, no line numbers, tabs, suggestions, hovers or squiggles, the folder tree in the left sidebar, the PDF to the right, and the preamble folded away. LaTeX commands, environment names, labels and references are set in the same grey as the braces, so the prose is what stands in full contrast; mathematics and section titles keep the theme's colours. It has LaTeX Workshop, the spell checker and the two home-made extensions, and neither Python nor Claude Code. `configs/vscode/setup.sh writing` creates it from the snapshot.
-
-All three profiles use my own themes, Høstlys and Høstkveld (`dagmortensj.hoest-theme` on the Marketplace, developed in [hoest-theme](https://github.com/dagmortensj/hoest-theme)), with a status bar button that switches between them.
+Both profiles use my own themes, Høstlys and Høstkveld (`dagmortensj.hoest-theme` on the Marketplace, developed in [hoest-theme](https://github.com/dagmortensj/hoest-theme)), with a status bar button that switches between them.
 
 **Keybindings**
 
@@ -369,15 +382,15 @@ When the Høst theme gets new colours, refresh the presets from the theme reposi
 cp ../hoest-theme/iterm/*.itermcolors configs/iterm2/farger/
 ```
 
-### VS Code snapshot
+### VS Code copy
 
-Settings Sync keeps VS Code current. The snapshot in `configs/vscode/` is only for the fallback script; refresh it now and then:
+Settings Sync keeps VS Code current. The copy in `configs/vscode/` is refreshed with one command; run it now and then, and commit:
 
 ```bash
-cp "$HOME/Library/Application Support/Code/User/settings.json"    configs/vscode/default/settings.json
-cp "$HOME/Library/Application Support/Code/User/keybindings.json" configs/vscode/keybindings.json
-code --list-extensions > configs/vscode/extensions.txt
+configs/vscode/setup.sh save
 ```
+
+`configs/vscode/setup.sh check` shows whether the Mac and the repository agree, and whether every home-made extension is installed where it belongs, in the version that is in the repository. After changing an extension's source, rebuild its `.vsix`, run `setup.sh restore --extensions`, and reload VS Code.
 
 ---
 
@@ -386,7 +399,7 @@ code --list-extensions > configs/vscode/extensions.txt
 1. Commit and push this repository and every other repository in `~/Developer`. Anything in `~/Developer` that is not in git is lost.
 2. Copy `~/.mac-setup-backup/` (the files `install.sh` moved aside), and `~/.zshenv` if you have one, to Dropbox. Look through the backups first for settings that should go into the repository.
 3. Run `scripts/iterm-export.sh` and commit, so the newest iTerm2 settings are in the snapshot.
-4. In VS Code, check that Settings Sync is on, that Profiles is ticked, and when it last synced.
+4. In VS Code, check that Settings Sync is on, that Profiles is ticked, and when it last synced. Run `configs/vscode/setup.sh check`, then `configs/vscode/setup.sh save`, and commit, so the copy here is current.
 5. Let iCloud Drive and Dropbox finish uploading.
 6. Check for local files outside iCloud, Dropbox and git (Pictures, Movies, Music, fonts in `~/Library/Fonts`, keys in `~/.ssh`), and for Claude Code settings in `~/.claude/`: only `CLAUDE.md` there is a link into this repository, the rest is local.
 7. Make a Time Machine backup, as a safety net only.

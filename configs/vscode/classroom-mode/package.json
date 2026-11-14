@@ -1,0 +1,75 @@
+{
+  "name": "classroom-mode",
+  "displayName": "Classroom Mode",
+  "description": "Status bar button that switches the editor to a quiet, large-type setup for showing code on a projector, and back again.",
+  "version": "1.0.0",
+  "publisher": "dagmorten",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "classroomMode.toggle",
+        "title": "Toggle",
+        "category": "Classroom Mode"
+      }
+    ],
+    "configuration": {
+      "title": "Classroom Mode",
+      "properties": {
+        "classroomMode.settings": {
+          "type": "object",
+          "description": "The settings that apply while classroom mode is on. A key in square brackets, such as \"[python]\", holds settings for that language only. A value that is an object is merged into the object already in the user settings.",
+          "default": {
+            "workbench.colorTheme": "Høstlys",
+            "editor.fontSize": 20,
+            "terminal.integrated.fontSize": 18,
+            "editor.quickSuggestions": {
+              "other": "off",
+              "comments": "off",
+              "strings": "off"
+            },
+            "editor.suggestOnTriggerCharacters": false,
+            "editor.wordBasedSuggestions": "off",
+            "editor.parameterHints.enabled": false,
+            "editor.inlineSuggest.enabled": false,
+            "editor.snippetSuggestions": "none",
+            "editor.acceptSuggestionOnEnter": "off",
+            "editor.tabCompletion": "off",
+            "editor.hover.enabled": "off",
+            "editor.lightbulb.enabled": "off",
+            "editor.codeLens": false,
+            "editor.inlayHints.enabled": "off",
+            "workbench.colorCustomizations": {
+              "editorError.foreground": "#00000000",
+              "editorWarning.foreground": "#00000000",
+              "editorInfo.foreground": "#00000000",
+              "editorOverviewRuler.errorForeground": "#00000000",
+              "editorOverviewRuler.warningForeground": "#00000000",
+              "editorOverviewRuler.infoForeground": "#00000000"
+            },
+            "problems.decorations.enabled": false,
+            "editor.autoClosingBrackets": "never",
+            "editor.autoClosingQuotes": "never",
+            "editor.autoSurround": "never",
+            "editor.formatOnSave": false,
+            "editor.formatOnType": false,
+            "editor.formatOnPaste": false,
+            "[python]": {
+              "editor.formatOnSave": false,
+              "editor.formatOnType": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

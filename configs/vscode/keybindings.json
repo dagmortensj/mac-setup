@@ -1,9 +1,8 @@
-// Snarveier, felles for Default og Tavle.
+// Snarveier, felles for Default og Writing.
 // Paneler bruker VS Codes standard: Cmd+B venstre, Alt+Cmd+B høyre, Cmd+J bunn.
 [
     // ===== Cmd+R: lag resultatet =====
     // Python: lagre og kjør fila i terminalen nederst. Fokus blir i editoren.
-    // pyrun (fra .zshrc) bruker prosjektets .venv hvis fila ligger i et prosjekt, ellers standardmiljøet.
     {
         "key": "cmd+r",
         "command": "runCommands",

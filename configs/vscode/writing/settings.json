@@ -1,7 +1,7 @@
 {
     // Profil for skriving i LaTeX: bare teksten, uten linjenummer, faner,
-    // forslag og popups. Mappetreet står til venstre, PDF-en til høyre
-    // (tex-oppstart), og preamblen er foldet sammen (tex-preambel).
+    // forslag og popups. Mappetreet står til venstre, og preamblen er foldet
+    // sammen (tex-preambel). Profilen brukes bare i arbeidsflata skriving.
 
     // ===== Utseende =====
     "workbench.colorTheme": "Høstlys",
@@ -19,7 +19,7 @@
     "workbench.layoutControl.enabled": false,
     "workbench.browser.showInTitleBar": false,
     "window.commandCenter": false,
-    "window.title": "${dirty}${activeEditorShort}",            // bare filnavnet; arbeidsflata står på knappen nede til høyre
+    "window.title": "${dirty}${activeEditorShort}",            // bare filnavnet; arbeidsflata står på knappen nede til venstre
     "breadcrumbs.enabled": false,
     "extensions.ignoreRecommendations": true,
     "update.showReleaseNotes": false,
@@ -263,7 +263,15 @@
     "editor.inlayHints.enabled": "off",
     "editor.occurrencesHighlight": "off",
     "editor.selectionHighlight": false,
-    "editor.renderValidationDecorations": "off",
+    // VS Code har ingen innstilling som slår av feilstrekene, så de gjøres gjennomsiktige.
+    "workbench.colorCustomizations": {
+        "editorError.foreground": "#00000000",
+        "editorWarning.foreground": "#00000000",
+        "editorInfo.foreground": "#00000000",
+        "editorOverviewRuler.errorForeground": "#00000000",
+        "editorOverviewRuler.warningForeground": "#00000000",
+        "editorOverviewRuler.infoForeground": "#00000000"
+    },
     "problems.decorations.enabled": false,
     "chat.disableAIFeatures": true,
 

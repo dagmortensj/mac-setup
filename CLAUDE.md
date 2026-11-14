@@ -15,7 +15,7 @@ The repository lives in `~/Developer/mac-setup`. Some synced VS Code settings de
 - `configs/python/`: the standard Python environment (uv project, built in `~/.venvs/standard`).
 - `configs/iterm2/com.googlecode.iterm2.plist`: iTerm2 settings snapshot, written by `scripts/iterm-export.sh`.
 - `configs/macos/defaults.sh`: macOS settings.
-- `configs/vscode/`: the home-made extensions tex-oppstart, tex-preambel and arbeidsflate, plus a settings snapshot (Default, Tavle and writing profiles) for the fallback `setup.sh`. Settings Sync is the real source for VS Code.
+- `configs/vscode/`: the home-made extensions (tex-oppstart, tex-preambel, workspace-switcher, classroom-mode), plus a copy of the settings of the two profiles (Default in `default/`, Writing in `writing/`) and the shared keybindings. VS Code and Settings Sync own the settings; `setup.sh save` copies them here, `setup.sh restore` puts them back, and `setup.sh check` reports any disagreement. Editing the copy here changes nothing on the Mac: to change a setting, have him run `setup.sh save` first, edit the copy, and give him `setup.sh restore default` or `setup.sh restore writing`. After changing an extension, rebuild its `.vsix` (same version number, 1.0.0) and have him run `setup.sh restore --extensions`; `setup.sh check` shows whether the installed copy is current. A setting name that VS Code does not know cannot be written through the extension API, so check names against VS Code before adding them to classroom-mode.
 - `configs/claude/`: the originals of `~/.claude/CLAUDE.md` for Claude Code (`claude-code/`) and `~/Developer/CLAUDE.md` (`developer/`). The files in place are relative links to these. Other repositories commit their own `CLAUDE.md`.
 
 ## Rules
@@ -33,6 +33,7 @@ The repository lives in `~/Developer/mac-setup`. Some synced VS Code settings de
 
 ## Checking a change
 
-- `bash -n install.sh` and `shellcheck install.sh scripts/*.sh configs/macos/defaults.sh`.
+- `bash -n` and `shellcheck` on `install.sh`, `scripts/*.sh`, `configs/macos/defaults.sh` and `configs/vscode/setup.sh`. Claude's device shell has no shellcheck: stage the scripts to the cloud sandbox and run it there (`pip install shellcheck-py`).
+- `configs/vscode/setup.sh` can be exercised without VS Code by running it with `HOME` set to an empty folder and a stub `code` command first on `PATH`.
 - `./install.sh --dry-run` (or with a group) shows what would happen without changing anything.
 - On this Mac, where the apps were installed by hand, use `--skip-casks`.

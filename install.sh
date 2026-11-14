@@ -386,6 +386,7 @@ python_env() {
 
 # VS Code's Python settings, written into this Mac's settings: the default
 # profile and every other profile that exists. Run `./install.sh dev` again
+# after Settings Sync has brought in the other profiles. Run `./install.sh dev` again
 # after Settings Sync has brought in the other profiles.
 #   python.defaultInterpreterPath           the standard environment
 #   python-envs.terminal.autoActivationType off
@@ -455,77 +456,48 @@ for path in sys.argv[2:]:
 PY
 }
 
-tex_oppstart() {
-  local code vsix="$REPO/configs/vscode/tex-oppstart/tex-oppstart-1.0.0.vsix"
-  code="$(command -v code)" || code="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
-  if [ ! -x "$code" ]; then
-    NOTE=" (VS Code is not installed)"
-    [ "$DRY" = 1 ] && { would "install tex-oppstart once VS Code is installed"; return 0; }
-    return 3
-  fi
-  if "$code" --list-extensions 2>/dev/null | grep -qx 'dagmorten.tex-oppstart'; then
-    echo "already installed"
-    return 0
-  fi
-  if [ "$DRY" = 1 ]; then would "install the VS Code extension tex-oppstart"; return 0; fi
-  "$code" --install-extension "$vsix" --force
-}
-
-# arbeidsflate, the status bar button that switches workspace and profile, is
-# home-made too. It goes into Default always and into writing once Settings
-# Sync or setup.sh has created that profile. Tavle is left without it: on the
-# board only loose folders are opened.
-arbeidsflate_ext() {
-  local code vsix="$REPO/configs/vscode/arbeidsflate/arbeidsflate-1.0.0.vsix" storage p rc=0
+# The home-made VS Code extensions are not on the Marketplace, and Settings
+# Sync only restores Marketplace extensions, so they are installed here from
+# the .vsix files in configs/vscode/: tex-oppstart, workspace-switcher and
+# classroom-mode in the Default profile, tex-preambel and workspace-switcher
+# in the Writing profile once Settings Sync (or configs/vscode/setup.sh
+# restore) has created it.
+vscode_extensions() {
+  local code dir="$REPO/configs/vscode" storage listed e rc=0
+  local installed="$HOME/.vscode/extensions"
   storage="$HOME/Library/Application Support/Code/User/globalStorage/storage.json"
   code="$(command -v code)" || code="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
   if [ ! -x "$code" ]; then
     NOTE=" (VS Code is not installed)"
-    [ "$DRY" = 1 ] && { would "install arbeidsflate once VS Code is installed"; return 0; }
+    [ "$DRY" = 1 ] && { would "install the home-made VS Code extensions once VS Code is installed"; return 0; }
     return 3
   fi
-  if [ "$DRY" = 1 ]; then would "install the VS Code extension arbeidsflate in the Default and writing profiles"; return 0; fi
-  if "$code" --list-extensions 2>/dev/null | grep -qx 'dagmorten.arbeidsflate'; then
-    echo "already installed: Default"
-  else
-    "$code" --install-extension "$vsix" --force || rc=1
-  fi
-  for p in writing; do
-    grep -q "\"name\": *\"$p\"" "$storage" 2>/dev/null || { echo "no $p profile yet"; continue; }
-    if "$code" --list-extensions --profile "$p" 2>/dev/null | grep -qx 'dagmorten.arbeidsflate'; then
-      echo "already installed: $p"
+  if [ "$DRY" = 1 ]; then would "install the home-made VS Code extensions in the Default and Writing profiles"; return 0; fi
+  # An extension is left alone when the profile has it and the installed
+  # copy is the one in this repository; a changed extension keeps its version
+  # number, so the files are compared.
+  listed="$("$code" --list-extensions 2>/dev/null)"
+  for e in tex-oppstart workspace-switcher classroom-mode; do
+    if echo "$listed" | grep -qx "dagmorten.$e" && cmp -s "$installed/dagmorten.$e-1.0.0/extension.js" "$dir/$e/extension.js"; then
+      echo "already installed: $e (Default)"
     else
-      "$code" --install-extension "$vsix" --profile "$p" --force || rc=1
+      "$code" --install-extension "$dir/$e/$e-1.0.0.vsix" --force || rc=1
+    fi
+  done
+  if ! grep -q '"name": *"Writing"' "$storage" 2>/dev/null; then
+    echo "no Writing profile yet"
+    NOTE=" (no Writing profile yet: run ./install.sh dev again once Settings Sync has brought it in)"
+    return "$rc"
+  fi
+  listed="$("$code" --list-extensions --profile Writing 2>/dev/null)"
+  for e in tex-preambel workspace-switcher; do
+    if echo "$listed" | grep -qx "dagmorten.$e" && cmp -s "$installed/dagmorten.$e-1.0.0/extension.js" "$dir/$e/extension.js"; then
+      echo "already installed: $e (Writing)"
+    else
+      "$code" --install-extension "$dir/$e/$e-1.0.0.vsix" --profile Writing --force || rc=1
     fi
   done
   return "$rc"
-}
-
-# The writing profile uses two home-made extensions, tex-oppstart and
-# tex-preambel. Settings Sync brings the profile itself but only Marketplace
-# extensions, so they are installed into it here once the profile exists.
-tex_writing() {
-  local code dir="$REPO/configs/vscode" storage listed
-  storage="$HOME/Library/Application Support/Code/User/globalStorage/storage.json"
-  code="$(command -v code)" || code="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
-  if [ ! -x "$code" ]; then
-    NOTE=" (VS Code is not installed)"
-    [ "$DRY" = 1 ] && { would "install tex-oppstart and tex-preambel in the writing profile once VS Code is installed"; return 0; }
-    return 3
-  fi
-  if ! grep -q '"name": *"writing"' "$storage" 2>/dev/null; then
-    NOTE=" (no writing profile yet: turn on Settings Sync or run configs/vscode/setup.sh writing)"
-    [ "$DRY" = 1 ] && { would "install tex-oppstart and tex-preambel once the writing profile exists"; return 0; }
-    return 3
-  fi
-  listed="$("$code" --list-extensions --profile writing 2>/dev/null)"
-  if echo "$listed" | grep -qx 'dagmorten.tex-oppstart' && echo "$listed" | grep -qx 'dagmorten.tex-preambel'; then
-    echo "already installed"
-    return 0
-  fi
-  if [ "$DRY" = 1 ]; then would "install tex-oppstart and tex-preambel in the VS Code profile writing"; return 0; fi
-  "$code" --install-extension "$dir/tex-oppstart/tex-oppstart-1.0.0.vsix" --profile writing --force &&
-    "$code" --install-extension "$dir/tex-preambel/tex-preambel-1.0.0.vsix" --profile writing --force
 }
 
 group_dev() {
@@ -535,9 +507,7 @@ group_dev() {
   step "latexmk and uv config (links)" tool_links
   step "Python standard environment" python_env
   step "VS Code: Python interpreter" vscode_python
-  step "VS Code: tex-oppstart" tex_oppstart
-  step "VS Code: writing profile extensions" tex_writing
-  step "VS Code: arbeidsflate" arbeidsflate_ext
+  step "VS Code: home-made extensions" vscode_extensions
 }
 
 # ---------------------------------------------------------------- apps
@@ -667,7 +637,8 @@ Left to do by hand (details in the README, section "After install.sh"):
   2. Sign in: Dropbox, Teams, Outlook, Claude (reconnect its folders), and
      `gh auth login` (answer No to "Authenticate Git with your GitHub credentials?").
   3. VS Code: turn on Settings Sync with GitHub and choose Merge. Then run
-     ./install.sh dev once more, so the synced profiles also get the Python setting.
+     ./install.sh dev once more, so the synced profiles also get the Python
+     setting and the home-made extensions.
   4. App Store, under your account: Word, Excel, PowerPoint, Outlook, OneNote,
      Pages, Numbers, Keynote, GeoGebra Classic 6, AdGuard for Safari.
   5. Download yourself: SAFEQ Client (from school) and PASCO Capstone.

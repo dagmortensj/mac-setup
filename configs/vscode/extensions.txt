@@ -2,7 +2,9 @@ akamud.vscode-theme-onelight
 anthropic.claude-code
 arthurlobo.easy-codesnap
 dagmortensj.hoest-theme
+dracula-theme.theme-dracula
 james-yu.latex-workshop
+jdinhlife.gruvbox
 miguelsolorio.fluent-icons
 monokai.theme-monokai-pro-vscode
 ms-python.autopep8

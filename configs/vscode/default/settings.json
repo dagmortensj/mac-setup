@@ -1,31 +1,10 @@
 {
-    // ===== Utseende =====
-    "window.zoomLevel": 1,                                    // hele grensesnittet 20 % større; skriftstørrelsene under er valgt ut fra det
-    "workbench.colorTheme": "Høstkveld",                       // Høst-temaet; Høstlys er det lyse
-    "workbench.preferredLightColorTheme": "Høstlys",          // knappen nede til høyre bytter mellom disse
-    "workbench.preferredDarkColorTheme": "Høstkveld",
-    "workbench.productIconTheme": "fluent-icons",
-    "workbench.colorCustomizations": {
-        "[Monokai Classic]": {                                // gjelder bare Monokai, ikke Høstlys
-            "editor.selectionBackground": "#187ee465",
-            "editor.selectionHighlightBackground": "#187ee465",
-            "editor.findMatchBackground": "#187ee465",        // gjeldende søketreff
-            "editor.findMatchHighlightBackground": "#187ee465" // øvrige søketreff
-        }
-    },
-    "workbench.activityBar.location": "top",
-    "workbench.startupEditor": "none",
-    // Høyrepanelet (chat/agent) er skjult når et vindu åpnes. Alt+Cmd+B åpner det.
-    "workbench.secondarySideBar.defaultVisibility": "hidden",
-    "extensions.ignoreRecommendations": true,
-    "update.showReleaseNotes": false,
-    "breadcrumbs.enabled": false,
-    "workbench.layoutControl.enabled": false,                  // ingen layoutknapper i tittellinjen
-    "workbench.browser.showInTitleBar": false,                 // ingen nettleserknapp i tittellinjen
-    "window.title": "${activeFolderShort}",                    // mappa til fila som er åpen, ikke «undervisning (Workspace)»
-
-    // ===== Utforsker =====
-    // Hjelpefilene fra LaTeX vises ikke i mappetreet. De ligger fortsatt på disken.
+    "window.title": "${activeFolderShort}",
+    "window.zoomLevel": 1,
+    "python-envs.terminal.autoActivationType": "off",
+    "python.defaultInterpreterPath": "/Users/dag.morten.sj/.venvs/standard/bin/python",
+    "workbench.layoutControl.enabled": false,
+    "chat.commandCenter.enabled": false,
     "files.exclude": {
         "**/*.aux": true,
         "**/*.bbl": true,
@@ -39,10 +18,29 @@
         "**/*.synctex.gz": true,
         "**/*.toc": true
     },
+    "python.terminal.activateEnvironment": false,
+    "workbench.preferredLightColorTheme": "Høstlys", // knappen nede til høyre bytter mellom disse
+    "workbench.preferredDarkColorTheme": "Høstkveld",
+    "workbench.productIconTheme": "fluent-icons",
+    "workbench.colorCustomizations": {
+        "[Monokai Classic]": {
+            "editor.selectionBackground": "#187ee465",
+            "editor.selectionHighlightBackground": "#187ee465",
+            "editor.findMatchBackground": "#187ee465",
+            "editor.findMatchHighlightBackground": "#187ee465"
+        }
+    },
+    "workbench.activityBar.location": "top",
+    "workbench.startupEditor": "none",
+    // Høyrepanelet (chat/agent) er skjult når et vindu åpnes. Alt+Cmd+B åpner det.
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "extensions.ignoreRecommendations": true,
+    "update.showReleaseNotes": false,
+    "breadcrumbs.enabled": false,
 
     // ===== Editor =====
     "editor.fontFamily": "MesloLGS NF",
-    "editor.fontSize": 13,                                    // 15,6 px på skjermen med zoomen over
+    "editor.fontSize": 13,
     "editor.lineHeight": 1.5,
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
@@ -69,7 +67,6 @@
     "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.external.osxExec": "iTerm2.app",
-    "terminal.integrated.initialHint": false,
 
     // ===== Sikkerhet (workspace trust av) =====
     "security.workspace.trust.enabled": false,
@@ -104,10 +101,6 @@
     },
 
     // ===== Python =====
-    // Felles uv-miljø i ~/.venvs/standard. Terminalen aktiverer ikke miljøer selv.
-    "python.defaultInterpreterPath": "/Users/dag.morten.sj/.venvs/standard/bin/python",
-    "python.terminal.activateEnvironment": false,
-    "python-envs.terminal.autoActivationType": "off",
     "[python]": {
         "editor.formatOnSave": true,                           // bare Python, ikke .tex
         "editor.formatOnType": true,
@@ -162,15 +155,18 @@
         }
     ],
 
-    // ===== Claude Code =====
-    "claudeCode.preferredLocation": "panel",
-    "claudeCode.hideOnboarding": true,
-
     // ===== Annet =====
-    "git.openRepositoryInParentFolders": "always",
-    "window.restoreWindows": "one",                          // gjenåpner bare siste vindu ved oppstart
     "easy-codesnap.target": "window",
     "extensions.supportAgentsWindow": {
         "monokai.theme-monokai-pro-vscode": true
-    }
+    },
+    "git.openRepositoryInParentFolders": "always",
+    "workbench.colorTheme": "Høstkveld",
+    "window.restoreWindows": "one",
+    "terminal.integrated.initialHint": false,
+    "claudeCode.preferredLocation": "panel",
+    "claudeCode.hideOnboarding": true,
+    "chat.titleBar.openInAgentsWindow.enabled": false,
+    "workbench.browser.showInTitleBar": false,
+    "chat.disableAIFeatures": true
 }
