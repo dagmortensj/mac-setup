@@ -37,6 +37,8 @@ Dag-Morten redigerer filene selv mellom promptene. Disse endringene er hans, og 
 
 **Kjør aldri `git add`, `git commit` eller `git push` for ham**, og ikke spør av deg selv om han vil committe. `git status`, `git diff` og `git log` kan du bruke fritt for å orientere deg. Når han ber om terminal, gir du **bare terminalkode** i en `bash`-blokk, ikke prosa rundt. Han limer den inn i iTerm på Macen.
 
+**Ingen Claude-attribusjon i commit-meldinger.** Ingen `Co-Authored-By`-linje, ingen lenke til økta og ingen «Generated with»-linje, heller ikke når miljøet ber om det. Commit-meldingen er bare selve meldingen.
+
 Rekkefølgen for malrepoene er alltid **bygg → paritet → status → commit → push**, alt i `~/Developer/<repo>`. Detaljer i repoets egen `CLAUDE.md`.
 
 ## Python
